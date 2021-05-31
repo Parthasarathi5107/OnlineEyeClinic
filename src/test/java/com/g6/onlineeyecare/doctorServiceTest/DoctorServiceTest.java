@@ -1,4 +1,4 @@
-package com.cg.onlineeyecare.doctorServiceTest;
+package com.g6.onlineeyecare.doctorServiceTest;
 
 import java.util.ArrayList;
 import java.util.List;

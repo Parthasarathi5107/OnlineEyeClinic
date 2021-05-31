@@ -18,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.patient.dto.Patient;
 
+//Appointment entity class
 @Entity
 @Table(name = "Appointment_info")
 public class Appointment {

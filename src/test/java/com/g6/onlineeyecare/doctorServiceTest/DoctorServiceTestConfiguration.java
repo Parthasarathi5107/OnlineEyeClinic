@@ -1,4 +1,4 @@
-package com.cg.onlineeyecare.doctorServiceTest;
+package com.g6.onlineeyecare.doctorServiceTest;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
