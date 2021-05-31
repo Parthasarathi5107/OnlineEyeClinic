@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.g6.onlineeyecare.user.dto.User;
-
+//Doctor bean class
 @Entity
 @DiscriminatorValue(value = "3")
 public class Doctor extends User {
