@@ -18,6 +18,13 @@ public class UserServiceImpl implements IUserService{
 	@Autowired
 	IUserRepository repository;
 	
+	
+	
+	public UserServiceImpl(IUserRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@Override
 	@Transactional
 	public User addUser(User user) {
@@ -64,11 +71,7 @@ public class UserServiceImpl implements IUserService{
 		Optional<User>optional=null;
 	
 			optional=repository.findById(userId);
-			if(optional.isPresent()) {
-				repository.findById(userId);
-			}
-			else
-			{
+			if(!optional.isPresent()) {
 				throw new UserIdNotFoundException("User Id not found to view user");
 			}
 		return optional.get();

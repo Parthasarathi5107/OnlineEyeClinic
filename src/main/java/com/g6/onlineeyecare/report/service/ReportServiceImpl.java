@@ -31,6 +31,13 @@ public class ReportServiceImpl implements IReportService {
 	IPatientRepository patientRepository;
 	@Autowired
 	ITestRepository testRepository;
+	
+	
+
+	public ReportServiceImpl(IReportRepository repository) {
+		super();
+		this.repository = repository;
+	}
 
 	@Override
 	@Transactional

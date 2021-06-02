@@ -22,18 +22,23 @@ import com.g6.onlineeyecare.patient.dao.IPatientRepository;
 public class AppointmentServiceImpl implements IAppointmentService {
 
 	@Autowired
-	IAppointmentRepository repository;
+	IAppointmentRepository appointmentRepository;
 	@Autowired
 	IPatientRepository patientRepository;
 	@Autowired
 	IDoctorRepository doctorRepository;
+
+	public AppointmentServiceImpl(IAppointmentRepository appointmentRepository) {
+		super();
+		this.appointmentRepository = appointmentRepository;
+	}
 
 	@Override
 	@Transactional
 	public Appointment bookAppointment(Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException {
 		if(doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
 			if(patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
-				repository.save(appointment);
+				appointmentRepository.save(appointment);
 			}
 			else {
 				throw new PatientIdFoundNotException("Patient Id not found");
@@ -51,9 +56,9 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	@Transactional
 	public Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException {
 		Optional<Appointment>optional=null;
-			optional=repository.findById(appointment.getAppointmentId());
+			optional=appointmentRepository.findById(appointment.getAppointmentId());
 			if(optional.isPresent()) {
-			repository.save(appointment);
+			appointmentRepository.save(appointment);
 			}
 			else {
 				throw new InvalidAppointmentException("Invalid Appointment Exception ");
@@ -65,9 +70,9 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	@Transactional
 	public Appointment cancelAppointment(int appointmentId) throws AppointmentIdNotFoundException {
 		Optional<Appointment>optional=null;
-			optional = repository.findById(appointmentId);
+			optional = appointmentRepository.findById(appointmentId);
 			if(optional.isPresent()) {
-			repository.deleteById(appointmentId);
+			appointmentRepository.deleteById(appointmentId);
 			}
 			else {
 				throw new AppointmentIdNotFoundException("Appointment ID not found to cancel appointment");
@@ -79,11 +84,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	public Appointment viewAppointment(int appointmentId) throws AppointmentIdNotFoundException {
 		Optional<Appointment>optional=null;
 
-			optional=repository.findById(appointmentId);
-			if(optional.isPresent()) {
-				repository.findById(appointmentId);
-			}
-			else {
+			optional=appointmentRepository.findById(appointmentId);
+			if(!optional.isPresent()) {
 				throw new AppointmentIdNotFoundException("Appointment ID not found to view appointment");
 			}
 		return optional.get();
@@ -93,7 +95,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	public List<Appointment> viewAllAppointments() {
 		List<Appointment> appointmentList = null;
 		try {
-			appointmentList = repository.findAll();
+			appointmentList = appointmentRepository.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -104,7 +106,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	public List<Appointment> viewAppointments(LocalDate date) {
 		 List<Appointment> dateList = new ArrayList<>();
 	        try {
-	            dateList=repository.viewAppointmentByDate(date);
+	            dateList=appointmentRepository.viewAppointmentByDate(date);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

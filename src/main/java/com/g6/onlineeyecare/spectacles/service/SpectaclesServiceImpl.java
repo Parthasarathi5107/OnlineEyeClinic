@@ -21,6 +21,13 @@ public class SpectaclesServiceImpl implements ISpectaclesService{
 	@Autowired
 	IPatientRepository patientRepository;
 	
+	
+	
+	public SpectaclesServiceImpl(ISpectaclesRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@Override
 	@Transactional
 	public Spectacles addSpectacles(Spectacles spectacles) throws PatientIdFoundNotException {
@@ -70,10 +77,7 @@ public class SpectaclesServiceImpl implements ISpectaclesService{
 		Optional<Spectacles>optional=null;
 		
 			optional=repository.findById(spectaclesId);
-			if(optional.isPresent()) {
-				repository.findById(spectaclesId);
-			}
-			else {
+			if(!optional.isPresent()) {
 				throw new SpectaclesIdNotFoundException("Spectacles Id not found to view spectacles");
 			}
 		return optional.get();

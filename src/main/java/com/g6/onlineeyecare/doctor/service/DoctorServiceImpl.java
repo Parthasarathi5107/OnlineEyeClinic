@@ -25,6 +25,13 @@ public class DoctorServiceImpl implements IDoctorService{
 	@Autowired
 	ITestService testService;
 	
+	
+
+	public DoctorServiceImpl(IDoctorRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@Override
 	@Transactional
 	public Doctor addDoctor(Doctor doctor) {
@@ -73,11 +80,7 @@ public class DoctorServiceImpl implements IDoctorService{
 		Optional<Doctor>optional=null;
 		
 			optional=repository.findById(doctorId);
-			if(optional.isPresent())
-			{
-				repository.findById(doctorId);
-			}
-			else
+			if(!optional.isPresent())
 			{
 				throw new DoctorIdNotFoundException("Doctor id not found to view doctor");
 			}

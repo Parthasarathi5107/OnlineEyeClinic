@@ -18,26 +18,36 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.g6.onlineeyecare.patient.dto.Patient;
 import com.g6.onlineeyecare.test.dto.Test;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Report dto")
 @Entity
 public class Report {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int reportId;
 	
+	@ApiModelProperty(name = "Report date",required = true)
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
 	private LocalDate dateOfReport;
+	@ApiModelProperty(name = "Report discription",required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String descriptionOfReport;
+	@ApiModelProperty(name = "visual acuity",required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String visualAcuity;
+	@ApiModelProperty(name = "visual acuity near",required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String visualAcuityNear;
+	@ApiModelProperty(name = "visual acuity distance",required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String visualAcuityDistance;

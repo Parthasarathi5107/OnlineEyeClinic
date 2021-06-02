@@ -27,6 +27,13 @@ public class PatientServiceImpl implements IPatientService{
 	@Autowired
 	IReportRepository reportRepository;
 	
+	
+	
+	public PatientServiceImpl(IPatientRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@Override
 	@Transactional
 	public Patient addPatient(Patient patient) {
@@ -82,13 +89,9 @@ public class PatientServiceImpl implements IPatientService{
 		Optional<Patient>optional=null;
        
             optional=repository.findById(patientId);
-            if(optional.isPresent()) {
-            	repository.findById(patientId);
-            }
-            else {
+            if(!optional.isPresent()) {
             	throw new PatientIdFoundNotException("Patient id not found to view patient");
             }
-            	
         return optional.get();
 	}
 

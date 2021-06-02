@@ -17,17 +17,22 @@ import com.g6.onlineeyecare.test.dto.Test;
 public class TestServiceImpl implements ITestService{
 
 	@Autowired
-	ITestRepository repository;
+	ITestRepository testRepository;
 	@Autowired
 	IPatientRepository patientRepository;
 	
+	public TestServiceImpl(ITestRepository testRepository) {
+		super();
+		this.testRepository = testRepository;
+	}
+
 	@Override
     @Transactional
     public Test addTest(Test test) throws PatientIdFoundNotException {
 
         if(patientRepository.findById(test.getPatient().getUserId()).isPresent())
         {
-            repository.save(test);
+            testRepository.save(test);
         }
         else
         {
@@ -41,9 +46,9 @@ public class TestServiceImpl implements ITestService{
 	@Transactional
 	public Test updateTest(Test test) throws TestIdNotFoundException {
 		Optional<Test>optional=null;
-			optional=repository.findById(test.getTestId());
+			optional=testRepository.findById(test.getTestId());
 			if(optional.isPresent()) {
-			repository.save(test);
+			testRepository.save(test);
 			}
 			else {
 				throw new TestIdNotFoundException("Test Id not found for updation");
@@ -56,9 +61,9 @@ public class TestServiceImpl implements ITestService{
 	public Test removeTest(int testId) throws TestIdNotFoundException {
 		Optional<Test>optional=null;
 		
-			optional=repository.findById(testId);
+			optional=testRepository.findById(testId);
 			if(optional.isPresent()) {
-			repository.deleteById(testId);
+			testRepository.deleteById(testId);
 			}
 			else {
 				throw new TestIdNotFoundException("Test Id not found to remove test");
@@ -70,13 +75,11 @@ public class TestServiceImpl implements ITestService{
 	public Test viewTest(int testId) throws TestIdNotFoundException {
 		Optional<Test>optional=null;
 		
-			optional=repository.findById(testId);
-			if(optional.isPresent()) {
-				repository.findById(testId);
-			}
-			else {
+			optional=testRepository.findById(testId);
+			if(!optional.isPresent()) {
 				throw new TestIdNotFoundException("Test Id not found to view test");
 			}
+			
 		return optional.get();
 	}
 
@@ -84,7 +87,7 @@ public class TestServiceImpl implements ITestService{
 	public List<Test> viewAllTests() {
 		List<Test> testList = null;
 		try {
-			testList = repository.findAll();
+			testList = testRepository.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -15,6 +15,10 @@ import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.patient.dto.Patient;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Spectacles dto")
 @Entity
 @Table(name = "spectacles_info")
 public class Spectacles {
@@ -22,13 +26,16 @@ public class Spectacles {
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int spectaclesId;
+	@ApiModelProperty(name = "Spectacles Model",required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	@Size(min = 3,max = 20)
 	private String spectaclesModel;
+	@ApiModelProperty(name = "Spectacles discription",required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String spectaclesDescription;
+	@ApiModelProperty(name = "Spectacles cost",required = true)
 	@Column
 	@Min(value=1000,message = "cost cannot be less than 1000")
 	@NotNull

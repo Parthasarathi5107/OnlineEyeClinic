@@ -6,26 +6,36 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.User;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 //Doctor entity class
+@ApiModel(value = "Doctor dto")
 @Entity
 @DiscriminatorValue(value = "3")
 public class Doctor extends User {
 
+	@ApiModelProperty(name = "Concultaion time",required = true)
 	@Column
 	@NotEmpty(message = "Consultaion time cannot be empty")
 	private String doctorConsultationTime;
 	
+	@ApiModelProperty(name = "doctor mobile number",required = true)
 	@Column
 	@NotNull
 	private long doctorMobile;
 	
+	@ApiModelProperty(name = "doctor email",required = true)
 	@Column
 	@Email(message="Email should be valid")
 	@NotEmpty(message = "Email cannot be empty")
 	private String doctorEmail;
+	@ApiModelProperty(name = "doctor address")
 	@Column
+	@Size(max=512,message = "doctor address cannot be more than 512 characters")
 	private String address;
 
 	public String getDoctorConsultationTime() {
