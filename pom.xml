@@ -18,7 +18,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
-	
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -86,6 +86,26 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Optional URL to server. Default value is http://localhost:9000 -->
+				<sonar.host.url> http://localhost:9000 </sonar.host.url>
+
+				<sonar.host.url> http://localhost:9000 </sonar.host.url>
+
+				<!-- <sonar.jdbc.url>your database URL</sonar.jdbc.url> <sonar.jdbc.driver>Your 
+					database driver</sonar.jdbc.driver> <sonar.jdbc.username>DB username</sonar.jdbc.username> 
+					<sonar.jdbc.password>db password</sonar.jdbc.password> -->
+
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -94,5 +114,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
