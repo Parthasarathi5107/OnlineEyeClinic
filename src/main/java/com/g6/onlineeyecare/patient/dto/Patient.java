@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -24,11 +25,10 @@ public class Patient extends User {
 	@ApiModelProperty(name = "Patient age", required = true)
 	@Column
 	@Min(value = 1)
-	@NotNull
 	private int patientAge;
 	@ApiModelProperty(name = "Patient mobile number", required = true)
 	@Column
-	@NotNull
+	@Min(value = 10)
 	private long patientMobile;
 	@ApiModelProperty(name = "Patient Email", required = true)
 	@Column
@@ -86,12 +86,12 @@ public class Patient extends User {
 
 	public Patient() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Patient(int userId, String password, String userName, String role) {
 		super(userId, password, userName, role);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Patient(int patientAge, long patientMobile, String patientEmail, LocalDate patientDOB, String address) {

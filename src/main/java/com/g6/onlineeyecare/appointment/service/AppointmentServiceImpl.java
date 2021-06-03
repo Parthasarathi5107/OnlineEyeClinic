@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	IPatientRepository patientRepository;
 	@Autowired
 	IDoctorRepository doctorRepository;
+
+	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
 
 	public AppointmentServiceImpl(IAppointmentRepository appointmentRepository) {
 		super();
@@ -93,7 +97,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		try {
 			appointmentList = appointmentRepository.findAll();
 		} catch (Exception e) {
-			e.printStackTrace();
+
+			log.error(e.getMessage(), e);
 		}
 		return appointmentList;
 	}
@@ -104,7 +109,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		try {
 			dateList = appointmentRepository.viewAppointmentByDate(date);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 
 		return dateList;

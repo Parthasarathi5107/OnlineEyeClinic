@@ -3,8 +3,6 @@ package com.g6.onlineeyecare.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import com.google.common.base.Predicates;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -12,10 +10,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SuppressWarnings("deprecation")
 @Configuration
 @EnableSwagger2
-public class OnlineEyeCareConfiguration extends WebMvcConfigurerAdapter {
+public class OnlineEyeCareConfiguration{
 
 	@Bean
 	public Docket api() {
@@ -31,7 +28,6 @@ public class OnlineEyeCareConfiguration extends WebMvcConfigurerAdapter {
             // @formatter:on
 	}
 
-	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// enabling swagger-ui part for visual documentation
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");

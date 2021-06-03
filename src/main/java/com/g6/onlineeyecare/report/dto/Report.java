@@ -127,13 +127,16 @@ public class Report {
 
 	public Report() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public Report(int reportId, LocalDate dateOfReport, String descriptionOfReport, String visualAcuity,
-			String visualAcuityNear, String visualAcuityDistance, Test typeOfTest, Patient patient) {
+	public Report(@NotNull LocalDate dateOfReport,
+			@NotEmpty(message = "cannot be left empty") String descriptionOfReport,
+			@NotEmpty(message = "cannot be left empty") String visualAcuity,
+			@NotEmpty(message = "cannot be left empty") String visualAcuityNear,
+			@NotEmpty(message = "cannot be left empty") String visualAcuityDistance, @NotNull Test typeOfTest,
+			@NotNull Patient patient) {
 		super();
-		this.reportId = reportId;
 		this.dateOfReport = dateOfReport;
 		this.descriptionOfReport = descriptionOfReport;
 		this.visualAcuity = visualAcuity;

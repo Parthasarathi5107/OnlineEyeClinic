@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.User;
@@ -26,7 +26,7 @@ public class Doctor extends User {
 
 	@ApiModelProperty(name = "doctor mobile number", required = true)
 	@Column
-	@NotNull
+	@Min(value = 10)
 	private long doctorMobile;
 
 	@ApiModelProperty(name = "doctor email", required = true)
@@ -73,7 +73,7 @@ public class Doctor extends User {
 
 	public Doctor() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Doctor(String doctorConsultationTime, long doctorMobile, String doctorEmail, String address) {
@@ -83,6 +83,33 @@ public class Doctor extends User {
 		this.doctorMobile = doctorMobile;
 		this.doctorEmail = doctorEmail;
 		this.address = address;
+	}
+
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((doctorEmail == null) ? 0 : doctorEmail.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Doctor other = (Doctor) obj;
+		if (doctorEmail == null) {
+			if (other.doctorEmail != null)
+				return false;
+		} else if (!doctorEmail.equals(other.doctorEmail))
+			return false;
+		return true;
 	}
 
 	@Override

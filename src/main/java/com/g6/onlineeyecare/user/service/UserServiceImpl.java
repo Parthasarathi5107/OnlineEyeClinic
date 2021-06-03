@@ -3,10 +3,13 @@ package com.g6.onlineeyecare.user.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
 
 import com.g6.onlineeyecare.user.dao.IUserRepository;
@@ -17,6 +20,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IUserRepository repository;
+
+	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
 
 	public UserServiceImpl(IUserRepository repository) {
 		super();
@@ -29,7 +34,7 @@ public class UserServiceImpl implements IUserService {
 		try {
 			repository.save(user);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return user;
 	}
@@ -79,7 +84,7 @@ public class UserServiceImpl implements IUserService {
 		try {
 			userList = repository.findAll();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return userList;
 	}

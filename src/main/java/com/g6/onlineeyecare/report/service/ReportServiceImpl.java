@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.ReportIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.TestIdNotFoundException;
@@ -32,6 +35,8 @@ public class ReportServiceImpl implements IReportService {
 	@Autowired
 	ITestRepository testRepository;
 
+	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+
 	public ReportServiceImpl(IReportRepository repository) {
 		super();
 		this.repository = repository;
@@ -40,6 +45,7 @@ public class ReportServiceImpl implements IReportService {
 	@Override
 	@Transactional
 	public Report addReport(Report report) throws TestIdNotFoundException, PatientIdFoundNotException {
+		
 		if (patientRepository.findById(report.getPatient().getUserId()).isPresent()) {
 			if (testRepository.findById(report.getTypeOfTest().getTestId()).isPresent()) {
 				repository.save(report);
@@ -104,7 +110,7 @@ public class ReportServiceImpl implements IReportService {
 		try {
 			myReport = repository.viewReportByDate(date);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 
 		return myReport;
@@ -112,12 +118,12 @@ public class ReportServiceImpl implements IReportService {
 
 	@Override
 	public List<Spectacles> viewSpetacles() {
-		// SpectaclesServiceImpl s = new SpectaclesServiceImpl();
+		
 		List<Spectacles> spectacleList = new ArrayList<Spectacles>();
 		try {
 			spectacleList = spectacleService.viewSpectacles();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return spectacleList;
 	}

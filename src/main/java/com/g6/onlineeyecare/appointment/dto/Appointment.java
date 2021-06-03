@@ -33,7 +33,7 @@ public class Appointment {
 	@ApiModelProperty(name = "Appointment date", required = true)
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull
+	@NotNull(message = "Please provide a date.")
 	private LocalDate appointmentDate;
 
 	@ApiModelProperty(name = "Appointment time", required = true)

@@ -3,10 +3,13 @@ package com.g6.onlineeyecare.spectacles.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.SpectaclesIdNotFoundException;
 import com.g6.onlineeyecare.patient.dao.IPatientRepository;
@@ -20,6 +23,8 @@ public class SpectaclesServiceImpl implements ISpectaclesService {
 	ISpectaclesRepository repository;
 	@Autowired
 	IPatientRepository patientRepository;
+
+	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
 
 	public SpectaclesServiceImpl(ISpectaclesRepository repository) {
 		super();
@@ -83,7 +88,7 @@ public class SpectaclesServiceImpl implements ISpectaclesService {
 		try {
 			spectacleList = repository.findAll();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return spectacleList;
 	}

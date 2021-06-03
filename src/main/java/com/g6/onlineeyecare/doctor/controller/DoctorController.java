@@ -25,7 +25,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Validated
-@Api(value = "Doctor Rest Controller", description = "REST APIs related to Doctor Entity!!!!")
+@Api(value = "Doctor Rest Controller")
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {

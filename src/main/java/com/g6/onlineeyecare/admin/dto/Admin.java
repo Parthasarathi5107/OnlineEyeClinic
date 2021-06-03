@@ -11,12 +11,12 @@ public class Admin extends User {
 
 	public Admin() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Admin(int userId, String password, String userName, String role) {
 		super(userId, password, userName, role);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

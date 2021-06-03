@@ -20,7 +20,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<String> handleAppointmentException(AppointmentIdNotFoundException ex) {
 
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Appointment");
+		header.add("AppointmentDescriptionMessage", "Trying to get Appointment");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(DoctorIdNotFoundException.class)
 	public ResponseEntity<String> handleDoctorException(DoctorIdNotFoundException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Doctor");
+		header.add("DoctorDescriptionMessage", "Trying to get Doctor");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(InvalidAppointmentException.class)
 	public ResponseEntity<String> handleInvalidAppointmentException(InvalidAppointmentException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Appointment");
+		header.add("AppointmentDescriptionMessage", "Trying to get Appointment");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(PatientIdFoundNotException.class)
 	public ResponseEntity<String> handlePatientException(PatientIdFoundNotException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Patient");
+		header.add("PatientDescriptionMessage", "Trying to get Patient");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ReportIdNotFoundException.class)
 	public ResponseEntity<String> handleReportException(ReportIdNotFoundException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Report");
+		header.add("ReportDescriptionMessage", "Trying to get Report");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(SpectaclesIdNotFoundException.class)
 	public ResponseEntity<String> handleSpectaclesException(SpectaclesIdNotFoundException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Spectacles");
+		header.add("SpectaclesDescriptionMessage", "Trying to get Spectacles");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -69,7 +69,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(TestIdNotFoundException.class)
 	public ResponseEntity<String> handleTestException(TestIdNotFoundException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get Test");
+		header.add("TestDescriptionMessage", "Trying to get Test");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(UserIdNotFoundException.class)
 	public ResponseEntity<String> handleUserException(UserIdNotFoundException ex) {
 		HttpHeaders header = new HttpHeaders();
-		header.add("Description", "Trying to get User");
+		header.add("UserDescriptionMessage", "Trying to get User");
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
 	}
@@ -88,20 +88,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 		Map<String, String> map = new HashMap<>();
 
-		ex.getBindingResult().getAllErrors().forEach((error) -> {
+		ex.getBindingResult().getAllErrors().forEach( error -> {
 			String fieldName = ((FieldError) error).getField();
 			String msg = error.getDefaultMessage();
 
 			map.put(fieldName, msg);
 		});
-		return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		return new ResponseEntity<Object>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
+		return new ResponseEntity<>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
 				HttpStatus.BAD_REQUEST);
 	}
 

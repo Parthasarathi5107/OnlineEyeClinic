@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.patient.dto.Patient;
@@ -43,7 +42,6 @@ public class Test {
 	@ApiModelProperty(name = "test cost", required = true)
 	@Column
 	@Min(value = 500, message = "cost cannot be less than 500")
-	@NotNull
 	private double testCost;
 
 	@OneToOne
@@ -100,7 +98,7 @@ public class Test {
 
 	public Test() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Test(int testId, String testName, String testType, String testDescription, double testCost,

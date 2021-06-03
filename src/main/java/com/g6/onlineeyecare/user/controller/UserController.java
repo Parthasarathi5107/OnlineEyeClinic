@@ -24,7 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Validated
-@Api(value = "User Rest Controller", description = "REST APIs related to User Entity!!!!")
+@Api(value = "User Rest Controller")
 @RestController
 @RequestMapping("/users")
 public class UserController {

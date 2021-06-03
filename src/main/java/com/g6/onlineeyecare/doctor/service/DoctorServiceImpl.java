@@ -3,11 +3,14 @@ package com.g6.onlineeyecare.doctor.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
+import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.doctor.dao.IDoctorRepository;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
@@ -25,6 +28,8 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	ITestService testService;
 
+	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+
 	public DoctorServiceImpl(IDoctorRepository repository) {
 		super();
 		this.repository = repository;
@@ -36,7 +41,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			repository.save(doctor);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return doctor;
 	}
@@ -87,7 +92,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			doctorList = repository.findAll();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return doctorList;
 	}
@@ -98,7 +103,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			appointmentList = appointmentService.viewAllAppointments();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return appointmentList;
 	}
@@ -109,7 +114,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			testService.addTest(test);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return test;
 	}
