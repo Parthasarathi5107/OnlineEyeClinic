@@ -16,9 +16,8 @@ import com.g6.onlineeyecare.patient.dto.Patient;
 import com.g6.onlineeyecare.report.dao.IReportRepository;
 import com.g6.onlineeyecare.report.dto.Report;
 
-
 @Service
-public class PatientServiceImpl implements IPatientService{
+public class PatientServiceImpl implements IPatientService {
 
 	@Autowired
 	IPatientRepository repository;
@@ -26,9 +25,7 @@ public class PatientServiceImpl implements IPatientService{
 	IAppointmentService appointmentService;
 	@Autowired
 	IReportRepository reportRepository;
-	
-	
-	
+
 	public PatientServiceImpl(IPatientRepository repository) {
 		super();
 		this.repository = repository;
@@ -48,29 +45,27 @@ public class PatientServiceImpl implements IPatientService{
 	@Override
 	@Transactional
 	public Patient updatePatient(Patient patient) throws PatientIdFoundNotException {
-		Optional<Patient>optional=null;
-			optional=repository.findById(patient.getUserId());
-			if(optional.isPresent()) {
+		Optional<Patient> optional = null;
+		optional = repository.findById(patient.getUserId());
+		if (optional.isPresent()) {
 			repository.save(patient);
-			}
-			else {
-				throw new PatientIdFoundNotException("Patient ID not found for updation");
-			}
+		} else {
+			throw new PatientIdFoundNotException("Patient ID not found for updation");
+		}
 		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public Patient deletePatient(int patientId) throws PatientIdFoundNotException {
-		Optional<Patient>optional=null;
-            optional=repository.findById(patientId);
-            if(optional.isPresent()) {
-            repository.deleteById(patientId);
-            }
-            else {
-            	throw new PatientIdFoundNotException("Patient id not found for deletion");
-            }
-        return optional.get();
+		Optional<Patient> optional = null;
+		optional = repository.findById(patientId);
+		if (optional.isPresent()) {
+			repository.deleteById(patientId);
+		} else {
+			throw new PatientIdFoundNotException("Patient id not found for deletion");
+		}
+		return optional.get();
 	}
 
 	@Override
@@ -86,13 +81,13 @@ public class PatientServiceImpl implements IPatientService{
 
 	@Override
 	public Patient viewPatient(int patientId) throws PatientIdFoundNotException {
-		Optional<Patient>optional=null;
-       
-            optional=repository.findById(patientId);
-            if(!optional.isPresent()) {
-            	throw new PatientIdFoundNotException("Patient id not found to view patient");
-            }
-        return optional.get();
+		Optional<Patient> optional = null;
+
+		optional = repository.findById(patientId);
+		if (!optional.isPresent()) {
+			throw new PatientIdFoundNotException("Patient id not found to view patient");
+		}
+		return optional.get();
 	}
 
 	@Override
@@ -119,13 +114,13 @@ public class PatientServiceImpl implements IPatientService{
 	}
 
 	@Override
-    public List<Report> viewReport(int patientId) throws PatientIdFoundNotException {
-        List<Report> reports=null;
-            reports=reportRepository.findReportByPatientId(patientId);
-            if(reports.isEmpty()) {
-            	throw new PatientIdFoundNotException("Patient Id not found to view the report");
-            }
-        return reports;
-    }
+	public List<Report> viewReport(int patientId) throws PatientIdFoundNotException {
+		List<Report> reports = null;
+		reports = reportRepository.findReportByPatientId(patientId);
+		if (reports.isEmpty()) {
+			throw new PatientIdFoundNotException("Patient Id not found to view the report");
+		}
+		return reports;
+	}
 
 }

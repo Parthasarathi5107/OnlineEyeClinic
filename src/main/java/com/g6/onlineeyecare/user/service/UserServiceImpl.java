@@ -13,13 +13,11 @@ import com.g6.onlineeyecare.user.dao.IUserRepository;
 import com.g6.onlineeyecare.user.dto.User;
 
 @Service
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IUserRepository repository;
-	
-	
-	
+
 	public UserServiceImpl(IUserRepository repository) {
 		super();
 		this.repository = repository;
@@ -39,41 +37,39 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	@Transactional
 	public User updateUser(User user) throws UserIdNotFoundException {
-		Optional<User>optional=null;
-		
-			optional=repository.findById(user.getUserId());
-			if(optional.isPresent()) {
+		Optional<User> optional = null;
+
+		optional = repository.findById(user.getUserId());
+		if (optional.isPresent()) {
 			repository.save(user);
-			}
-			else {
-				throw new UserIdNotFoundException("User Id not found for updation");
-			}
+		} else {
+			throw new UserIdNotFoundException("User Id not found for updation");
+		}
 		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public User removeUser(int userId) throws UserIdNotFoundException {
-		Optional<User>optional=null;
-		
-			optional=repository.findById(userId);
-			if(optional.isPresent()) {
+		Optional<User> optional = null;
+
+		optional = repository.findById(userId);
+		if (optional.isPresent()) {
 			repository.deleteById(userId);
-			}
-			else {
-				throw new UserIdNotFoundException("User Id not found for deletion");
-			}
+		} else {
+			throw new UserIdNotFoundException("User Id not found for deletion");
+		}
 		return optional.get();
 	}
 
 	@Override
 	public User viewUser(int userId) throws UserIdNotFoundException {
-		Optional<User>optional=null;
-	
-			optional=repository.findById(userId);
-			if(!optional.isPresent()) {
-				throw new UserIdNotFoundException("User Id not found to view user");
-			}
+		Optional<User> optional = null;
+
+		optional = repository.findById(userId);
+		if (!optional.isPresent()) {
+			throw new UserIdNotFoundException("User Id not found to view user");
+		}
 		return optional.get();
 	}
 

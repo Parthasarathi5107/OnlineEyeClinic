@@ -29,30 +29,31 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentId;
-	
-	@ApiModelProperty(name = "Appointment date",required = true)
+
+	@ApiModelProperty(name = "Appointment date", required = true)
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
 	private LocalDate appointmentDate;
-	
-	@ApiModelProperty(name = "Appointment time",required = true)
+
+	@ApiModelProperty(name = "Appointment time", required = true)
 	@Column
 	@NotNull
 	private LocalTime appointmentTime;
-	
+
 	@OneToOne
-	@JoinColumn(name ="doctor_Id",referencedColumnName = "userId")
+	@JoinColumn(name = "doctor_Id", referencedColumnName = "userId")
 	private Doctor doctor;
-	
+
 	@OneToOne
-	@JoinColumn(name = "patient_Id",referencedColumnName = "userId")
+	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
 	private Patient patient;
-	
+
 	public Appointment() {
 		super();
-		
+
 	}
+
 	public Appointment(int appointmentId, LocalDate appointmentDate, LocalTime appointmentTime, Doctor doctor,
 			Patient patient) {
 		super();
@@ -62,37 +63,47 @@ public class Appointment {
 		this.doctor = doctor;
 		this.patient = patient;
 	}
+
 	public int getAppointmentId() {
 		return appointmentId;
 	}
+
 	public void setAppointmentId(int appointmentId) {
 		this.appointmentId = appointmentId;
 	}
+
 	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
+
 	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
+
 	public LocalTime getAppointmentTime() {
 		return appointmentTime;
 	}
+
 	public void setAppointmentTime(LocalTime appointmentTime) {
 		this.appointmentTime = appointmentTime;
 	}
+
 	public Doctor getDoctor() {
 		return doctor;
 	}
+
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
+
 	public Patient getPatient() {
 		return patient;
 	}
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,6 +111,7 @@ public class Appointment {
 		result = prime * result + appointmentId;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -113,11 +125,11 @@ public class Appointment {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Appointment [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
 				+ ", appointmentTime=" + appointmentTime + ", doctor=" + doctor + ", patient=" + patient + "]";
 	}
-	
-	
+
 }

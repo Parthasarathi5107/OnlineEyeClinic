@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 
 @Repository
-public interface IDoctorRepository extends JpaRepository<Doctor, Integer>{
-	
+public interface IDoctorRepository extends JpaRepository<Doctor, Integer> {
+
 }

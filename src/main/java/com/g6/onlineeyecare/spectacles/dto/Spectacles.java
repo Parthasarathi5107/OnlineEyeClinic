@@ -22,65 +22,74 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name = "spectacles_info")
 public class Spectacles {
-	
-	@Id	
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int spectaclesId;
-	@ApiModelProperty(name = "Spectacles Model",required = true)
+	@ApiModelProperty(name = "Spectacles Model", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min = 3,max = 20)
+	@Size(min = 3, max = 20)
 	private String spectaclesModel;
-	@ApiModelProperty(name = "Spectacles discription",required = true)
+	@ApiModelProperty(name = "Spectacles discription", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String spectaclesDescription;
-	@ApiModelProperty(name = "Spectacles cost",required = true)
+	@ApiModelProperty(name = "Spectacles cost", required = true)
 	@Column
-	@Min(value=1000,message = "cost cannot be less than 1000")
+	@Min(value = 1000, message = "cost cannot be less than 1000")
 	@NotNull
 	private double spectaclesCost;
-	
+
 	@OneToOne
-	@JoinColumn(name = "patient_Id",referencedColumnName = "userId")
+	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
 	private Patient patient;
-	
-	
-	
+
 	public Patient getPatient() {
 		return patient;
 	}
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+
 	public int getSpectaclesId() {
 		return spectaclesId;
 	}
+
 	public void setSpectaclesId(int spectaclesId) {
 		this.spectaclesId = spectaclesId;
 	}
+
 	public String getSpectaclesModel() {
 		return spectaclesModel;
 	}
+
 	public void setSpectaclesModel(String spectaclesModel) {
 		this.spectaclesModel = spectaclesModel;
 	}
+
 	public String getSpectaclesDescription() {
 		return spectaclesDescription;
 	}
+
 	public void setSpectaclesDescription(String spectaclesDescription) {
 		this.spectaclesDescription = spectaclesDescription;
 	}
+
 	public double getSpectaclesCost() {
 		return spectaclesCost;
 	}
+
 	public void setSpectaclesCost(double spectaclesCost) {
 		this.spectaclesCost = spectaclesCost;
 	}
+
 	public Spectacles() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Spectacles(int spectaclesId, String spectaclesModel, String spectaclesDescription, double spectaclesCost,
 			Patient patient) {
 		super();
@@ -98,6 +107,7 @@ public class Spectacles {
 		result = prime * result + spectaclesId;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,12 +121,12 @@ public class Spectacles {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Spectacles [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
 				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesCost=" + spectaclesCost
 				+ ", patient=" + patient + "]";
 	}
-	
-	
+
 }

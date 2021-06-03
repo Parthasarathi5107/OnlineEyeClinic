@@ -35,59 +35,55 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 	@Override
 	@Transactional
-	public Appointment bookAppointment(Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException {
-		if(doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
-			if(patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
+	public Appointment bookAppointment(Appointment appointment)
+			throws DoctorIdNotFoundException, PatientIdFoundNotException {
+		if (doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
+			if (patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
 				appointmentRepository.save(appointment);
-			}
-			else {
+			} else {
 				throw new PatientIdFoundNotException("Patient Id not found");
 			}
-		}
-		else {
+		} else {
 			throw new DoctorIdNotFoundException("Doctor Id not found");
 		}
-			
-		
+
 		return appointment;
 	}
 
 	@Override
 	@Transactional
 	public Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException {
-		Optional<Appointment>optional=null;
-			optional=appointmentRepository.findById(appointment.getAppointmentId());
-			if(optional.isPresent()) {
+		Optional<Appointment> optional = null;
+		optional = appointmentRepository.findById(appointment.getAppointmentId());
+		if (optional.isPresent()) {
 			appointmentRepository.save(appointment);
-			}
-			else {
-				throw new InvalidAppointmentException("Invalid Appointment Exception ");
-			}
+		} else {
+			throw new InvalidAppointmentException("Invalid Appointment Exception ");
+		}
 		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public Appointment cancelAppointment(int appointmentId) throws AppointmentIdNotFoundException {
-		Optional<Appointment>optional=null;
-			optional = appointmentRepository.findById(appointmentId);
-			if(optional.isPresent()) {
+		Optional<Appointment> optional = null;
+		optional = appointmentRepository.findById(appointmentId);
+		if (optional.isPresent()) {
 			appointmentRepository.deleteById(appointmentId);
-			}
-			else {
-				throw new AppointmentIdNotFoundException("Appointment ID not found to cancel appointment");
-			}
+		} else {
+			throw new AppointmentIdNotFoundException("Appointment ID not found to cancel appointment");
+		}
 		return optional.get();
 	}
 
 	@Override
 	public Appointment viewAppointment(int appointmentId) throws AppointmentIdNotFoundException {
-		Optional<Appointment>optional=null;
+		Optional<Appointment> optional = null;
 
-			optional=appointmentRepository.findById(appointmentId);
-			if(!optional.isPresent()) {
-				throw new AppointmentIdNotFoundException("Appointment ID not found to view appointment");
-			}
+		optional = appointmentRepository.findById(appointmentId);
+		if (!optional.isPresent()) {
+			throw new AppointmentIdNotFoundException("Appointment ID not found to view appointment");
+		}
 		return optional.get();
 	}
 
@@ -104,14 +100,14 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 	@Override
 	public List<Appointment> viewAppointments(LocalDate date) {
-		 List<Appointment> dateList = new ArrayList<>();
-	        try {
-	            dateList=appointmentRepository.viewAppointmentByDate(date);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+		List<Appointment> dateList = new ArrayList<>();
+		try {
+			dateList = appointmentRepository.viewAppointmentByDate(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-	        return dateList;
+		return dateList;
 
 	}
 }

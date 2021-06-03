@@ -31,8 +31,6 @@ public class ReportServiceImpl implements IReportService {
 	IPatientRepository patientRepository;
 	@Autowired
 	ITestRepository testRepository;
-	
-	
 
 	public ReportServiceImpl(IReportRepository repository) {
 		super();
@@ -41,18 +39,16 @@ public class ReportServiceImpl implements IReportService {
 
 	@Override
 	@Transactional
-	public Report addReport(Report report) throws TestIdNotFoundException,PatientIdFoundNotException{
-			if(patientRepository.findById(report.getPatient().getUserId()).isPresent()) {
-			 if(testRepository.findById(report.getTypeOfTest().getTestId()).isPresent()) {
-			repository.save(report);
-			 }
-			else {
+	public Report addReport(Report report) throws TestIdNotFoundException, PatientIdFoundNotException {
+		if (patientRepository.findById(report.getPatient().getUserId()).isPresent()) {
+			if (testRepository.findById(report.getTypeOfTest().getTestId()).isPresent()) {
+				repository.save(report);
+			} else {
 				throw new TestIdNotFoundException("test Id not found");
 			}
-			}
-			 else {
-				 throw new PatientIdFoundNotException("patient Id not found");
-			 }
+		} else {
+			throw new PatientIdFoundNotException("patient Id not found");
+		}
 		return report;
 	}
 
@@ -86,17 +82,17 @@ public class ReportServiceImpl implements IReportService {
 	@Override
 	public Report viewReport(int reportId, int patientId) throws ReportIdNotFoundException, PatientIdFoundNotException {
 		Report report = null;
-			Optional<Patient> optional1 = this.patientRepository.findById(patientId);
-			if (optional1.isPresent()) {
-				Optional<Report> optional2 = this.repository.findById(reportId);
-				if (optional2.isPresent()) {
-					report = repository.findReportByPatiendIdandReportId(reportId, patientId);
-				} else {
-					throw new ReportIdNotFoundException("Report not found for given report Id");
-				}
+		Optional<Patient> optional1 = this.patientRepository.findById(patientId);
+		if (optional1.isPresent()) {
+			Optional<Report> optional2 = this.repository.findById(reportId);
+			if (optional2.isPresent()) {
+				report = repository.findReportByPatiendIdandReportId(reportId, patientId);
 			} else {
-				throw new PatientIdFoundNotException("Report not found for given patient Id");
+				throw new ReportIdNotFoundException("Report not found for given report Id");
 			}
+		} else {
+			throw new PatientIdFoundNotException("Report not found for given patient Id");
+		}
 		return report;
 	}
 

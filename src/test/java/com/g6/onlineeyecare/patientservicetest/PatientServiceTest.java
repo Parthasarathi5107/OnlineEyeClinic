@@ -1,7 +1,6 @@
 package com.g6.onlineeyecare.patientservicetest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,100 +30,90 @@ import com.g6.onlineeyecare.report.dao.IReportRepository;
 import com.g6.onlineeyecare.report.service.IReportService;
 import com.g6.onlineeyecare.report.service.ReportServiceImpl;
 
-
 @SpringBootTest
 public class PatientServiceTest {
 
-	
 	IPatientRepository repository;
 	IAppointmentRepository appointmentRepository;
 	IReportRepository reportRepository;
-	
+
 	@InjectMocks
 	static PatientServiceImpl patientService;
 	static IAppointmentService appointmentService;
 	static IReportService reportService;
 	private static AutoCloseable ac;
-	
+
 	@Before
 	public void doinit() {
 		repository = mock(IPatientRepository.class);
 		appointmentRepository = mock(IAppointmentRepository.class);
 		reportRepository = mock(IReportRepository.class);
-		
+
 		patientService = new PatientServiceImpl(repository);
 		appointmentService = new AppointmentServiceImpl(appointmentRepository);
 		reportService = new ReportServiceImpl(reportRepository);
-		
+
 		ac = MockitoAnnotations.openMocks(this);
 	}
-	
+
 	@AfterEach
-	public void doAtEnd()throws Exception
-	{
+	public void doAtEnd() throws Exception {
 		ac.close();
 	}
-	
 
 	@Test
 	@DisplayName("test -> view patient by Id")
 	public void testViewPatientById() throws PatientIdFoundNotException {
-		Patient d1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		d1.setRole("patient");
-		d1.setUserId(2);
-		Optional<Patient> s = Optional.of(d1);
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		p1.setRole("patient");
+		p1.setUserId(2);
 
-		
-		when(repository.findById(2)).thenReturn(s);
-		Patient d = patientService.viewPatient(2);
-		assertEquals(d, d1);
+		when(repository.findById(2)).thenReturn(Optional.of(p1));
+		Patient p2 = patientService.viewPatient(2);
+		assertEquals(p2, p1);
 		verify(repository).findById(2);
 	}
-	
+
 	@Test
 	@DisplayName("test -> view all patients")
 	public void ViewAllPatient() {
-		Patient d1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		Patient d2 = new Patient(25, 805063735, "xys@gmail.com", LocalDate.now(), "mysore");
-		
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p2 = new Patient(25, 805063735, "xys@gmail.com", LocalDate.now(), "mysore");
+
 		List<Patient> dummylist = new ArrayList<>();
-		dummylist.add(d1);
-		dummylist.add(d2);
-		
+		dummylist.add(p1);
+		dummylist.add(p2);
+
 		when(repository.findAll()).thenReturn(dummylist);
 		List<Patient> output = patientService.viewPatientList();
-		
+
 		verify(repository).findAll();
-		assertIterableEquals(dummylist, output);
+		assertEquals(dummylist, output);
 	}
-	
+
 	@Test
 	@DisplayName("test -> delete patients")
-    public void deletePatient() throws PatientIdFoundNotException 
-    {
-		Patient d1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		d1.setUserId(2);
-		Optional<Patient> s = Optional.of(d1);
-		when(repository.findById(2)).thenReturn(s);
+	public void deletePatient() throws PatientIdFoundNotException {
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		p1.setUserId(2);
+		when(repository.findById(2)).thenReturn(Optional.of(p1));
 
-            patientService.deletePatient(2);
-            verify(repository).deleteById(2);
+		Patient p = patientService.deletePatient(2);
+		verify(repository).deleteById(2);
+		assertEquals(p1, p);
 
+	}
 
-    }
-	
 	@Test
 	@DisplayName("test -> add doctor")
-	public void addPatient()
-	{
-		Patient d1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		//d1.setUserId(2);
-		Patient d2 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		//d2.setUserId(2);
-		Optional<Patient> s = Optional.of(d1);
-		when(repository.findById(d1.getUserId())).thenReturn(s);
-		patientService.addPatient(d1);
-		verify(repository).save(d1);
-		assertEquals(d1, d2);
+	public void addPatient() {
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		// d1.setUserId(2);
+		Patient p2 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		// d2.setUserId(2);
+		when(repository.save(p1)).thenReturn(p2);
+		Patient p = patientService.addPatient(p1);
+		verify(repository).save(p1);
+		assertEquals(p1, p2);
 	}
 }

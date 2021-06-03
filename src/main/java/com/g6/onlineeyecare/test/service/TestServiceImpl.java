@@ -14,72 +14,67 @@ import com.g6.onlineeyecare.test.dao.ITestRepository;
 import com.g6.onlineeyecare.test.dto.Test;
 
 @Service
-public class TestServiceImpl implements ITestService{
+public class TestServiceImpl implements ITestService {
 
 	@Autowired
 	ITestRepository testRepository;
 	@Autowired
 	IPatientRepository patientRepository;
-	
+
 	public TestServiceImpl(ITestRepository testRepository) {
 		super();
 		this.testRepository = testRepository;
 	}
 
 	@Override
-    @Transactional
-    public Test addTest(Test test) throws PatientIdFoundNotException {
+	@Transactional
+	public Test addTest(Test test) throws PatientIdFoundNotException {
 
-        if(patientRepository.findById(test.getPatient().getUserId()).isPresent())
-        {
-            testRepository.save(test);
-        }
-        else
-        {
-            throw new PatientIdFoundNotException("Patient Id not found");
-        }
+		if (patientRepository.findById(test.getPatient().getUserId()).isPresent()) {
+			testRepository.save(test);
+		} else {
+			throw new PatientIdFoundNotException("Patient Id not found");
+		}
 
-        return test;
-    }
+		return test;
+	}
 
 	@Override
 	@Transactional
 	public Test updateTest(Test test) throws TestIdNotFoundException {
-		Optional<Test>optional=null;
-			optional=testRepository.findById(test.getTestId());
-			if(optional.isPresent()) {
+		Optional<Test> optional = null;
+		optional = testRepository.findById(test.getTestId());
+		if (optional.isPresent()) {
 			testRepository.save(test);
-			}
-			else {
-				throw new TestIdNotFoundException("Test Id not found for updation");
-			}
+		} else {
+			throw new TestIdNotFoundException("Test Id not found for updation");
+		}
 		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public Test removeTest(int testId) throws TestIdNotFoundException {
-		Optional<Test>optional=null;
-		
-			optional=testRepository.findById(testId);
-			if(optional.isPresent()) {
+		Optional<Test> optional = null;
+
+		optional = testRepository.findById(testId);
+		if (optional.isPresent()) {
 			testRepository.deleteById(testId);
-			}
-			else {
-				throw new TestIdNotFoundException("Test Id not found to remove test");
-			}
+		} else {
+			throw new TestIdNotFoundException("Test Id not found to remove test");
+		}
 		return optional.get();
 	}
 
 	@Override
 	public Test viewTest(int testId) throws TestIdNotFoundException {
-		Optional<Test>optional=null;
-		
-			optional=testRepository.findById(testId);
-			if(!optional.isPresent()) {
-				throw new TestIdNotFoundException("Test Id not found to view test");
-			}
-			
+		Optional<Test> optional = null;
+
+		optional = testRepository.findById(testId);
+		if (!optional.isPresent()) {
+			throw new TestIdNotFoundException("Test Id not found to view test");
+		}
+
 		return optional.get();
 	}
 

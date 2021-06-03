@@ -29,39 +29,38 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/test")
 public class TestController {
 
-    @Autowired
-    ITestService testService;
+	@Autowired
+	ITestService testService;
 
-    @ApiOperation(value = "Create a new test",response = Test.class)
-    @PostMapping("/add")
-    public Test addTest(@RequestBody @Valid Test test) throws PatientIdFoundNotException {
-        return    this.testService.addTest(test);
+	@ApiOperation(value = "Create a new test", response = Test.class)
+	@PostMapping("/add")
+	public Test addTest(@RequestBody @Valid Test test) throws PatientIdFoundNotException {
+		return this.testService.addTest(test);
 
-    }
+	}
 
-    @ApiOperation(value = "Update the specific test",response = Test.class)
-    @PutMapping("/update")
-    public Test updateTest(@RequestBody Test test) throws TestIdNotFoundException {
-        return this.testService.updateTest(test);
-    }
+	@ApiOperation(value = "Update the specific test", response = Test.class)
+	@PutMapping("/update")
+	public Test updateTest(@RequestBody Test test) throws TestIdNotFoundException {
+		return this.testService.updateTest(test);
+	}
 
-    @ApiOperation(value = "Delete the specific test",response = Test.class)
-    @DeleteMapping("/delete/{testId}")
-    public Test deleteTest(@PathVariable("testId") int testId) throws TestIdNotFoundException
-    {
-        return this.testService.removeTest(testId);
-    }
+	@ApiOperation(value = "Delete the specific test", response = Test.class)
+	@DeleteMapping("/delete/{testId}")
+	public Test deleteTest(@PathVariable("testId") int testId) throws TestIdNotFoundException {
+		return this.testService.removeTest(testId);
+	}
 
-    @ApiOperation(value = "View the test by Id",response = Test.class)
-    @GetMapping("/view/{testId}")
-    public Test viewTest(@PathVariable("testId")  int testId ) throws TestIdNotFoundException {
-        return this.testService.viewTest(testId);
+	@ApiOperation(value = "View the test by Id", response = Test.class)
+	@GetMapping("/view/{testId}")
+	public Test viewTest(@PathVariable("testId") int testId) throws TestIdNotFoundException {
+		return this.testService.viewTest(testId);
 
-    }
+	}
 
-    @ApiOperation(value = "View all Tests",response = Test.class)
-    @GetMapping("/viewAll")
-    public List<Test> viewAllTests(){
-        return this.testService.viewAllTests();
-    }
+	@ApiOperation(value = "View all Tests", response = Test.class)
+	@GetMapping("/viewAll")
+	public List<Test> viewAllTests() {
+		return this.testService.viewAllTests();
+	}
 }

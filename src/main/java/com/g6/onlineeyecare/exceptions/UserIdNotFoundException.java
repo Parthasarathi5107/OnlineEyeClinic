@@ -1,7 +1,7 @@
 package com.g6.onlineeyecare.exceptions;
 
 @SuppressWarnings("serial")
-public class UserIdNotFoundException extends Exception{
+public class UserIdNotFoundException extends Exception {
 
 	public UserIdNotFoundException() {
 		super();

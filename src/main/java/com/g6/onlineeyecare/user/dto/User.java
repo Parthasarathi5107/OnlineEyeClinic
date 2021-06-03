@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 @ApiModel(value = "User dto")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -27,25 +28,26 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
-	@ApiModelProperty(name = "user password",required = true)
+	@ApiModelProperty(name = "user password", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min=8,max=25)
+	@Size(min = 8, max = 25)
 	private String password;
-	@ApiModelProperty(name = "user name",required = true)
+	@ApiModelProperty(name = "user name", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min=3,max=20)
+	@Size(min = 3, max = 20)
 	private String userName;
-	@ApiModelProperty(name = "user role",required = true)
+	@ApiModelProperty(name = "user role", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String role;
-	
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public User(int userId, String password, String userName, String role) {
 		super();
 		this.userId = userId;
@@ -53,27 +55,35 @@ public class User {
 		this.userName = userName;
 		this.role = role;
 	}
+
 	public int getUserId() {
 		return userId;
 	}
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
@@ -87,6 +97,7 @@ public class User {
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,10 +121,10 @@ public class User {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", password=" + password + ", userName=" + userName + ", role=" + role + "]";
 	}
-	
-	
+
 }

@@ -33,56 +33,56 @@ public class PatientController {
 
 	@Autowired
 	IPatientService patientService;
-	
-	@ApiOperation(value = "create a new Patient profile",response = Patient.class)
+
+	@ApiOperation(value = "create a new Patient profile", response = Patient.class)
 	@PostMapping("/add")
 	public Patient addPatient(@RequestBody @Valid Patient patient) {
-		return	this.patientService.addPatient(patient);
-		
+		return this.patientService.addPatient(patient);
+
 	}
-	
-	@ApiOperation(value = "Update your profile ",response = Patient.class)
+
+	@ApiOperation(value = "Update your profile ", response = Patient.class)
 	@PutMapping("/update")
-	public Patient updatePatient(@RequestBody Patient patient) throws PatientIdFoundNotException  {
+	public Patient updatePatient(@RequestBody Patient patient) throws PatientIdFoundNotException {
 		return this.patientService.updatePatient(patient);
 	}
-	
-	@ApiOperation(value = "Delete your profile ",response = Patient.class)
+
+	@ApiOperation(value = "Delete your profile ", response = Patient.class)
 	@DeleteMapping("/delete/{patientId}")
-	public Patient deletePatient(@PathVariable("patientId") int patientId) throws PatientIdFoundNotException
-	{
+	public Patient deletePatient(@PathVariable("patientId") int patientId) throws PatientIdFoundNotException {
 		return this.patientService.deletePatient(patientId);
 	}
-	
-	@ApiOperation(value = "view Patient profile by Id",response = Patient.class)
+
+	@ApiOperation(value = "view Patient profile by Id", response = Patient.class)
 	@GetMapping("/view/{patientId}")
-	public Patient viewPatient(@PathVariable("patientId")  int patientId ) throws PatientIdFoundNotException  {
+	public Patient viewPatient(@PathVariable("patientId") int patientId) throws PatientIdFoundNotException {
 		return this.patientService.viewPatient(patientId);
-		
+
 	}
-	
-	@ApiOperation(value = "view list of Patients ",response = Patient.class)
+
+	@ApiOperation(value = "view list of Patients ", response = Patient.class)
 	@GetMapping("/viewPatientList")
-	public List<Patient> viewPatientList(){
+	public List<Patient> viewPatientList() {
 		return this.patientService.viewPatientList();
 	}
-	
-	@ApiOperation(value = "Book appointment to consult the doctor",response = Appointment.class)
+
+	@ApiOperation(value = "Book appointment to consult the doctor", response = Appointment.class)
 	@PostMapping("/book")
-	public Appointment bookAppointment(@RequestBody  Appointment appointment) {
-		return	this.patientService.bookAppointment(appointment);
-		
+	public Appointment bookAppointment(@RequestBody Appointment appointment) {
+		return this.patientService.bookAppointment(appointment);
+
 	}
-	
-	@ApiOperation(value = "Get the required appointment by Id ",response = Appointment.class)
+
+	@ApiOperation(value = "Get the required appointment by Id ", response = Appointment.class)
 	@GetMapping("/viewAppointmentDetails/{appointmentId}")
-	public Appointment viewAppointmentDetails(@PathVariable("appointmentId") int appointmentid) throws AppointmentIdNotFoundException {
+	public Appointment viewAppointmentDetails(@PathVariable("appointmentId") int appointmentid)
+			throws AppointmentIdNotFoundException {
 		return this.patientService.viewAppointmentDetails(appointmentid);
 	}
-	
-	@ApiOperation(value = "Get the required Report by patientId ",response = Report.class)
+
+	@ApiOperation(value = "Get the required Report by patientId ", response = Report.class)
 	@GetMapping("/report/{patientId}")
-    public List<Report> viewReport(@PathVariable("patientId") int patientId) throws PatientIdFoundNotException {
-        return this.patientService.viewReport(patientId);
-    }
+	public List<Report> viewReport(@PathVariable("patientId") int patientId) throws PatientIdFoundNotException {
+		return this.patientService.viewReport(patientId);
+	}
 }

@@ -31,37 +31,38 @@ public class SpectaclesController {
 
 	@Autowired
 	ISpectaclesService spectaclesService;
-	
-	@ApiOperation(value = "add a new Spectacles",response = Spectacles.class)
+
+	@ApiOperation(value = "add a new Spectacles", response = Spectacles.class)
 	@PostMapping("/add")
 	public Spectacles addSpectacles(@RequestBody @Valid Spectacles spectacles) throws PatientIdFoundNotException {
-		return	this.spectaclesService.addSpectacles(spectacles);
-		
+		return this.spectaclesService.addSpectacles(spectacles);
+
 	}
-	
-	@ApiOperation(value = "update Spectacles",response = Spectacles.class)
+
+	@ApiOperation(value = "update Spectacles", response = Spectacles.class)
 	@PutMapping("/update")
 	public Spectacles updateSpectacles(@RequestBody Spectacles spectacles) throws SpectaclesIdNotFoundException {
 		return this.spectaclesService.updateSpectacles(spectacles);
 	}
-	
-	@ApiOperation(value = "delete Spectacles",response = Spectacles.class)
+
+	@ApiOperation(value = "delete Spectacles", response = Spectacles.class)
 	@DeleteMapping("/delete/{spectaclesId}")
-	public Spectacles deleteSpectacles(@PathVariable("spectaclesId") int spectaclesId) throws SpectaclesIdNotFoundException
-	{
+	public Spectacles deleteSpectacles(@PathVariable("spectaclesId") int spectaclesId)
+			throws SpectaclesIdNotFoundException {
 		return this.spectaclesService.removeSpectacles(spectaclesId);
 	}
-	
-	@ApiOperation(value = "view Spectacles by Id",response = Spectacles.class)
+
+	@ApiOperation(value = "view Spectacles by Id", response = Spectacles.class)
 	@GetMapping("/view/{spectaclesId}")
-	public Spectacles viewSpectacles(@PathVariable("spectaclesId")  int spectaclesId ) throws SpectaclesIdNotFoundException {
+	public Spectacles viewSpectacles(@PathVariable("spectaclesId") int spectaclesId)
+			throws SpectaclesIdNotFoundException {
 		return this.spectaclesService.viewSpectacles(spectaclesId);
-		
+
 	}
-	
-	@ApiOperation(value = "view all Spectacles",response = Spectacles.class)
+
+	@ApiOperation(value = "view all Spectacles", response = Spectacles.class)
 	@GetMapping("/viewAll")
-	public List<Spectacles>viewSpectacles(){
+	public List<Spectacles> viewSpectacles() {
 		return this.spectaclesService.viewSpectacles();
 	}
 }
