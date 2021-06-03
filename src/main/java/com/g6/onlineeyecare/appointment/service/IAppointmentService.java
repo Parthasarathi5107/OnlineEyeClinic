@@ -9,12 +9,17 @@ import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.InvalidAppointmentException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 
-public interface IAppointmentService{
-	
+public interface IAppointmentService {
+
 	Appointment bookAppointment(Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException;
-	Appointment updateAppointment(Appointment appointment)throws InvalidAppointmentException;
-	Appointment cancelAppointment(int appointmentId)throws AppointmentIdNotFoundException;
-	Appointment viewAppointment(int appointmentId)throws AppointmentIdNotFoundException;
+
+	Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException;
+
+	Appointment cancelAppointment(int appointmentId) throws AppointmentIdNotFoundException;
+
+	Appointment viewAppointment(int appointmentId) throws AppointmentIdNotFoundException;
+
 	List<Appointment> viewAllAppointments();
+
 	List<Appointment> viewAppointments(LocalDate date);
 }

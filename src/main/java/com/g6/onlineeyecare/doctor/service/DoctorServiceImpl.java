@@ -16,7 +16,7 @@ import com.g6.onlineeyecare.test.dto.Test;
 import com.g6.onlineeyecare.test.service.ITestService;
 
 @Service
-public class DoctorServiceImpl implements IDoctorService{
+public class DoctorServiceImpl implements IDoctorService {
 
 	@Autowired
 	IDoctorRepository repository;
@@ -24,7 +24,12 @@ public class DoctorServiceImpl implements IDoctorService{
 	IAppointmentService appointmentService;
 	@Autowired
 	ITestService testService;
-	
+
+	public DoctorServiceImpl(IDoctorRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@Override
 	@Transactional
 	public Doctor addDoctor(Doctor doctor) {
@@ -39,48 +44,40 @@ public class DoctorServiceImpl implements IDoctorService{
 	@Override
 	@Transactional
 	public Doctor updateDoctor(Doctor doctor) throws DoctorIdNotFoundException {
-		Optional<Doctor>optional=null;
-		
-			optional=repository.findById(doctor.getUserId());
-			if(optional.isPresent()) {
+		Optional<Doctor> optional = null;
+
+		optional = repository.findById(doctor.getUserId());
+		if (optional.isPresent()) {
 			repository.save(doctor);
-			}
-			else {
-				throw new DoctorIdNotFoundException("Doctor id not found for updation");
-			}
+		} else {
+			throw new DoctorIdNotFoundException("Doctor id not found for updation");
+		}
 		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public Doctor deleteDoctor(int doctorId) throws DoctorIdNotFoundException {
-		Optional<Doctor>optional=null;
-		
-			optional=repository.findById(doctorId);
-			if(optional.isPresent()) {
-			repository.deleteById(doctorId);
-			}
-			else 
-			{
-				throw new DoctorIdNotFoundException("Doctor id not found for deletion");
+		Optional<Doctor> optional = null;
 
-			}
+		optional = repository.findById(doctorId);
+		if (optional.isPresent()) {
+			repository.deleteById(doctorId);
+		} else {
+			throw new DoctorIdNotFoundException("Doctor id not found for deletion");
+
+		}
 		return optional.get();
 	}
 
 	@Override
 	public Doctor viewDoctor(int doctorId) throws DoctorIdNotFoundException {
-		Optional<Doctor>optional=null;
-		
-			optional=repository.findById(doctorId);
-			if(optional.isPresent())
-			{
-				repository.findById(doctorId);
-			}
-			else
-			{
-				throw new DoctorIdNotFoundException("Doctor id not found to view doctor");
-			}
+		Optional<Doctor> optional = null;
+
+		optional = repository.findById(doctorId);
+		if (!optional.isPresent()) {
+			throw new DoctorIdNotFoundException("Doctor id not found to view doctor");
+		}
 		return optional.get();
 	}
 
@@ -99,7 +96,7 @@ public class DoctorServiceImpl implements IDoctorService{
 	public List<Appointment> viewAppointments() {
 		List<Appointment> appointmentList = null;
 		try {
-			appointmentList = appointmentService.viewAllAppointments() ;
+			appointmentList = appointmentService.viewAllAppointments();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

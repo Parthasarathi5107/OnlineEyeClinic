@@ -33,45 +33,46 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/report")
 public class ReportController {
 
-    @Autowired
-    IReportService reportService;
+	@Autowired
+	IReportService reportService;
 
-    @ApiOperation(value = "Generate a new report",response = Report.class)
-    @PostMapping("/add")
-    public Report addReport(@RequestBody @Valid Report report) throws TestIdNotFoundException, PatientIdFoundNotException {
-        return this.reportService.addReport(report);
+	@ApiOperation(value = "Generate a new report", response = Report.class)
+	@PostMapping("/add")
+	public Report addReport(@RequestBody @Valid Report report)
+			throws TestIdNotFoundException, PatientIdFoundNotException {
+		return this.reportService.addReport(report);
 
-    }
+	}
 
-    @ApiOperation(value = "Update the specific report",response = Report.class)
-    @PutMapping("/update")
-    public Report updateReport(@RequestBody Report report) throws ReportIdNotFoundException {
-        return this.reportService.updateReport(report);
-    }
+	@ApiOperation(value = "Update the specific report", response = Report.class)
+	@PutMapping("/update")
+	public Report updateReport(@RequestBody Report report) throws ReportIdNotFoundException {
+		return this.reportService.updateReport(report);
+	}
 
-    @ApiOperation(value = "Delete the report",response = Report.class)
-    @DeleteMapping("/delete/{reportId}")
-    public Report deleteReport(@PathVariable("reportId") int reportId) throws ReportIdNotFoundException {
-        return this.reportService.removeReport(reportId);
-    }
+	@ApiOperation(value = "Delete the report", response = Report.class)
+	@DeleteMapping("/delete/{reportId}")
+	public Report deleteReport(@PathVariable("reportId") int reportId) throws ReportIdNotFoundException {
+		return this.reportService.removeReport(reportId);
+	}
 
-    @ApiOperation(value = "View the specific report by report id and patient id",response = Report.class)
-    @GetMapping("/view/{reportId}/{patientId}")
-    public Report viewReport(@PathVariable("reportId") int reportId, @PathVariable("patientId") int patientId)
-            throws ReportIdNotFoundException, PatientIdFoundNotException {
-        return this.reportService.viewReport(reportId, patientId);
+	@ApiOperation(value = "View the specific report by report id and patient id", response = Report.class)
+	@GetMapping("/view/{reportId}/{patientId}")
+	public Report viewReport(@PathVariable("reportId") int reportId, @PathVariable("patientId") int patientId)
+			throws ReportIdNotFoundException, PatientIdFoundNotException {
+		return this.reportService.viewReport(reportId, patientId);
 
-    }
+	}
 
-    @ApiOperation(value = "View the specific report by date",response = Report.class)
-    @GetMapping("/viewByDate/{date}")
-    public List<Report> viewAllReport(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        return this.reportService.viewAllReport(date);
-    }
+	@ApiOperation(value = "View the specific report by date", response = Report.class)
+	@GetMapping("/viewByDate/{date}")
+	public List<Report> viewAllReport(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+		return this.reportService.viewAllReport(date);
+	}
 
-    @ApiOperation(value = "Get the list of Spectacles",response = Spectacles.class)
-    @GetMapping("/spectacles")
-    public List<Spectacles> viewSpetacles() {
-        return this.reportService.viewSpetacles();
-    }
+	@ApiOperation(value = "Get the list of Spectacles", response = Spectacles.class)
+	@GetMapping("/spectacles")
+	public List<Spectacles> viewSpetacles() {
+		return this.reportService.viewSpetacles();
+	}
 }

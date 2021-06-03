@@ -30,54 +30,50 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/doctor")
 public class DoctorController {
 
-    @Autowired
-    IDoctorService doctorService;
+	@Autowired
+	IDoctorService doctorService;
 
-    @ApiOperation(value = "Create a new Doctor profile",response = Doctor.class)
-    @PostMapping("/add")
-    public Doctor addDoctor(@RequestBody @Valid Doctor doctor) {
-        return    this.doctorService.addDoctor(doctor);
+	@ApiOperation(value = "Create a new Doctor profile", response = Doctor.class)
+	@PostMapping("/add")
+	public Doctor addDoctor(@RequestBody @Valid Doctor doctor) {
+		return this.doctorService.addDoctor(doctor);
 
-    }
+	}
 
-    @ApiOperation(value = "Update your profile",response = Doctor.class)
-    @PutMapping("/update")
-    public Doctor updateDoctor(@RequestBody Doctor doctor) throws DoctorIdNotFoundException  {
-        return this.doctorService.updateDoctor(doctor);
-    }
+	@ApiOperation(value = "Update your profile", response = Doctor.class)
+	@PutMapping("/update")
+	public Doctor updateDoctor(@RequestBody Doctor doctor) throws DoctorIdNotFoundException {
+		return this.doctorService.updateDoctor(doctor);
+	}
 
-    @ApiOperation(value = "delete your profile ",response = Doctor.class)
-    @DeleteMapping("/delete/{doctorId}")
-    public Doctor deleteDoctor(@PathVariable("doctorId") int doctorId) throws DoctorIdNotFoundException 
-    {
-        return this.doctorService.deleteDoctor(doctorId);
-    }
+	@ApiOperation(value = "delete your profile ", response = Doctor.class)
+	@DeleteMapping("/delete/{doctorId}")
+	public Doctor deleteDoctor(@PathVariable("doctorId") int doctorId) throws DoctorIdNotFoundException {
+		return this.doctorService.deleteDoctor(doctorId);
+	}
 
-    @ApiOperation(value = "View Doctor profile by Id",response = Doctor.class)
-    @GetMapping("/view/{doctorId}")
-    public Doctor viewDoctor(@PathVariable("doctorId")  int doctorId ) throws DoctorIdNotFoundException  {
-        return this.doctorService.viewDoctor(doctorId);
+	@ApiOperation(value = "View Doctor profile by Id", response = Doctor.class)
+	@GetMapping("/view/{doctorId}")
+	public Doctor viewDoctor(@PathVariable("doctorId") int doctorId) throws DoctorIdNotFoundException {
+		return this.doctorService.viewDoctor(doctorId);
 
-    }
+	}
 
-    @ApiOperation(value = "Get the List of Doctors",response = Doctor.class)
-    @GetMapping("/viewList")
-    public List<Doctor> viewDoctorsList()
-    {
-        return this.doctorService.viewDoctorsList();
-    }
+	@ApiOperation(value = "Get the List of Doctors", response = Doctor.class)
+	@GetMapping("/viewList")
+	public List<Doctor> viewDoctorsList() {
+		return this.doctorService.viewDoctorsList();
+	}
 
-    @ApiOperation(value = "view all appointments",response = Doctor.class)
-    @GetMapping("/viewAppointments")
-    public List<Appointment> viewAppointments()
-    {
-        return this.doctorService.viewAppointments();
-    }
+	@ApiOperation(value = "view all appointments", response = Doctor.class)
+	@GetMapping("/viewAppointments")
+	public List<Appointment> viewAppointments() {
+		return this.doctorService.viewAppointments();
+	}
 
-    @ApiOperation(value = "Create a new test",response = Doctor.class)
-    @PostMapping("/test")
-    public Test createTest(@RequestBody Test test)
-    {
-        return this.doctorService.createTest(test);
-    }
+	@ApiOperation(value = "Create a new test", response = Doctor.class)
+	@PostMapping("/test")
+	public Test createTest(@RequestBody Test test) {
+		return this.doctorService.createTest(test);
+	}
 }

@@ -12,13 +12,13 @@ import com.g6.onlineeyecare.spectacles.dto.Spectacles;
 public interface IReportService {
 	Report addReport(Report report) throws TestIdNotFoundException, PatientIdFoundNotException;
 
-	Report updateReport(Report report)throws ReportIdNotFoundException;
+	Report updateReport(Report report) throws ReportIdNotFoundException;
 
-	Report removeReport(int reportId)throws ReportIdNotFoundException;
+	Report removeReport(int reportId) throws ReportIdNotFoundException;
 
-	Report viewReport(int reportId, int patientId)throws ReportIdNotFoundException,PatientIdFoundNotException;
+	Report viewReport(int reportId, int patientId) throws ReportIdNotFoundException, PatientIdFoundNotException;
 
 	List<Report> viewAllReport(LocalDate date);
 
-	List<Spectacles>  viewSpetacles();
+	List<Spectacles> viewSpetacles();
 }

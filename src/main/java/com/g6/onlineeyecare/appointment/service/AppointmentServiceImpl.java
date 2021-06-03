@@ -22,70 +22,68 @@ import com.g6.onlineeyecare.patient.dao.IPatientRepository;
 public class AppointmentServiceImpl implements IAppointmentService {
 
 	@Autowired
-	IAppointmentRepository repository;
+	IAppointmentRepository appointmentRepository;
 	@Autowired
 	IPatientRepository patientRepository;
 	@Autowired
 	IDoctorRepository doctorRepository;
 
+	public AppointmentServiceImpl(IAppointmentRepository appointmentRepository) {
+		super();
+		this.appointmentRepository = appointmentRepository;
+	}
+
 	@Override
 	@Transactional
-	public Appointment bookAppointment(Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException {
-		if(doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
-			if(patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
-				repository.save(appointment);
-			}
-			else {
+	public Appointment bookAppointment(Appointment appointment)
+			throws DoctorIdNotFoundException, PatientIdFoundNotException {
+		if (doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
+			if (patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
+				appointmentRepository.save(appointment);
+			} else {
 				throw new PatientIdFoundNotException("Patient Id not found");
 			}
-		}
-		else {
+		} else {
 			throw new DoctorIdNotFoundException("Doctor Id not found");
 		}
-			
-		
+
 		return appointment;
 	}
 
 	@Override
 	@Transactional
 	public Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException {
-		Optional<Appointment>optional=null;
-			optional=repository.findById(appointment.getAppointmentId());
-			if(optional.isPresent()) {
-			repository.save(appointment);
-			}
-			else {
-				throw new InvalidAppointmentException("Invalid Appointment Exception ");
-			}
+		Optional<Appointment> optional = null;
+		optional = appointmentRepository.findById(appointment.getAppointmentId());
+		if (optional.isPresent()) {
+			appointmentRepository.save(appointment);
+		} else {
+			throw new InvalidAppointmentException("Invalid Appointment Exception ");
+		}
 		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public Appointment cancelAppointment(int appointmentId) throws AppointmentIdNotFoundException {
-		Optional<Appointment>optional=null;
-			optional = repository.findById(appointmentId);
-			if(optional.isPresent()) {
-			repository.deleteById(appointmentId);
-			}
-			else {
-				throw new AppointmentIdNotFoundException("Appointment ID not found to cancel appointment");
-			}
+		Optional<Appointment> optional = null;
+		optional = appointmentRepository.findById(appointmentId);
+		if (optional.isPresent()) {
+			appointmentRepository.deleteById(appointmentId);
+		} else {
+			throw new AppointmentIdNotFoundException("Appointment ID not found to cancel appointment");
+		}
 		return optional.get();
 	}
 
 	@Override
 	public Appointment viewAppointment(int appointmentId) throws AppointmentIdNotFoundException {
-		Optional<Appointment>optional=null;
+		Optional<Appointment> optional = null;
 
-			optional=repository.findById(appointmentId);
-			if(optional.isPresent()) {
-				repository.findById(appointmentId);
-			}
-			else {
-				throw new AppointmentIdNotFoundException("Appointment ID not found to view appointment");
-			}
+		optional = appointmentRepository.findById(appointmentId);
+		if (!optional.isPresent()) {
+			throw new AppointmentIdNotFoundException("Appointment ID not found to view appointment");
+		}
 		return optional.get();
 	}
 
@@ -93,7 +91,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	public List<Appointment> viewAllAppointments() {
 		List<Appointment> appointmentList = null;
 		try {
-			appointmentList = repository.findAll();
+			appointmentList = appointmentRepository.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,14 +100,14 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 	@Override
 	public List<Appointment> viewAppointments(LocalDate date) {
-		 List<Appointment> dateList = new ArrayList<>();
-	        try {
-	            dateList=repository.viewAppointmentByDate(date);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+		List<Appointment> dateList = new ArrayList<>();
+		try {
+			dateList = appointmentRepository.viewAppointmentByDate(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-	        return dateList;
+		return dateList;
 
 	}
 }

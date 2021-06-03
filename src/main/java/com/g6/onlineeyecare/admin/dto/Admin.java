@@ -7,7 +7,7 @@ import com.g6.onlineeyecare.user.dto.User;
 
 @Entity
 @DiscriminatorValue(value = "2")
-public class Admin extends User{
+public class Admin extends User {
 
 	public Admin() {
 		super();
@@ -18,6 +18,5 @@ public class Admin extends User{
 		super(userId, password, userName, role);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

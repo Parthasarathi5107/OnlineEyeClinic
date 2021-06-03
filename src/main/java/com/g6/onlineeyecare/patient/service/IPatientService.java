@@ -10,11 +10,18 @@ import com.g6.onlineeyecare.report.dto.Report;
 
 public interface IPatientService {
 	Patient addPatient(Patient patient);
-	Patient updatePatient(Patient patient)throws PatientIdFoundNotException;
-	Patient deletePatient(int patientId)throws PatientIdFoundNotException;
+
+	Patient updatePatient(Patient patient) throws PatientIdFoundNotException;
+
+	Patient deletePatient(int patientId) throws PatientIdFoundNotException;
+
 	List<Patient> viewPatientList();
-	Patient viewPatient(int patientId)throws PatientIdFoundNotException;
+
+	Patient viewPatient(int patientId) throws PatientIdFoundNotException;
+
 	Appointment bookAppointment(Appointment appointment);
-	Appointment viewAppointmentDetails(int appointmentid)throws AppointmentIdNotFoundException;
-	List<Report> viewReport(int patientId)throws PatientIdFoundNotException;
+
+	Appointment viewAppointmentDetails(int appointmentid) throws AppointmentIdNotFoundException;
+
+	List<Report> viewReport(int patientId) throws PatientIdFoundNotException;
 }

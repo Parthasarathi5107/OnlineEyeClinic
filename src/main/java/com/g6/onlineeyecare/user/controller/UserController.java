@@ -31,36 +31,35 @@ public class UserController {
 
 	@Autowired
 	IUserService userService;
-	
-	@ApiOperation(value = "add a new User",response = User.class)
+
+	@ApiOperation(value = "add a new User", response = User.class)
 	@PostMapping("/add")
 	public Admin addUser(@RequestBody @Valid Admin user) {
 		return (Admin) this.userService.addUser(user);
 	}
-	
-	@ApiOperation(value = "view User by Id",response = User.class)
+
+	@ApiOperation(value = "view User by Id", response = User.class)
 	@GetMapping("/view/{userId}")
-	public Admin viewUser(@PathVariable("userId")  int userId ) throws UserIdNotFoundException {
+	public Admin viewUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
 		return (Admin) this.userService.viewUser(userId);
-		
+
 	}
-	
-	@ApiOperation(value = "update profile",response = User.class)
+
+	@ApiOperation(value = "update profile", response = User.class)
 	@PutMapping("/update")
 	public Admin updateUser(@RequestBody Admin user) throws UserIdNotFoundException {
 		return (Admin) this.userService.updateUser(user);
 	}
-	
-	@ApiOperation(value = "delete user",response = User.class)
+
+	@ApiOperation(value = "delete user", response = User.class)
 	@DeleteMapping("/delete/{userId}")
-	public Admin removeUser(@PathVariable("userId") int userId) throws UserIdNotFoundException
-	{
+	public Admin removeUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
 		return (Admin) this.userService.removeUser(userId);
 	}
-	
-	@ApiOperation(value = "view all Users",response = User.class)
+
+	@ApiOperation(value = "view all Users", response = User.class)
 	@GetMapping("/viewAll")
-	public List<User> viewUsers(){
+	public List<User> viewUsers() {
 		return this.userService.viewUsers();
 	}
 }
