@@ -19,7 +19,9 @@ import com.g6.onlineeyecare.appointment.dto.Appointment;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.doctor.service.IDoctorService;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.test.dto.Test;
+import com.g6.onlineeyecare.test.service.ITestService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +34,7 @@ public class DoctorController {
 
 	@Autowired
 	IDoctorService doctorService;
+	
 
 	@ApiOperation(value = "Create a new Doctor profile", response = Doctor.class)
 	@PostMapping("/add")
@@ -73,7 +76,7 @@ public class DoctorController {
 
 	@ApiOperation(value = "Create a new test", response = Doctor.class)
 	@PostMapping("/test")
-	public Test createTest(@RequestBody Test test) {
+	public Test createTest(@RequestBody Test test) throws PatientIdFoundNotException {
 		return this.doctorService.createTest(test);
 	}
 }

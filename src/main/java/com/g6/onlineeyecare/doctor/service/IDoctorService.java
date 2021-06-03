@@ -5,6 +5,7 @@ import java.util.List;
 import com.g6.onlineeyecare.appointment.dto.Appointment;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.test.dto.Test;
 
 public interface IDoctorService {
@@ -20,6 +21,6 @@ public interface IDoctorService {
 
 	List<Appointment> viewAppointments();
 
-	Test createTest(Test test);
+	Test createTest(Test test) throws PatientIdFoundNotException;
 
 }

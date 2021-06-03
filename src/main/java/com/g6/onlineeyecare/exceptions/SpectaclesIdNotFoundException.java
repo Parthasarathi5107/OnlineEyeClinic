@@ -2,32 +2,48 @@ package com.g6.onlineeyecare.exceptions;
 
 @SuppressWarnings("serial")
 public class SpectaclesIdNotFoundException extends Exception{
+	
+	private String message;
+	
+	
+
+	
+	public SpectaclesIdNotFoundException(String message) {
+		super();
+		this.message = message;
+		
+	}
 
 	public SpectaclesIdNotFoundException() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public SpectaclesIdNotFoundException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public SpectaclesIdNotFoundException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SpectaclesIdNotFoundException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SpectaclesIdNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	
+
+	public SpectaclesIdNotFoundException(Throwable cause) {
+		super(cause);
+		
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
 }

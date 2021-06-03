@@ -12,6 +12,7 @@ import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.doctor.dao.IDoctorRepository;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.test.dto.Test;
 import com.g6.onlineeyecare.test.service.ITestService;
 
@@ -105,13 +106,11 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	@Transactional
-	public Test createTest(Test test) {
-		try {
-			testService.addTest(test);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return test;
+	public Test createTest(Test test) throws PatientIdFoundNotException {
+		
+		 Test t=testService.addTest(test);
+		
+		return t;
 	}
 
 }

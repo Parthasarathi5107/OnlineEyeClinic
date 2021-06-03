@@ -41,10 +41,10 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			if (patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
 				appointmentRepository.save(appointment);
 			} else {
-				throw new PatientIdFoundNotException("Patient Id not found");
+				throw new PatientIdFoundNotException("Patient Id not found to book appointment");
 			}
 		} else {
-			throw new DoctorIdNotFoundException("Doctor Id not found");
+			throw new DoctorIdNotFoundException("Doctor Id not found to book appointment");
 		}
 
 		return appointment;
@@ -58,7 +58,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		if (optional.isPresent()) {
 			appointmentRepository.save(appointment);
 		} else {
-			throw new InvalidAppointmentException("Invalid Appointment Exception ");
+			throw new InvalidAppointmentException("Invalid Appointment Exception");
 		}
 		return optional.get();
 	}

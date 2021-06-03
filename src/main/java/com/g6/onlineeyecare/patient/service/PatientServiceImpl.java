@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.g6.onlineeyecare.appointment.dto.Appointment;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.exceptions.AppointmentIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.patient.dao.IPatientRepository;
 import com.g6.onlineeyecare.patient.dto.Patient;
@@ -92,13 +93,11 @@ public class PatientServiceImpl implements IPatientService {
 
 	@Override
 	@Transactional
-	public Appointment bookAppointment(Appointment appointment) {
-		try {
-			appointmentService.bookAppointment(appointment);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return appointment;
+	public Appointment bookAppointment(Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException {
+		
+			Appointment a=appointmentService.bookAppointment(appointment);
+		
+		return a;
 	}
 
 	@Override
