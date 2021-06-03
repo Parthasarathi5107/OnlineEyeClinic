@@ -2,12 +2,17 @@ package com.g6.onlineeyecare.exceptions;
 
 @SuppressWarnings("serial")
 public class DoctorIdNotFoundException extends Exception {
-	public DoctorIdNotFoundException() {
-		
-	}
+	
+	private String message;
 
 	public DoctorIdNotFoundException(String message) {
-		super(message);
+		super();
+		this.message = message;
+	}
+
+	public DoctorIdNotFoundException() {
+		super();
+		
 	}
 
 	public DoctorIdNotFoundException(String message, Throwable cause, boolean enableSuppression,
@@ -26,4 +31,15 @@ public class DoctorIdNotFoundException extends Exception {
 		
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
+	
+	
 }

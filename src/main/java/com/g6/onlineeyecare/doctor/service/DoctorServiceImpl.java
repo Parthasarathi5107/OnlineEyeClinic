@@ -3,18 +3,16 @@ package com.g6.onlineeyecare.doctor.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.doctor.dao.IDoctorRepository;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.test.dto.Test;
 import com.g6.onlineeyecare.test.service.ITestService;
 
@@ -28,8 +26,6 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	ITestService testService;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
-
 	public DoctorServiceImpl(IDoctorRepository repository) {
 		super();
 		this.repository = repository;
@@ -41,7 +37,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			repository.save(doctor);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		return doctor;
 	}
@@ -92,7 +88,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			doctorList = repository.findAll();
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		return doctorList;
 	}
@@ -103,20 +99,18 @@ public class DoctorServiceImpl implements IDoctorService {
 		try {
 			appointmentList = appointmentService.viewAllAppointments();
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		return appointmentList;
 	}
 
 	@Override
 	@Transactional
-	public Test createTest(Test test) {
-		try {
-			testService.addTest(test);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		return test;
+	public Test createTest(Test test) throws PatientIdFoundNotException {
+		
+		 Test t=testService.addTest(test);
+		
+		return t;
 	}
 
 }

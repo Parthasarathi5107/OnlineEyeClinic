@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
 import com.g6.onlineeyecare.exceptions.AppointmentIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.patient.dto.Patient;
 import com.g6.onlineeyecare.patient.service.IPatientService;
@@ -68,7 +69,7 @@ public class PatientController {
 
 	@ApiOperation(value = "Book appointment to consult the doctor", response = Appointment.class)
 	@PostMapping("/book")
-	public Appointment bookAppointment(@RequestBody Appointment appointment) {
+	public Appointment bookAppointment(@RequestBody Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException {
 		return this.patientService.bookAppointment(appointment);
 
 	}

@@ -16,71 +16,99 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(AppointmentIdNotFoundException.class)
-	public ResponseEntity<String> handleAppointmentException(AppointmentIdNotFoundException ex) {
+	
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidAppointmentIdException(AppointmentIdNotFoundException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+	}
+	
 
-		HttpHeaders header = new HttpHeaders();
-		header.add("AppointmentDescriptionMessage", "Trying to get Appointment");
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidDoctorIdException(DoctorIdNotFoundException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+	}
+	
 
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
-
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidAppointmentException(InvalidAppointmentException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(DoctorIdNotFoundException.class)
-	public ResponseEntity<String> handleDoctorException(DoctorIdNotFoundException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("DoctorDescriptionMessage", "Trying to get Doctor");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidPatientIdException(PatientIdFoundNotException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidReportIdException(ReportIdNotFoundException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(InvalidAppointmentException.class)
-	public ResponseEntity<String> handleInvalidAppointmentException(InvalidAppointmentException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("AppointmentDescriptionMessage", "Trying to get Appointment");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidSpectaclesIdException(SpectaclesIdNotFoundException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(PatientIdFoundNotException.class)
-	public ResponseEntity<String> handlePatientException(PatientIdFoundNotException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("PatientDescriptionMessage", "Trying to get Patient");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidTestIdException(TestIdNotFoundException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(ReportIdNotFoundException.class)
-	public ResponseEntity<String> handleReportException(ReportIdNotFoundException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("ReportDescriptionMessage", "Trying to get Report");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
+	
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> invalidUserIdException(UserIdNotFoundException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
 	}
-
-	@ExceptionHandler(SpectaclesIdNotFoundException.class)
-	public ResponseEntity<String> handleSpectaclesException(SpectaclesIdNotFoundException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("SpectaclesDescriptionMessage", "Trying to get Spectacles");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
-	}
-
-	@ExceptionHandler(TestIdNotFoundException.class)
-	public ResponseEntity<String> handleTestException(TestIdNotFoundException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("TestDescriptionMessage", "Trying to get Test");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
-	}
-
-	@ExceptionHandler(UserIdNotFoundException.class)
-	public ResponseEntity<String> handleUserException(UserIdNotFoundException ex) {
-		HttpHeaders header = new HttpHeaders();
-		header.add("UserDescriptionMessage", "Trying to get User");
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(header).body(ex.getMessage());
-	}
+	
+	
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -88,20 +116,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 		Map<String, String> map = new HashMap<>();
 
-		ex.getBindingResult().getAllErrors().forEach( error -> {
+		ex.getBindingResult().getAllErrors().forEach((error) -> {
 			String fieldName = ((FieldError) error).getField();
 			String msg = error.getDefaultMessage();
 
 			map.put(fieldName, msg);
 		});
-		return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		return new ResponseEntity<>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
+		return new ResponseEntity<Object>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
 				HttpStatus.BAD_REQUEST);
 	}
 

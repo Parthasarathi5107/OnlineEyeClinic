@@ -3,16 +3,14 @@ package com.g6.onlineeyecare.patient.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.exceptions.AppointmentIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.patient.dao.IPatientRepository;
 import com.g6.onlineeyecare.patient.dto.Patient;
@@ -29,8 +27,6 @@ public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	IReportRepository reportRepository;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
-
 	public PatientServiceImpl(IPatientRepository repository) {
 		super();
 		this.repository = repository;
@@ -42,7 +38,7 @@ public class PatientServiceImpl implements IPatientService {
 		try {
 			repository.save(patient);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		return patient;
 	}
@@ -79,7 +75,7 @@ public class PatientServiceImpl implements IPatientService {
 		try {
 			patientList = repository.findAll();
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		return patientList;
 	}
@@ -97,13 +93,11 @@ public class PatientServiceImpl implements IPatientService {
 
 	@Override
 	@Transactional
-	public Appointment bookAppointment(Appointment appointment) {
-		try {
-			appointmentService.bookAppointment(appointment);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		return appointment;
+	public Appointment bookAppointment(Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException {
+		
+			Appointment a=appointmentService.bookAppointment(appointment);
+		
+		return a;
 	}
 
 	@Override
@@ -112,7 +106,7 @@ public class PatientServiceImpl implements IPatientService {
 		try {
 			appointment = appointmentService.viewAppointment(appointmentid);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			e.printStackTrace();
 			throw new AppointmentIdNotFoundException("Appointment Id not found to view appointment");
 		}
 		return appointment;
