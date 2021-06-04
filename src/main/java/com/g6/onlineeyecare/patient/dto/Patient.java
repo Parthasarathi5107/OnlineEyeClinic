@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -26,10 +25,11 @@ public class Patient extends User {
 	@Column
 	@Min(value = 1)
 	private int patientAge;
+	
 	@ApiModelProperty(name = "Patient mobile number", required = true)
 	@Column
-	@Min(value = 10)
 	private long patientMobile;
+	
 	@ApiModelProperty(name = "Patient Email", required = true)
 	@Column
 	@Email(message = "Email should be valid")

@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -26,7 +25,6 @@ public class Doctor extends User {
 
 	@ApiModelProperty(name = "doctor mobile number", required = true)
 	@Column
-	@Min(value = 10)
 	private long doctorMobile;
 
 	@ApiModelProperty(name = "doctor email", required = true)

@@ -7,7 +7,7 @@ public class MyExceptionResponse {
 
     public MyExceptionResponse() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
     public MyExceptionResponse(int httpStatus, String exceptionMsg) {
         super();

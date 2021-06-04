@@ -3,7 +3,8 @@ package com.g6.onlineeyecare.user.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,32 +35,36 @@ public class UserController {
 
 	@ApiOperation(value = "add a new User", response = User.class)
 	@PostMapping("/add")
-	public Admin addUser(@RequestBody @Valid Admin user) {
-		return (Admin) this.userService.addUser(user);
+	public ResponseEntity<Admin> addUser(@RequestBody @Valid Admin user) {
+		Admin u = (Admin) this.userService.addUser(user);
+		return new ResponseEntity<Admin>(u, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view User by Id", response = User.class)
 	@GetMapping("/view/{userId}")
-	public Admin viewUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
-		return (Admin) this.userService.viewUser(userId);
-
+	public ResponseEntity<User> viewUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
+		User u =  this.userService.viewUser(userId);
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
-
+//============================================================================================================================
 	@ApiOperation(value = "update profile", response = User.class)
 	@PutMapping("/update")
-	public Admin updateUser(@RequestBody Admin user) throws UserIdNotFoundException {
-		return (Admin) this.userService.updateUser(user);
+	public ResponseEntity<User> updateUser(@RequestBody User user) throws UserIdNotFoundException {
+		User u =  this.userService.updateUser(user);
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "delete user", response = User.class)
 	@DeleteMapping("/delete/{userId}")
-	public Admin removeUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
-		return (Admin) this.userService.removeUser(userId);
+	public ResponseEntity<User> removeUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
+		User u =  this.userService.removeUser(userId);
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view all Users", response = User.class)
 	@GetMapping("/viewAll")
-	public List<User> viewUsers() {
-		return this.userService.viewUsers();
+	public ResponseEntity<List<User>> viewUsers() {
+		List<User> u = this.userService.viewUsers();
+		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 }
