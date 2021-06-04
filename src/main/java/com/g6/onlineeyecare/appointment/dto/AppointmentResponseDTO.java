@@ -5,41 +5,45 @@ import java.time.LocalTime;
 
 public class AppointmentResponseDTO {
 
-	private int appointmentId;
-	private LocalDate appointmentDate;
-	private LocalTime appointmentTime;
+	private int appId;
+	private LocalDate appDate;
+	private LocalTime appTime;
 	private int doctorId;
 	private int patientId;
+	
 	public AppointmentResponseDTO() {
 		super();
 		
 	}
-	public AppointmentResponseDTO(int appointmentId, LocalDate appointmentDate, LocalTime appointmentTime, int doctorId,
-			int patientId) {
+	
+	
+	public AppointmentResponseDTO(int appId, LocalDate appDate, LocalTime appTime, int doctorId, int patientId) {
 		super();
-		this.appointmentId = appointmentId;
-		this.appointmentDate = appointmentDate;
-		this.appointmentTime = appointmentTime;
+		this.appId = appId;
+		this.appDate = appDate;
+		this.appTime = appTime;
 		this.doctorId = doctorId;
 		this.patientId = patientId;
 	}
-	public int getAppointmentId() {
-		return appointmentId;
+
+
+	public int getAppId() {
+		return appId;
 	}
-	public void setAppointmentId(int appointmentId) {
-		this.appointmentId = appointmentId;
+	public void setAppId(int appId) {
+		this.appId = appId;
 	}
-	public LocalDate getAppointmentDate() {
-		return appointmentDate;
+	public LocalDate getAppDate() {
+		return appDate;
 	}
-	public void setAppointmentDate(LocalDate appointmentDate) {
-		this.appointmentDate = appointmentDate;
+	public void setAppDate(LocalDate appDate) {
+		this.appDate = appDate;
 	}
-	public LocalTime getAppointmentTime() {
-		return appointmentTime;
+	public LocalTime getAppTime() {
+		return appTime;
 	}
-	public void setAppointmentTime(LocalTime appointmentTime) {
-		this.appointmentTime = appointmentTime;
+	public void setAppTime(LocalTime appTime) {
+		this.appTime = appTime;
 	}
 	public int getDoctorId() {
 		return doctorId;
@@ -53,6 +57,5 @@ public class AppointmentResponseDTO {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	
 	
 }

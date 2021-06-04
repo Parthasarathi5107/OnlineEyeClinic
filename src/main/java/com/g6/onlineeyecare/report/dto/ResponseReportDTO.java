@@ -2,11 +2,11 @@ package com.g6.onlineeyecare.report.dto;
 
 public class ResponseReportDTO {
 
-	private int reportId;
-	private String descriptionOfReport;
-	private String visualAcuity;
-	private String visualAcuityNear;
-	private String visualAcuityDistance;
+	private int repId;
+	private String description;
+	private String visAcuity;
+	private String visAcuityNear;
+	private String visAcuityDistance;
 	private int testId;
 	private int patientId;
 	
@@ -15,56 +15,56 @@ public class ResponseReportDTO {
 		
 	}
 
-	public ResponseReportDTO(int reportId, String descriptionOfReport, String visualAcuity, String visualAcuityNear,
-			String visualAcuityDistance, int testId, int patientId) {
+	public ResponseReportDTO(int repId, String description, String visAcuity, String visAcuityNear,
+			String visAcuityDistance, int testId, int patientId) {
 		super();
-		this.reportId = reportId;
-		this.descriptionOfReport = descriptionOfReport;
-		this.visualAcuity = visualAcuity;
-		this.visualAcuityNear = visualAcuityNear;
-		this.visualAcuityDistance = visualAcuityDistance;
+		this.repId = repId;
+		this.description = description;
+		this.visAcuity = visAcuity;
+		this.visAcuityNear = visAcuityNear;
+		this.visAcuityDistance = visAcuityDistance;
 		this.testId = testId;
 		this.patientId = patientId;
 	}
 
-	public int getReportId() {
-		return reportId;
+	public int getRepId() {
+		return repId;
 	}
 
-	public void setReportId(int reportId) {
-		this.reportId = reportId;
+	public void setRepId(int repId) {
+		this.repId = repId;
 	}
 
-	public String getDescriptionOfReport() {
-		return descriptionOfReport;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescriptionOfReport(String descriptionOfReport) {
-		this.descriptionOfReport = descriptionOfReport;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getVisualAcuity() {
-		return visualAcuity;
+	public String getVisAcuity() {
+		return visAcuity;
 	}
 
-	public void setVisualAcuity(String visualAcuity) {
-		this.visualAcuity = visualAcuity;
+	public void setVisAcuity(String visAcuity) {
+		this.visAcuity = visAcuity;
 	}
 
-	public String getVisualAcuityNear() {
-		return visualAcuityNear;
+	public String getVisAcuityNear() {
+		return visAcuityNear;
 	}
 
-	public void setVisualAcuityNear(String visualAcuityNear) {
-		this.visualAcuityNear = visualAcuityNear;
+	public void setVisAcuityNear(String visAcuityNear) {
+		this.visAcuityNear = visAcuityNear;
 	}
 
-	public String getVisualAcuityDistance() {
-		return visualAcuityDistance;
+	public String getVisAcuityDistance() {
+		return visAcuityDistance;
 	}
 
-	public void setVisualAcuityDistance(String visualAcuityDistance) {
-		this.visualAcuityDistance = visualAcuityDistance;
+	public void setVisAcuityDistance(String visAcuityDistance) {
+		this.visAcuityDistance = visAcuityDistance;
 	}
 
 	public int getTestId() {
@@ -82,8 +82,6 @@ public class ResponseReportDTO {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	
-	
-	
+
 	
 }

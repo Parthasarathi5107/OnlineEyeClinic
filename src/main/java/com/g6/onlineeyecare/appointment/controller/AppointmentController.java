@@ -44,8 +44,8 @@ public class AppointmentController {
 	public  ResponseEntity<AppointmentResponseDTO> bookAppointment(@RequestBody @Valid Appointment appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException
 	{
 		Appointment a = appointmentService.bookAppointment(appointment);
-		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
-				a.getDoctor().getUserId(), a.getPatient().getUserId());
+		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(),a.getAppointmentDate(),
+				a.getAppointmentTime(),a.getDoctor().getUserId(),a.getPatient().getUserId());
 		
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
