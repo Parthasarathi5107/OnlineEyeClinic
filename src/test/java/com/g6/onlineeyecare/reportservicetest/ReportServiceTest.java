@@ -138,4 +138,37 @@ public class ReportServiceTest {
 		Executable executable = () -> reportService.removeReport(2);
 		assertThrows(ReportIdNotFoundException.class, executable);
 	}
+	
+	@org.junit.Test
+	@DisplayName("test -> update a report with valid entries")
+	public void updateReport() throws ReportIdNotFoundException
+	{
+		Patient p1 = new Patient();
+		Test test = new Test();
+
+		Report r = new Report(LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
+				"visualacuitydistance", test, p1);
+		r.setReportId(1);
+		when(repository.findById(1)).thenReturn(Optional.of(r));
+		Report actualR = reportService.updateReport(r);
+		verify(repository).save(r);
+		assertEquals(r, actualR);
+		
+	}
+	
+	@org.junit.Test
+	@DisplayName("test -> update a report with invalid entries")
+	public void updateReportInvalid() throws ReportIdNotFoundException
+	{
+		Patient p1 = new Patient();
+		Test test = new Test();
+
+		Report r = new Report(LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
+				"visualacuitydistance", test, p1);
+		r.setReportId(1);
+		when(repository.findById(10)).thenReturn(Optional.of(r));
+		Executable executable = () -> reportService.updateReport(r);
+		assertThrows(ReportIdNotFoundException.class, executable);
+		
+	}
 }

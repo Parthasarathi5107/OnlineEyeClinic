@@ -139,4 +139,31 @@ public class DoctorServiceTest {
 		Executable executable = () -> doctorService.deleteDoctor(3);
 		assertThrows(DoctorIdNotFoundException.class, executable);
 	}
+	
+	@Test
+	@DisplayName("test -> update doctor with valid entries")
+	public void updateDoctor() throws DoctorIdNotFoundException
+	{
+		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		d1.setUserId(2);
+		
+		when(repository.findById(2)).thenReturn(Optional.of(d1));
+		Doctor actual=doctorService.updateDoctor(d1);
+		verify(repository).save(d1);
+		assertEquals(d1, actual);
+	}
+	
+	@Test
+	@DisplayName("test -> update doctor with invalid entries")
+	public void updateDoctorInvalid() throws DoctorIdNotFoundException
+	{
+		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		d1.setUserId(2);
+		
+		when(repository.findById(3)).thenReturn(Optional.of(d1));
+		Executable executable = () -> doctorService.updateDoctor(d1);
+		assertThrows(DoctorIdNotFoundException.class, executable);
+		
+		
+	}
 }
