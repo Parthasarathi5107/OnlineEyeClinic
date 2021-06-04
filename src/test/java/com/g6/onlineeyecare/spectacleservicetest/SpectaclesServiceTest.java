@@ -170,5 +170,31 @@ public class SpectaclesServiceTest {
 		Executable executable = () -> spectaclesService.removeSpectacles(2);
 		assertThrows(SpectaclesIdNotFoundException.class, executable);
 	}
+	
+	@Test
+	@DisplayName("test -> to update spectacles with valid entries")
+	public void testUpdateSpectacles() throws SpectaclesIdNotFoundException
+	{
+		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		p1.setUserId(1);
 
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		when(repository.findById(1)).thenReturn(Optional.of(s));
+		Spectacles spec = spectaclesService.updateSpectacles(s);
+		verify(repository).save(s);
+		assertEquals(s, spec);
+	}
+
+	@Test
+	@DisplayName("test -> to update spectacles with invalid entries")
+	public void testUpdateSpectaclesInvalid() throws SpectaclesIdNotFoundException
+	{
+		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		p1.setUserId(1);
+
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		when(repository.findById(10)).thenReturn(Optional.of(s));
+		Executable executable = () -> spectaclesService.updateSpectacles(s);
+		assertThrows(SpectaclesIdNotFoundException.class, executable);
+	}
 }

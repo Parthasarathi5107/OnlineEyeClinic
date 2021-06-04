@@ -130,15 +130,44 @@ public class PatientServiceTest {
 	}
 
 	@Test
-	@DisplayName("test -> add doctor")
+	@DisplayName("test -> add patient")
 	public void addPatient() {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		// d1.setUserId(2);
+		
 		Patient p2 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		// d2.setUserId(2);
+		
 		when(repository.save(p1)).thenReturn(p2);
 		Patient p = patientService.addPatient(p1);
 		verify(repository).save(p1);
 		assertEquals(p, p1);
+	}
+	
+	@Test
+	@DisplayName("test -> update patient with valid entries")
+	public void updatePatient() throws PatientIdFoundNotException
+	{
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		p1.setUserId(2);
+		
+		when(repository.findById(2)).thenReturn(Optional.of(p1));
+
+		Patient p = patientService.updatePatient(p1);
+		verify(repository).save(p1);
+		assertEquals(p1, p);
+	}
+	
+	@Test
+	@DisplayName("test -> update patient with invalid entries")
+	public void updatePatientInvalid() throws PatientIdFoundNotException
+	{
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		p1.setUserId(2);
+		
+		when(repository.findById(3)).thenReturn(Optional.of(p1));
+		Executable executable = () ->  patientService.updatePatient(p1);
+		assertThrows(PatientIdFoundNotException.class, executable);
+
+		
+		
 	}
 }

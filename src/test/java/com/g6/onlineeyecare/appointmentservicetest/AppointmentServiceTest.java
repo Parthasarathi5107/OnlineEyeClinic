@@ -30,6 +30,7 @@ import com.g6.onlineeyecare.doctor.service.DoctorServiceImpl;
 import com.g6.onlineeyecare.doctor.service.IDoctorService;
 import com.g6.onlineeyecare.exceptions.AppointmentIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.InvalidAppointmentException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.patient.dao.IPatientRepository;
 import com.g6.onlineeyecare.patient.dto.Patient;
@@ -175,4 +176,33 @@ public class AppointmentServiceTest {
 		assertThrows(AppointmentIdNotFoundException.class, executable);
 
 	}
+	
+	@Test
+	@DisplayName("test -> for updating appointment with valid entries")
+	public void testUpdateAppointment() throws InvalidAppointmentException
+	{
+		Appointment appointment = new Appointment();
+		appointment.setAppointmentId(1);
+		
+		when(repository.findById(1)).thenReturn(Optional.of(appointment));
+		Appointment actualAppointment = appointmentService.updateAppointment(appointment);
+		verify(repository).save(appointment);
+		assertEquals(appointment, actualAppointment);
+		
+	}
+	
+	@Test
+	@DisplayName("test -> for updating appointment with invalid entries")
+	public void testUpdateAppointmentInvalid() throws InvalidAppointmentException
+	{
+		Appointment appointment = new Appointment();
+		appointment.setAppointmentId(1);
+		
+		when(repository.findById(2)).thenReturn(Optional.of(appointment));
+		Executable executable = () -> appointmentService.updateAppointment(appointment);
+		assertThrows(InvalidAppointmentException.class, executable);
+		
+	}
+	
+	
 }

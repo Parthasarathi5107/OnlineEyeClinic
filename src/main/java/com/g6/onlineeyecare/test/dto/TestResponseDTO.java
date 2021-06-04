@@ -2,11 +2,11 @@ package com.g6.onlineeyecare.test.dto;
 
 public class TestResponseDTO {
 
-	private int testId;
-	private String testName;
-	private String testType;
-	private String testDescription;
-	private double testCost;
+	private int id;
+	private String name;
+	private String typeOfTest;
+	private String description;
+	private double cost;
 	private int patientId;
 	
 	public TestResponseDTO() {
@@ -14,55 +14,54 @@ public class TestResponseDTO {
 		
 	}
 
-	public TestResponseDTO(int testId, String testName, String testType, String testDescription, double testCost,
-			int patientId) {
+	public TestResponseDTO(int tId, String tName, String tType, String tDescription, double tCost, int patientId) {
 		super();
-		this.testId = testId;
-		this.testName = testName;
-		this.testType = testType;
-		this.testDescription = testDescription;
-		this.testCost = testCost;
+		this.id = tId;
+		this.name = tName;
+		this.typeOfTest = tType;
+		this.description = tDescription;
+		this.cost = tCost;
 		this.patientId = patientId;
 	}
 
-	public int getTestId() {
-		return testId;
+	public int getId() {
+		return id;
 	}
 
-	public void setTestId(int testId) {
-		this.testId = testId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getTestName() {
-		return testName;
+	public String getName() {
+		return name;
 	}
 
-	public void setTestName(String testName) {
-		this.testName = testName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getTestType() {
-		return testType;
+	public String getTypeOfTest() {
+		return typeOfTest;
 	}
 
-	public void setTestType(String testType) {
-		this.testType = testType;
+	public void setTypeOfTest(String typeOfTest) {
+		this.typeOfTest = typeOfTest;
 	}
 
-	public String getTestDescription() {
-		return testDescription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setTestDescription(String testDescription) {
-		this.testDescription = testDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public double getTestCost() {
-		return testCost;
+	public double getCost() {
+		return cost;
 	}
 
-	public void setTestCost(double testCost) {
-		this.testCost = testCost;
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
 	public int getPatientId() {
@@ -72,6 +71,6 @@ public class TestResponseDTO {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	
+
 	
 }

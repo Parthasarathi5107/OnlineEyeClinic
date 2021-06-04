@@ -2,10 +2,10 @@ package com.g6.onlineeyecare.spectacles.dto;
 
 public class SpectaclesResponseDTO {
 
-	private int spectaclesId;
-	private String spectaclesModel;
-	private String spectaclesDescription;
-	private double spectaclesCost;
+	private int specsId;
+	private String specsModel;
+	private String specsDescription;
+	private double specsCost;
 	private int patientId;
 	
 	public SpectaclesResponseDTO() {
@@ -13,46 +13,46 @@ public class SpectaclesResponseDTO {
 		
 	}
 
-	public SpectaclesResponseDTO(int spectaclesId, String spectaclesModel, String spectaclesDescription,
-			double spectaclesCost, int patientId) {
+	public SpectaclesResponseDTO(int specsId, String specsModel, String specsDescription, double specsCost,
+			int patientId) {
 		super();
-		this.spectaclesId = spectaclesId;
-		this.spectaclesModel = spectaclesModel;
-		this.spectaclesDescription = spectaclesDescription;
-		this.spectaclesCost = spectaclesCost;
+		this.specsId = specsId;
+		this.specsModel = specsModel;
+		this.specsDescription = specsDescription;
+		this.specsCost = specsCost;
 		this.patientId = patientId;
 	}
 
-	public int getSpectaclesId() {
-		return spectaclesId;
+	public int getSpecsId() {
+		return specsId;
 	}
 
-	public void setSpectaclesId(int spectaclesId) {
-		this.spectaclesId = spectaclesId;
+	public void setSpecsId(int specsId) {
+		this.specsId = specsId;
 	}
 
-	public String getSpectaclesModel() {
-		return spectaclesModel;
+	public String getSpecsModel() {
+		return specsModel;
 	}
 
-	public void setSpectaclesModel(String spectaclesModel) {
-		this.spectaclesModel = spectaclesModel;
+	public void setSpecsModel(String specsModel) {
+		this.specsModel = specsModel;
 	}
 
-	public String getSpectaclesDescription() {
-		return spectaclesDescription;
+	public String getSpecsDescription() {
+		return specsDescription;
 	}
 
-	public void setSpectaclesDescription(String spectaclesDescription) {
-		this.spectaclesDescription = spectaclesDescription;
+	public void setSpecsDescription(String specsDescription) {
+		this.specsDescription = specsDescription;
 	}
 
-	public double getSpectaclesCost() {
-		return spectaclesCost;
+	public double getSpecsCost() {
+		return specsCost;
 	}
 
-	public void setSpectaclesCost(double spectaclesCost) {
-		this.spectaclesCost = spectaclesCost;
+	public void setSpecsCost(double specsCost) {
+		this.specsCost = specsCost;
 	}
 
 	public int getPatientId() {
@@ -62,6 +62,6 @@ public class SpectaclesResponseDTO {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	
+
 	
 }
