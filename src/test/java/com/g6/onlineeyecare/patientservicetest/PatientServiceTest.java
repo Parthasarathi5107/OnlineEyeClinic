@@ -130,12 +130,12 @@ public class PatientServiceTest {
 	}
 
 	@Test
-	@DisplayName("test -> add doctor")
+	@DisplayName("test -> add patient")
 	public void addPatient() {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		// d1.setUserId(2);
+		
 		Patient p2 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		// d2.setUserId(2);
+		
 		when(repository.save(p1)).thenReturn(p2);
 		Patient p = patientService.addPatient(p1);
 		verify(repository).save(p1);

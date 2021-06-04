@@ -2,11 +2,11 @@ package com.g6.onlineeyecare.report.dto;
 
 public class ResponseReportDTO {
 
-	private int repId;
+	private int id;
 	private String description;
-	private String visAcuity;
-	private String visAcuityNear;
-	private String visAcuityDistance;
+	private String visualAcuityDetails;
+	private String visualAcuityNearDetails;
+	private String visualAcuityDistanceDetails;
 	private int testId;
 	private int patientId;
 	
@@ -18,21 +18,21 @@ public class ResponseReportDTO {
 	public ResponseReportDTO(int repId, String description, String visAcuity, String visAcuityNear,
 			String visAcuityDistance, int testId, int patientId) {
 		super();
-		this.repId = repId;
+		this.id = repId;
 		this.description = description;
-		this.visAcuity = visAcuity;
-		this.visAcuityNear = visAcuityNear;
-		this.visAcuityDistance = visAcuityDistance;
+		this.visualAcuityDetails = visAcuity;
+		this.visualAcuityNearDetails = visAcuityNear;
+		this.visualAcuityDistanceDetails = visAcuityDistance;
 		this.testId = testId;
 		this.patientId = patientId;
 	}
 
-	public int getRepId() {
-		return repId;
+	public int getId() {
+		return id;
 	}
 
-	public void setRepId(int repId) {
-		this.repId = repId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
@@ -43,28 +43,28 @@ public class ResponseReportDTO {
 		this.description = description;
 	}
 
-	public String getVisAcuity() {
-		return visAcuity;
+	public String getVisualAcuityDetails() {
+		return visualAcuityDetails;
 	}
 
-	public void setVisAcuity(String visAcuity) {
-		this.visAcuity = visAcuity;
+	public void setVisualAcuityDetails(String visualAcuityDetails) {
+		this.visualAcuityDetails = visualAcuityDetails;
 	}
 
-	public String getVisAcuityNear() {
-		return visAcuityNear;
+	public String getVisualAcuityNearDetails() {
+		return visualAcuityNearDetails;
 	}
 
-	public void setVisAcuityNear(String visAcuityNear) {
-		this.visAcuityNear = visAcuityNear;
+	public void setVisualAcuityNearDetails(String visualAcuityNearDetails) {
+		this.visualAcuityNearDetails = visualAcuityNearDetails;
 	}
 
-	public String getVisAcuityDistance() {
-		return visAcuityDistance;
+	public String getVisualAcuityDistanceDetails() {
+		return visualAcuityDistanceDetails;
 	}
 
-	public void setVisAcuityDistance(String visAcuityDistance) {
-		this.visAcuityDistance = visAcuityDistance;
+	public void setVisualAcuityDistanceDetails(String visualAcuityDistanceDetails) {
+		this.visualAcuityDistanceDetails = visualAcuityDistanceDetails;
 	}
 
 	public int getTestId() {

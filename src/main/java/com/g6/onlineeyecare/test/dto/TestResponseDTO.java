@@ -2,11 +2,11 @@ package com.g6.onlineeyecare.test.dto;
 
 public class TestResponseDTO {
 
-	private int tId;
-	private String tName;
-	private String tType;
-	private String tDescription;
-	private double tCost;
+	private int id;
+	private String name;
+	private String typeOfTest;
+	private String description;
+	private double cost;
 	private int patientId;
 	
 	public TestResponseDTO() {
@@ -16,52 +16,52 @@ public class TestResponseDTO {
 
 	public TestResponseDTO(int tId, String tName, String tType, String tDescription, double tCost, int patientId) {
 		super();
-		this.tId = tId;
-		this.tName = tName;
-		this.tType = tType;
-		this.tDescription = tDescription;
-		this.tCost = tCost;
+		this.id = tId;
+		this.name = tName;
+		this.typeOfTest = tType;
+		this.description = tDescription;
+		this.cost = tCost;
 		this.patientId = patientId;
 	}
 
-	public int gettId() {
-		return tId;
+	public int getId() {
+		return id;
 	}
 
-	public void settId(int tId) {
-		this.tId = tId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String gettName() {
-		return tName;
+	public String getName() {
+		return name;
 	}
 
-	public void settName(String tName) {
-		this.tName = tName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String gettType() {
-		return tType;
+	public String getTypeOfTest() {
+		return typeOfTest;
 	}
 
-	public void settType(String tType) {
-		this.tType = tType;
+	public void setTypeOfTest(String typeOfTest) {
+		this.typeOfTest = typeOfTest;
 	}
 
-	public String gettDescription() {
-		return tDescription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void settDescription(String tDescription) {
-		this.tDescription = tDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public double gettCost() {
-		return tCost;
+	public double getCost() {
+		return cost;
 	}
 
-	public void settCost(double tCost) {
-		this.tCost = tCost;
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
 	public int getPatientId() {
