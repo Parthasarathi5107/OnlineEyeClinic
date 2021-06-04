@@ -162,5 +162,30 @@ public class TestServiceTest {
 		assertThrows(TestIdNotFoundException.class, executable);
 
 	}
+	
+	@org.junit.Test
+	@DisplayName("test -> update a test with valid entries")
+	public void UpdateTest() throws TestIdNotFoundException {
+		Test test = new Test();
+		test.setTestId(1);
+		when(repository.findById(1)).thenReturn(Optional.of(test));
+
+		Test t = testService.updateTest(test);
+		assertEquals(test, t);
+		verify(repository).save(test);
+
+	}
+	
+	@org.junit.Test
+	@DisplayName("test -> update a test with invalid entries")
+	public void UpdateTestInvalid() throws TestIdNotFoundException {
+		Test test = new Test();
+		test.setTestId(1);
+		when(repository.findById(10)).thenReturn(Optional.of(test));
+		Executable executable = () ->testService.updateTest(test);
+		assertThrows(TestIdNotFoundException.class, executable);
+		
+
+	}
 
 }

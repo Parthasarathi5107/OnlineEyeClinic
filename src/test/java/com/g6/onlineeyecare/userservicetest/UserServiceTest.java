@@ -118,4 +118,27 @@ public class UserServiceTest {
 		Executable executable = () -> userService.removeUser(2);
 		assertThrows(UserIdNotFoundException.class, executable);
 	}
+	
+	@Test
+	@DisplayName("test -> update an user with valid entries")
+	public void updateUser() throws UserIdNotFoundException {
+
+		User u = new User(1, "abc", "Charlie", "doctor");
+
+		when(repository.findById(1)).thenReturn(Optional.of(u));
+		User actualUser = userService.updateUser(u);
+		verify(repository).save(u);
+		assertEquals(u, actualUser);
+	}
+	
+	@Test
+	@DisplayName("test -> update an user with invalid entries")
+	public void updateUserInvalid() throws UserIdNotFoundException {
+
+		User u = new User(1, "abc", "Charlie", "doctor");
+
+		when(repository.findById(10)).thenReturn(Optional.of(u));
+		Executable executable = () -> userService.updateUser(u);
+		assertThrows(UserIdNotFoundException.class, executable);
+	}
 }
