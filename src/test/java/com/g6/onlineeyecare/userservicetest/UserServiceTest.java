@@ -1,6 +1,7 @@
 package com.g6.onlineeyecare.userservicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,10 +14,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
 import com.g6.onlineeyecare.user.dao.IUserRepository;
 import com.g6.onlineeyecare.user.dto.User;
@@ -68,6 +69,17 @@ public class UserServiceTest {
 		assertEquals(u, actualUser);
 		verify(repository).findById(1);
 	}
+	
+	@Test
+	@DisplayName("test -> view user by Id with invalid entries")
+	public void viewUserByIdInvalid() throws UserIdNotFoundException {
+
+		User u = new User(1, "abc", "Charlie", "doctor");
+
+		when(repository.findById(1)).thenReturn(Optional.of(u));
+		Executable executable = () -> userService.viewUser(2);
+		assertThrows(UserIdNotFoundException.class, executable);
+	}
 
 	@Test
 	@DisplayName("test -> view all users")
@@ -94,5 +106,16 @@ public class UserServiceTest {
 		User actualUser = userService.removeUser(1);
 		verify(repository).deleteById(1);
 		assertEquals(u, actualUser);
+	}
+	
+	@Test
+	@DisplayName("test -> delete an user with invalid entries")
+	public void deleteUserInvalid() throws UserIdNotFoundException {
+
+		User u = new User(1, "abc", "Charlie", "doctor");
+
+		when(repository.findById(1)).thenReturn(Optional.of(u));
+		Executable executable = () -> userService.removeUser(2);
+		assertThrows(UserIdNotFoundException.class, executable);
 	}
 }

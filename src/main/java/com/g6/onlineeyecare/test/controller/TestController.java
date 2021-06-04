@@ -41,7 +41,7 @@ public class TestController {
 		Test t = this.testService.addTest(test);
 		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
 				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<TestResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Update the specific test", response = Test.class)
@@ -50,7 +50,7 @@ public class TestController {
 		Test t = this.testService.updateTest(test);
 		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
 				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<TestResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Delete the specific test", response = Test.class)
@@ -60,7 +60,7 @@ public class TestController {
 		Test t = this.testService.removeTest(testId);
 		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
 				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<TestResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "View the test by Id", response = Test.class)
@@ -69,7 +69,7 @@ public class TestController {
 		Test t = this.testService.viewTest(testId);
 		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
 				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<TestResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 

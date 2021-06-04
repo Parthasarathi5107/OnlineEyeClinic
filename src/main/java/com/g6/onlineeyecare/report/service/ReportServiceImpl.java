@@ -119,7 +119,7 @@ public class ReportServiceImpl implements IReportService {
 	@Override
 	public List<Spectacles> viewSpetacles() {
 		
-		List<Spectacles> spectacleList = new ArrayList<Spectacles>();
+		List<Spectacles> spectacleList = new ArrayList<>();
 		try {
 			spectacleList = spectacleService.viewSpectacles();
 		} catch (Exception e) {

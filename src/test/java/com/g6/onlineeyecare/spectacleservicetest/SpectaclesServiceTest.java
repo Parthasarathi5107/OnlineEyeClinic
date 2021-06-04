@@ -1,6 +1,7 @@
 package com.g6.onlineeyecare.spectacleservicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,9 +42,6 @@ public class SpectaclesServiceTest {
 
 	private static AutoCloseable ac;
 
-	static Patient p = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
-	static Spectacles s = new Spectacles(1, "A-254", "rectangle glasses", 3000, p);
-
 	@Before
 	public void doinit() {
 
@@ -63,10 +62,10 @@ public class SpectaclesServiceTest {
 	@Test
 	@DisplayName("test -> to view all spectacles")
 	public void testViewAllSpectacles() {
-//		 p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
+		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
-//	     Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+	     Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
 
 		List<Spectacles> list = new ArrayList<Spectacles>();
 		list.add(s);
@@ -83,11 +82,10 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to view spectacles by Id")
 	public void testViewById() throws SpectaclesIdNotFoundException {
 
-		// p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12),
-		// "Bangalore");
+		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
-		// Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
 
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles actualSpectacles = spectaclesService.viewSpectacles(1);
@@ -95,19 +93,34 @@ public class SpectaclesServiceTest {
 		assertEquals(actualSpectacles, s);
 
 	}
+	
+
+	@Test
+	@DisplayName("test -> to view spectacles by Id with invalid entries")
+	public void testViewByIdInvalid() throws SpectaclesIdNotFoundException {
+
+		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
+		p.setUserId(1);
+
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+
+		when(repository.findById(1)).thenReturn(Optional.of(s));
+		Executable executable = () -> spectaclesService.viewSpectacles(2);
+		assertThrows(SpectaclesIdNotFoundException.class, executable);
+
+	}
 
 	@Test
 	@DisplayName("test -> to add spectacles with valid entries ")
 	public void testAddSpectacles() throws PatientIdFoundNotException {
-		// p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12),
-		// "Bangalore");
+		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12),"Bangalore");
 		p.setUserId(1);
 
 		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p1));
 
-		// Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
 		Spectacles expectedSpectacles = new Spectacles(1, "A-254", "rectangle glasses", 3000, p);
 
 		when(repository.save(s)).thenReturn(expectedSpectacles);
@@ -116,19 +129,19 @@ public class SpectaclesServiceTest {
 		assertEquals(s, actualSpectacles);
 	}
 
-	@Test(expected = PatientIdFoundNotException.class)
+	@Test
 	@DisplayName("test -> to add spectacles with invalid entries")
 	public void testAddSpectaclesInvalidEntries() throws PatientIdFoundNotException {
 
-		// Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+		
 
 		Patient p1 = mock(Patient.class);
-
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
 		Spectacles expectedSpectacles = new Spectacles(1, "A-254", "rectangle glasses", 3000, p1);
 
 		when(repository.save(s)).thenReturn(expectedSpectacles);
-		Spectacles spec = spectaclesService.addSpectacles(s);
-		verify(repository).save(s);
+		Executable executable = () -> spectaclesService.addSpectacles(s);
+		assertThrows(PatientIdFoundNotException.class, executable);
 
 	}
 
@@ -136,10 +149,26 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to delete spectacles by valid Id")
 	public void testDeleteSpectacles() throws SpectaclesIdNotFoundException {
 
+		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		p1.setUserId(1);
+
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles spec = spectaclesService.removeSpectacles(1);
 		verify(repository).deleteById(1);
 		assertEquals(s, spec);
+	}
+	
+	@Test
+	@DisplayName("test -> to delete spectacles with invalid entries")
+	public void testDeleteSpectaclesInvalid() throws SpectaclesIdNotFoundException {
+
+		Patient p1 = mock(Patient.class);
+
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		when(repository.findById(1)).thenReturn(Optional.of(s));
+		Executable executable = () -> spectaclesService.removeSpectacles(2);
+		assertThrows(SpectaclesIdNotFoundException.class, executable);
 	}
 
 }

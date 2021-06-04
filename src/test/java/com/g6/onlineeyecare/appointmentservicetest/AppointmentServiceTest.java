@@ -1,6 +1,7 @@
 package com.g6.onlineeyecare.appointmentservicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -92,7 +94,7 @@ public class AppointmentServiceTest {
 		assertEquals(a, appointment);
 	}
 
-	@Test(expected = AppointmentIdNotFoundException.class)
+	@Test
 	@DisplayName("test -> for view by Id for invalid credentials")
 	public void testViewByIdforInvalidEntries() throws AppointmentIdNotFoundException {
 
@@ -100,8 +102,8 @@ public class AppointmentServiceTest {
 		appointment.setAppointmentId(1);
 
 		when(repository.findById(1)).thenReturn(Optional.of(appointment));
-		Appointment actualAppointment = appointmentService.viewAppointment(2);
-		verify(repository).findById(appointment.getAppointmentId());
+		Executable executable = () -> appointmentService.viewAppointment(2);
+		assertThrows(AppointmentIdNotFoundException.class, executable);
 
 	}
 
@@ -136,7 +138,7 @@ public class AppointmentServiceTest {
 
 	}
 
-	@Test(expected = DoctorIdNotFoundException.class)
+	@Test
 	@DisplayName("test -> for booking an appointment with invalid entries")
 	public void testBookAppointmentInvalidEntries() throws DoctorIdNotFoundException, PatientIdFoundNotException {
 		Patient p = mock(Patient.class);
@@ -145,9 +147,8 @@ public class AppointmentServiceTest {
 		Appointment ExcepectAppointment = new Appointment(10, LocalDate.now(), LocalTime.now(), d, p);
 
 		when(repository.save(appointment)).thenReturn(ExcepectAppointment);
-		Appointment actualAppointment = appointmentService.bookAppointment(appointment);
-		verify(repository).save(appointment);
-
+		Executable executable = () -> appointmentService.bookAppointment(appointment);
+		assertThrows(DoctorIdNotFoundException.class, executable);
 	}
 
 	@Test
@@ -163,4 +164,15 @@ public class AppointmentServiceTest {
 
 	}
 
+	@Test
+	@DisplayName("test -> for deleting appointment with invalid entries")
+	public void testDeleteAppointmentInvaild() throws AppointmentIdNotFoundException {
+		Appointment appointment = new Appointment();
+		appointment.setAppointmentId(1);
+
+		when(repository.findById(1)).thenReturn(Optional.of(appointment));
+		Executable executable = () -> appointmentService.cancelAppointment(2);
+		assertThrows(AppointmentIdNotFoundException.class, executable);
+
+	}
 }

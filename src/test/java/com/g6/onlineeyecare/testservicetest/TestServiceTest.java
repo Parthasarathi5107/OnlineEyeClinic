@@ -3,7 +3,7 @@ package com.g6.onlineeyecare.testservicetest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,7 +16,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
-
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,7 +76,6 @@ public class TestServiceTest {
 	}
 
 	@org.junit.Test
-
 	@DisplayName("test -> view test by testId")
 	public void testViewTestById() throws TestIdNotFoundException {
 
@@ -88,6 +87,19 @@ public class TestServiceTest {
 		Test test = testService.viewTest(1);
 		assertEquals(test, t);
 		verify(repository).findById(1);
+	}
+
+	@org.junit.Test
+	@DisplayName("test -> view test by testId with invalid entries")
+	public void testViewTestByIdInvalid() throws TestIdNotFoundException {
+
+		Test t = new Test();
+		t.setTestId(1);
+		Optional<Test> s = Optional.of(t);
+
+		when(repository.findById(1)).thenReturn(s);
+		Executable executable = () -> testService.viewTest(2);
+		assertThrows(TestIdNotFoundException.class, executable);
 	}
 
 	@org.junit.Test
@@ -113,7 +125,7 @@ public class TestServiceTest {
 		verify(repository).save(test);
 	}
 
-	@org.junit.Test(expected = PatientIdFoundNotException.class)
+	@org.junit.Test
 	@DisplayName("test -> adding a  test with invalid entries")
 	public void addTestInvalidEntries() throws PatientIdFoundNotException {
 
@@ -122,9 +134,8 @@ public class TestServiceTest {
 		Test testExpected = new Test(2, "abc", "vision", "describe", 1800, p);
 
 		when(repository.save(test)).thenReturn(testExpected);
-		Test actucalTest = testService.addTest(test);
-		assertNotNull(actucalTest);
-		verify(repository).save(test);
+		Executable executable = () -> testService.addTest(test);
+		assertThrows(PatientIdFoundNotException.class, executable);
 	}
 
 	@org.junit.Test
@@ -141,15 +152,14 @@ public class TestServiceTest {
 
 	}
 
-	@org.junit.Test(expected = TestIdNotFoundException.class)
+	@org.junit.Test
 	@DisplayName("test -> delete a test with invalid entries")
 	public void deleteTestIdException() throws TestIdNotFoundException {
 		Test test = new Test();
 		test.setTestId(1);
 		when(repository.findById(1)).thenReturn(Optional.of(test));
-		Test t = testService.removeTest(3);
-
-		verify(repository).deleteById(3);
+		Executable executable = () -> testService.removeTest(2);
+		assertThrows(TestIdNotFoundException.class, executable);
 
 	}
 

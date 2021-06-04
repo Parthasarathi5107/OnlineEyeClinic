@@ -32,7 +32,6 @@ public class Report {
 	@ApiModelProperty(name = "Report date", required = true)
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull
 	private LocalDate dateOfReport;
 	@ApiModelProperty(name = "Report discription", required = true)
 	@Column
@@ -53,12 +52,10 @@ public class Report {
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "test_Id", referencedColumnName = "testId")
-	@NotNull
 	private Test typeOfTest;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	@NotNull
 	private Patient patient;
 
 	public int getReportId() {
@@ -134,8 +131,8 @@ public class Report {
 			@NotEmpty(message = "cannot be left empty") String descriptionOfReport,
 			@NotEmpty(message = "cannot be left empty") String visualAcuity,
 			@NotEmpty(message = "cannot be left empty") String visualAcuityNear,
-			@NotEmpty(message = "cannot be left empty") String visualAcuityDistance, @NotNull Test typeOfTest,
-			@NotNull Patient patient) {
+			@NotEmpty(message = "cannot be left empty") String visualAcuityDistance,  Test typeOfTest,
+			Patient patient) {
 		super();
 		this.dateOfReport = dateOfReport;
 		this.descriptionOfReport = descriptionOfReport;

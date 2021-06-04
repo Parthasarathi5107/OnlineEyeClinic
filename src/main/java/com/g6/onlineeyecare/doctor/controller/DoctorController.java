@@ -42,14 +42,14 @@ public class DoctorController {
 	@PostMapping("/add")
 	public ResponseEntity<Doctor> addDoctor(@RequestBody @Valid Doctor doctor) {
 		Doctor d = this.doctorService.addDoctor(doctor);
-		return new ResponseEntity<Doctor>(d, HttpStatus.OK);
+		return new ResponseEntity<>(d, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Update your profile", response = Doctor.class)
 	@PutMapping("/update")
 	public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) throws DoctorIdNotFoundException {
 		Doctor d = this.doctorService.updateDoctor(doctor);
-		return new ResponseEntity<Doctor>(d, HttpStatus.OK);
+		return new ResponseEntity<>(d, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "delete your profile ", response = Doctor.class)
@@ -57,14 +57,14 @@ public class DoctorController {
 	public ResponseEntity<Doctor> deleteDoctor(@PathVariable("doctorId") int doctorId)
 			throws DoctorIdNotFoundException {
 		Doctor d = this.doctorService.deleteDoctor(doctorId);
-		return new ResponseEntity<Doctor>(d, HttpStatus.OK);
+		return new ResponseEntity<>(d, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "View Doctor profile by Id", response = Doctor.class)
 	@GetMapping("/view/{doctorId}")
 	public ResponseEntity<Doctor> viewDoctor(@PathVariable("doctorId") int doctorId) throws DoctorIdNotFoundException {
 		Doctor d = this.doctorService.viewDoctor(doctorId);
-		return new ResponseEntity<Doctor>(d, HttpStatus.OK);
+		return new ResponseEntity<>(d, HttpStatus.OK);
 
 	}
 

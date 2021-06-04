@@ -25,7 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
 
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
 
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler
@@ -60,7 +60,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler
@@ -71,7 +71,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler
@@ -82,7 +82,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler
@@ -93,7 +93,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 
 	
@@ -105,7 +105,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
 		response.setExceptionMsg(message);
 		
-		return new ResponseEntity<MyExceptionResponse>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
 	
@@ -116,20 +116,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 		Map<String, String> map = new HashMap<>();
 
-		ex.getBindingResult().getAllErrors().forEach((error) -> {
+		ex.getBindingResult().getAllErrors().forEach( error -> {
 			String fieldName = ((FieldError) error).getField();
 			String msg = error.getDefaultMessage();
 
 			map.put(fieldName, msg);
 		});
-		return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		return new ResponseEntity<Object>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
+		return new ResponseEntity<>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
 				HttpStatus.BAD_REQUEST);
 	}
 

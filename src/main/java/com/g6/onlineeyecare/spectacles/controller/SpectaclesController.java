@@ -43,7 +43,7 @@ public class SpectaclesController {
 		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
 				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
 
-		return new ResponseEntity<SpectaclesResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "update Spectacles", response = Spectacles.class)
@@ -53,7 +53,7 @@ public class SpectaclesController {
 		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
 				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
 
-		return new ResponseEntity<SpectaclesResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "delete Spectacles", response = Spectacles.class)
@@ -64,7 +64,7 @@ public class SpectaclesController {
 		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
 				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
 
-		return new ResponseEntity<SpectaclesResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
@@ -76,7 +76,7 @@ public class SpectaclesController {
 		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
 				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
 
-		return new ResponseEntity<SpectaclesResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view all Spectacles", response = Spectacles.class)

@@ -1,8 +1,7 @@
 package com.g6.onlineeyecare.reportservicetest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,6 +12,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -69,29 +69,7 @@ public class ReportServiceTest {
 		ac.close();
 	}
 
-//	@org.junit.Test
-//	@DisplayName("test -> view all report")
-//	public void viewAllReport() {
-//		
-//		Patient p1=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
-//		p1.setUserId(1);
-//		
-//		Test test=new Test(2, "abc", "vision","describe",1800,p1);
-//
-//		
-//		Report r = new Report(1, LocalDate.of(2002,02,12), "report description", "visualacuity", "visualacuitynear", "visualacuitydistance", test, p1);
-//		Report r1 = new Report(2, LocalDate.of(2003,02,12), "report description", "visualacuity", "visualacuitynear", "visualacuitydistance", test, p1);
-//		
-//		List<Report> dummylist = new ArrayList<>();
-//		dummylist.add(r);
-//		dummylist.add(r1);
-//		
-//		when(repository.findAll()).thenReturn(dummylist);
-//		List<Report> output = reportService.viewAllReport(LocalDate.of(2002,02,12));
-//		
-//		verify(repository).viewReportByDate(LocalDate.of(2002,02,12));
-//		assertEquals(1, output.size());
-//	}
+
 
 	@org.junit.Test
 	@DisplayName("test -> add a report")
@@ -115,48 +93,21 @@ public class ReportServiceTest {
 		assertEquals(expectedR, actualR);
 	}
 
-//	@org.junit.Test
-//	@DisplayName("view report using reportId and patientId")
-//	public void viewReportById() throws ReportIdNotFoundException, PatientIdFoundNotException {
-//
-////		Patient p = new Patient();
-////		p.setUserId(1);
-////
-////		Test t = new Test();
-////		t.setTestId(2);
-//
-//		Report r = new Report(3, LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
-//				"visualacuitydistance", t, p);
-//		when(patientRepository.findById(1)).thenReturn(Optional.of(p));
-//		when(repository.findById(3)).thenReturn(Optional.of(r));
-//		Report r1 = reportService.viewReport(3, 1);
-//		System.out.println(r1);
-//		 assertNotEquals(r, r1);
-//		// assertEquals(r, r1);
-//		verify(repository).findReportByPatiendIdandReportId(3, 1);
-//
-//	}
-	
 	@org.junit.Test
-	public void viewReportById() {
-		
-		Patient expectedPatient = new Patient(1, "abc", "Partha", "patient");
-		Test expectedTest = new Test(3, "eyetest", "type", "description", 2000, expectedPatient);
-		Report expectedReport = new Report(LocalDate.of(2021, 6, 3), "description", "visual acuity", "viscual acuity near", "distance", expectedTest, expectedPatient);
-		
-		when(patientRepository.findById(1)).thenReturn(Optional.of(expectedPatient));
-		when(repository.findById(2)).thenReturn(Optional.of(expectedReport));
-		Report actualReport = null;
-		try {
-			actualReport = reportService.viewReport(2, 1);
-		} catch (ReportIdNotFoundException e) {
-			e.printStackTrace();
-		} catch (PatientIdFoundNotException e) {
-			
-			e.printStackTrace();
-		}
-		//assertNotNull(actualReport);
-		//assertEquals(expectedReport.getReportId(), actualReport.getReportId());
+	@DisplayName("test -> add a report with invalid entries")
+	public void addReportInvalid() throws TestIdNotFoundException, PatientIdFoundNotException {
+
+		Patient p = mock(Patient.class);
+		Test t = mock(Test.class);
+
+		Report r = new Report( LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
+				"visualacuitydistance", t, p);
+		Report expectedR = new Report( LocalDate.of(2002, 02, 12), "report description", "visualacuity",
+				"visualacuitynear", "visualacuitydistance", t, p);
+
+		when(repository.save(r)).thenReturn(expectedR);
+		Executable executable = () -> reportService.addReport(r);
+		assertThrows(PatientIdFoundNotException.class, executable);
 	}
 
 	@org.junit.Test
@@ -174,4 +125,17 @@ public class ReportServiceTest {
 		assertEquals(r, actualR);
 	}
 
+	@org.junit.Test
+	@DisplayName("test -> delete a report with invalid entries")
+	public void deleteReportInvlaid() throws ReportIdNotFoundException {
+
+		Patient p1 = new Patient();
+		Test test = new Test();
+
+		Report r = new Report(LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
+				"visualacuitydistance", test, p1);
+		when(repository.findById(1)).thenReturn(Optional.of(r));
+		Executable executable = () -> reportService.removeReport(2);
+		assertThrows(ReportIdNotFoundException.class, executable);
+	}
 }

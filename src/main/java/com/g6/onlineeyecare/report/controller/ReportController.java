@@ -48,7 +48,7 @@ public class ReportController {
 				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
 				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
 
-		return new ResponseEntity<ResponseReportDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
@@ -60,7 +60,7 @@ public class ReportController {
 		ResponseReportDTO response = new ResponseReportDTO(result.getReportId(), result.getDescriptionOfReport(),
 				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
 				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
-		return new ResponseEntity<ResponseReportDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Delete the report", response = Report.class)
@@ -73,7 +73,7 @@ public class ReportController {
 				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
 				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
 
-		return new ResponseEntity<ResponseReportDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "View the specific report by report id and patient id", response = Report.class)
@@ -86,7 +86,7 @@ public class ReportController {
 				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
 				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
 
-		return new ResponseEntity<ResponseReportDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 

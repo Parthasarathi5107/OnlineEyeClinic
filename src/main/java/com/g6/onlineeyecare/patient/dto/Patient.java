@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.User;
@@ -37,7 +36,6 @@ public class Patient extends User {
 	private String patientEmail;
 	@ApiModelProperty(name = "Patient DOB", required = true)
 	@Column
-	@NotNull
 	private LocalDate patientDOB;
 	@ApiModelProperty(name = "Patient address")
 	@Column
@@ -101,6 +99,32 @@ public class Patient extends User {
 		this.patientEmail = patientEmail;
 		this.patientDOB = patientDOB;
 		this.address = address;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((patientEmail == null) ? 0 : patientEmail.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Patient other = (Patient) obj;
+		if (patientEmail == null) {
+			if (other.patientEmail != null)
+				return false;
+		} else if (!patientEmail.equals(other.patientEmail))
+			return false;
+		return true;
 	}
 
 	@Override

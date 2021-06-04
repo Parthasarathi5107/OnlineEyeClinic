@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,7 @@ import com.g6.onlineeyecare.test.dao.ITestRepository;
 import com.g6.onlineeyecare.test.service.ITestService;
 import com.g6.onlineeyecare.test.service.TestServiceImpl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -88,7 +90,7 @@ public class DoctorServiceTest {
 		assertEquals(d, d1);
 	}
 
-	@Test(expected = DoctorIdNotFoundException.class)
+	@Test
 	@DisplayName("test -> view doctor by Id using invalid entries")
 	public void ViewDoctorByIdNotExisting() throws DoctorIdNotFoundException {
 		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
@@ -96,8 +98,8 @@ public class DoctorServiceTest {
 		d1.setUserId(2);
 		Optional<Doctor> s = Optional.of(d1);
 		when(repository.findById(2)).thenReturn(s);
-		Doctor d = doctorService.viewDoctor(3);
-		verify(repository).findById(3);
+		Executable executable = () -> doctorService.viewDoctor(3);
+		assertThrows(DoctorIdNotFoundException.class, executable);
 
 	}
 
@@ -112,7 +114,7 @@ public class DoctorServiceTest {
 		when(repository.save(d1)).thenReturn(d2);
 		Doctor d = doctorService.addDoctor(d1);
 		verify(repository).save(d1);
-		assertEquals(d1, d2);
+		assertEquals(d, d1);
 	}
 
 	@Test
@@ -125,5 +127,16 @@ public class DoctorServiceTest {
 		Doctor d2 = doctorService.deleteDoctor(2);
 		verify(repository).deleteById(2);
 		assertEquals(d1, d2);
+	}
+
+	@Test
+	@DisplayName("test -> delete doctor by Id with invalid entries")
+	public void deleteDoctorInvalid() throws DoctorIdNotFoundException {
+		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		d1.setUserId(2);
+		when(repository.findById(2)).thenReturn(Optional.of(d1));
+
+		Executable executable = () -> doctorService.deleteDoctor(3);
+		assertThrows(DoctorIdNotFoundException.class, executable);
 	}
 }

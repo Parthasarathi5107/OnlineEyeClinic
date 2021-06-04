@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,12 +32,10 @@ public class Appointment {
 	@ApiModelProperty(name = "Appointment date", required = true)
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "Please provide a date.")
 	private LocalDate appointmentDate;
 
 	@ApiModelProperty(name = "Appointment time", required = true)
 	@Column
-	@NotNull
 	private LocalTime appointmentTime;
 
 	@OneToOne

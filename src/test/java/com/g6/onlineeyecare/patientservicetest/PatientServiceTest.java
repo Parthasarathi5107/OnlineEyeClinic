@@ -1,6 +1,7 @@
 package com.g6.onlineeyecare.patientservicetest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
@@ -75,6 +77,18 @@ public class PatientServiceTest {
 	}
 
 	@Test
+	@DisplayName("test -> view patient by Id with invalid entries")
+	public void testViewPatientByIdInvalid() throws PatientIdFoundNotException {
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		p1.setRole("patient");
+		p1.setUserId(2);
+
+		when(repository.findById(2)).thenReturn(Optional.of(p1));
+		Executable executable = () -> patientService.viewPatient(3);
+		assertThrows(PatientIdFoundNotException.class, executable);
+	}
+
+	@Test
 	@DisplayName("test -> view all patients")
 	public void ViewAllPatient() {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
@@ -105,6 +119,17 @@ public class PatientServiceTest {
 	}
 
 	@Test
+	@DisplayName("test -> delete patients with invalid entries")
+	public void deletePatientInvalid() throws PatientIdFoundNotException {
+		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		p1.setUserId(2);
+		when(repository.findById(2)).thenReturn(Optional.of(p1));
+		Executable executable = () -> patientService.deletePatient(3);
+		assertThrows(PatientIdFoundNotException.class, executable);
+
+	}
+
+	@Test
 	@DisplayName("test -> add doctor")
 	public void addPatient() {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
@@ -114,6 +139,6 @@ public class PatientServiceTest {
 		when(repository.save(p1)).thenReturn(p2);
 		Patient p = patientService.addPatient(p1);
 		verify(repository).save(p1);
-		assertEquals(p1, p2);
+		assertEquals(p, p1);
 	}
 }

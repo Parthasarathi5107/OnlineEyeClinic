@@ -47,7 +47,7 @@ public class AppointmentController {
 		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
 				a.getDoctor().getUserId(), a.getPatient().getUserId());
 		
-		return new ResponseEntity<AppointmentResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Update your appointment ",response = Appointment.class)
@@ -58,7 +58,7 @@ public class AppointmentController {
 		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
 				a.getDoctor().getUserId(), a.getPatient().getUserId());
 		
-		return new ResponseEntity<AppointmentResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Delete the required appointment by Id ",response = Appointment.class)
@@ -69,7 +69,7 @@ public class AppointmentController {
 		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
 				a.getDoctor().getUserId(), a.getPatient().getUserId());
 		
-		return new ResponseEntity<AppointmentResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Get the required appointment by Id ",response = Appointment.class)
@@ -80,7 +80,7 @@ public class AppointmentController {
 		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
 				a.getDoctor().getUserId(), a.getPatient().getUserId());
 		
-		return new ResponseEntity<AppointmentResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Get the list of all appointments ",response = Appointment.class)

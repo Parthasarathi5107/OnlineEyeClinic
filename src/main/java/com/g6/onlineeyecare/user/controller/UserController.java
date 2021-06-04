@@ -37,28 +37,28 @@ public class UserController {
 	@PostMapping("/add")
 	public ResponseEntity<Admin> addUser(@RequestBody @Valid Admin user) {
 		Admin u = (Admin) this.userService.addUser(user);
-		return new ResponseEntity<Admin>(u, HttpStatus.OK);
+		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view User by Id", response = User.class)
 	@GetMapping("/view/{userId}")
 	public ResponseEntity<User> viewUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
 		User u =  this.userService.viewUser(userId);
-		return new ResponseEntity<User>(u, HttpStatus.OK);
+		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 //============================================================================================================================
 	@ApiOperation(value = "update profile", response = User.class)
 	@PutMapping("/update")
-	public ResponseEntity<User> updateUser(@RequestBody User user) throws UserIdNotFoundException {
+	public ResponseEntity<User> updateUser(@RequestBody  User user) throws UserIdNotFoundException {
 		User u =  this.userService.updateUser(user);
-		return new ResponseEntity<User>(u, HttpStatus.OK);
+		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "delete user", response = User.class)
 	@DeleteMapping("/delete/{userId}")
 	public ResponseEntity<User> removeUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
 		User u =  this.userService.removeUser(userId);
-		return new ResponseEntity<User>(u, HttpStatus.OK);
+		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view all Users", response = User.class)

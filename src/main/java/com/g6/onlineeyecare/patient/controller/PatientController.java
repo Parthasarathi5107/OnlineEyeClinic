@@ -42,14 +42,14 @@ public class PatientController {
 	@PostMapping("/add")
 	public ResponseEntity<Patient> addPatient(@RequestBody @Valid Patient patient) {
 		Patient p = this.patientService.addPatient(patient);
-		return new ResponseEntity<Patient>(p, HttpStatus.OK);
+		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Update your profile ", response = Patient.class)
 	@PutMapping("/update")
 	public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) throws PatientIdFoundNotException {
 		Patient p = this.patientService.updatePatient(patient);
-		return new ResponseEntity<Patient>(p, HttpStatus.OK);
+		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Delete your profile ", response = Patient.class)
@@ -57,7 +57,7 @@ public class PatientController {
 	public ResponseEntity<Patient> deletePatient(@PathVariable("patientId") int patientId)
 			throws PatientIdFoundNotException {
 		Patient p = this.patientService.deletePatient(patientId);
-		return new ResponseEntity<Patient>(p, HttpStatus.OK);
+		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view Patient profile by Id", response = Patient.class)
@@ -65,7 +65,7 @@ public class PatientController {
 	public ResponseEntity<Patient> viewPatient(@PathVariable("patientId") int patientId)
 			throws PatientIdFoundNotException {
 		Patient p = this.patientService.viewPatient(patientId);
-		return new ResponseEntity<Patient>(p, HttpStatus.OK);
+		return new ResponseEntity<>(p, HttpStatus.OK);
 
 	}
 
@@ -84,7 +84,7 @@ public class PatientController {
 		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
 				a.getDoctor().getUserId(), a.getPatient().getUserId());
 		
-		return new ResponseEntity<AppointmentResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
@@ -96,7 +96,7 @@ public class PatientController {
 		AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(), a.getAppointmentTime(),
 				a.getDoctor().getUserId(), a.getPatient().getUserId());
 		
-		return new ResponseEntity<AppointmentResponseDTO>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Get the required Report by patientId ", response = Report.class)
