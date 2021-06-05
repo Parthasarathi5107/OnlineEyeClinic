@@ -35,54 +35,54 @@ public class TestController {
 	@Autowired
 	ITestService testService;
 
-	@ApiOperation(value = "Create a new test", response = Test.class)
-	@PostMapping("/add")
-	public ResponseEntity<TestResponseDTO> addTest(@RequestBody @Valid Test test) throws PatientIdFoundNotException {
-		Test t = this.testService.addTest(test);
-		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
-				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "Update the specific test", response = Test.class)
-	@PutMapping("/update")
-	public ResponseEntity<TestResponseDTO> updateTest(@RequestBody Test test) throws TestIdNotFoundException {
-		Test t = this.testService.updateTest(test);
-		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
-				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "Delete the specific test", response = Test.class)
-	@DeleteMapping("/delete/{testId}")
-	public ResponseEntity<TestResponseDTO> deleteTest(@PathVariable("testId") int testId)
-			throws TestIdNotFoundException {
-		Test t = this.testService.removeTest(testId);
-		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
-				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "View the test by Id", response = Test.class)
-	@GetMapping("/view/{testId}")
-	public ResponseEntity<TestResponseDTO> viewTest(@PathVariable("testId") int testId) throws TestIdNotFoundException {
-		Test t = this.testService.viewTest(testId);
-		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
-				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-		return new ResponseEntity<>(response, HttpStatus.OK);
-
-	}
-
-	@ApiOperation(value = "View all Tests", response = Test.class)
-	@GetMapping("/viewAll")
-	public ResponseEntity<List<TestResponseDTO>> viewAllTests() {
-		List<Test> tList = this.testService.viewAllTests();
-		List<TestResponseDTO> responseList = new ArrayList<>();
-		for (Test t : tList) {
-			TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
-					t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-			responseList.add(response);
-		}
-		return new ResponseEntity<>(responseList, HttpStatus.OK);
-	}
+//	@ApiOperation(value = "Create a new test", response = Test.class)
+	//@PostMapping("/add")
+//	public ResponseEntity<TestResponseDTO> addTest(@RequestBody @Valid Test test) throws PatientIdFoundNotException {
+//		Test t = this.testService.addTest(test);
+//		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
+//				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "Update the specific test", response = Test.class)
+//	@PutMapping("/update")
+//	public ResponseEntity<TestResponseDTO> updateTest(@RequestBody Test test) throws TestIdNotFoundException {
+//		Test t = this.testService.updateTest(test);
+//		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
+//				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "Delete the specific test", response = Test.class)
+//	@DeleteMapping("/delete/{testId}")
+//	public ResponseEntity<TestResponseDTO> deleteTest(@PathVariable("testId") int testId)
+//			throws TestIdNotFoundException {
+//		Test t = this.testService.removeTest(testId);
+//		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
+//				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "View the test by Id", response = Test.class)
+//	@GetMapping("/view/{testId}")
+//	public ResponseEntity<TestResponseDTO> viewTest(@PathVariable("testId") int testId) throws TestIdNotFoundException {
+//		Test t = this.testService.viewTest(testId);
+//		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
+//				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//
+//	}
+//
+//	@ApiOperation(value = "View all Tests", response = Test.class)
+//	@GetMapping("/viewAll")
+//	public ResponseEntity<List<TestResponseDTO>> viewAllTests() {
+//		List<Test> tList = this.testService.viewAllTests();
+//		List<TestResponseDTO> responseList = new ArrayList<>();
+//		for (Test t : tList) {
+//			TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
+//					t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
+//			responseList.add(response);
+//		}
+//		return new ResponseEntity<>(responseList, HttpStatus.OK);
+//	}
 }

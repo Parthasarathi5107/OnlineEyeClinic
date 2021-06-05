@@ -1,16 +1,18 @@
 package com.g6.onlineeyecare.test.dto;
 
+import com.g6.onlineeyecare.patient.dto.Patient;
+
 import lombok.Data;
 
 @Data
-public class TestResponseDTO {
+public class TestDTO {
 
 	private int testId;
 	private String testName;
 	private String testType;
 	private String testDescription;
 	private double testCost;
-	private int patientId;
+	private Patient patient;
 	public int getTestId() {
 		return testId;
 	}
@@ -41,18 +43,17 @@ public class TestResponseDTO {
 	public void setTestCost(double testCost) {
 		this.testCost = testCost;
 	}
-	public int getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 	@Override
 	public String toString() {
-		return "TestResponseDTO [testId=" + testId + ", testName=" + testName + ", testType=" + testType
-				+ ", testDescription=" + testDescription + ", testCost=" + testCost + ", patientId=" + patientId + "]";
+		return "TestDTO [testId=" + testId + ", testName=" + testName + ", testType=" + testType + ", testDescription="
+				+ testDescription + ", testCost=" + testCost + ", patient=" + patient + "]";
 	}
-	
 	
 	
 }

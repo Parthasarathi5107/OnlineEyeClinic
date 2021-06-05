@@ -22,7 +22,7 @@ import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.ReportIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.TestIdNotFoundException;
 import com.g6.onlineeyecare.report.dto.Report;
-import com.g6.onlineeyecare.report.dto.ResponseReportDTO;
+import com.g6.onlineeyecare.report.dto.ReportResponseDTO;
 import com.g6.onlineeyecare.report.service.IReportService;
 import com.g6.onlineeyecare.spectacles.dto.Spectacles;
 import com.g6.onlineeyecare.spectacles.dto.SpectaclesResponseDTO;
@@ -39,83 +39,83 @@ public class ReportController {
 	@Autowired
 	IReportService reportService;
 
-	@ApiOperation(value = "Generate a new report", response = Report.class)
-	@PostMapping("/add")
-	public ResponseEntity<ResponseReportDTO> addReport(@RequestBody @Valid Report report)
-			throws TestIdNotFoundException, PatientIdFoundNotException {
-		Report result = this.reportService.addReport(report);
-		ResponseReportDTO response = new ResponseReportDTO(result.getReportId(), result.getDescriptionOfReport(),
-				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
-				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-
-	}
-
-	@ApiOperation(value = "Update the specific report", response = Report.class)
-	@PutMapping("/update")
-	public ResponseEntity<ResponseReportDTO> updateReport(@RequestBody Report report) throws ReportIdNotFoundException {
-		Report result = this.reportService.updateReport(report);
-
-		ResponseReportDTO response = new ResponseReportDTO(result.getReportId(), result.getDescriptionOfReport(),
-				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
-				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "Delete the report", response = Report.class)
-	@DeleteMapping("/delete/{reportId}")
-	public ResponseEntity<ResponseReportDTO> deleteReport(@PathVariable("reportId") int reportId)
-			throws ReportIdNotFoundException {
-		Report result = this.reportService.removeReport(reportId);
-
-		ResponseReportDTO response = new ResponseReportDTO(result.getReportId(), result.getDescriptionOfReport(),
-				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
-				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "View the specific report by report id and patient id", response = Report.class)
-	@GetMapping("/view/{reportId}/{patientId}")
-	public ResponseEntity<ResponseReportDTO> viewReport(@PathVariable("reportId") int reportId,
-			@PathVariable("patientId") int patientId) throws ReportIdNotFoundException, PatientIdFoundNotException {
-		Report result = this.reportService.viewReport(reportId, patientId);
-
-		ResponseReportDTO response = new ResponseReportDTO(result.getReportId(), result.getDescriptionOfReport(),
-				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
-				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-
-	}
-
-	@ApiOperation(value = "View the specific report by date", response = Report.class)
-	@GetMapping("/viewByDate/{date}")
-	public ResponseEntity<List<ResponseReportDTO>> viewAllReport(
-			@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-		List<Report> reportList = this.reportService.viewAllReport(date);
-		List<ResponseReportDTO> rlist = new ArrayList<>();
-		for (Report result : reportList) {
-			ResponseReportDTO response = new ResponseReportDTO(result.getReportId(), result.getDescriptionOfReport(),
-					result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
-					result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
-			rlist.add(response);
-		}
-		return new ResponseEntity<>(rlist, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "Get the list of Spectacles", response = Spectacles.class)
-	@GetMapping("/spectacles")
-	public ResponseEntity<List<SpectaclesResponseDTO>> viewSpetacles() {
-		List<Spectacles> spectaclesList = this.reportService.viewSpetacles();
-		List<SpectaclesResponseDTO> sResponseList = new ArrayList<>();
-		for (Spectacles s : spectaclesList) {
-			SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
-					s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
-			sResponseList.add(response);
-		}
-		return new ResponseEntity<>(sResponseList, HttpStatus.OK);
-	}
+//	@ApiOperation(value = "Generate a new report", response = Report.class)
+//	@PostMapping("/add")
+//	public ResponseEntity<ReportResponseDTO> addReport(@RequestBody @Valid Report report)
+//			throws TestIdNotFoundException, PatientIdFoundNotException {
+//		Report result = this.reportService.addReport(report);
+//		ReportResponseDTO response = new ReportResponseDTO(result.getReportId(), result.getDescriptionOfReport(),
+//				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
+//				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//
+//	}
+//
+//	@ApiOperation(value = "Update the specific report", response = Report.class)
+//	@PutMapping("/update")
+//	public ResponseEntity<ReportResponseDTO> updateReport(@RequestBody Report report) throws ReportIdNotFoundException {
+//		Report result = this.reportService.updateReport(report);
+//
+//		ReportResponseDTO response = new ReportResponseDTO(result.getReportId(), result.getDescriptionOfReport(),
+//				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
+//				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "Delete the report", response = Report.class)
+//	@DeleteMapping("/delete/{reportId}")
+//	public ResponseEntity<ReportResponseDTO> deleteReport(@PathVariable("reportId") int reportId)
+//			throws ReportIdNotFoundException {
+//		Report result = this.reportService.removeReport(reportId);
+//
+//		ReportResponseDTO response = new ReportResponseDTO(result.getReportId(), result.getDescriptionOfReport(),
+//				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
+//				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "View the specific report by report id and patient id", response = Report.class)
+//	@GetMapping("/view/{reportId}/{patientId}")
+//	public ResponseEntity<ReportResponseDTO> viewReport(@PathVariable("reportId") int reportId,
+//			@PathVariable("patientId") int patientId) throws ReportIdNotFoundException, PatientIdFoundNotException {
+//		Report result = this.reportService.viewReport(reportId, patientId);
+//
+//		ReportResponseDTO response = new ReportResponseDTO(result.getReportId(), result.getDescriptionOfReport(),
+//				result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
+//				result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//
+//	}
+//
+//	@ApiOperation(value = "View the specific report by date", response = Report.class)
+//	@GetMapping("/viewByDate/{date}")
+//	public ResponseEntity<List<ReportResponseDTO>> viewAllReport(
+//			@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+//		List<Report> reportList = this.reportService.viewAllReport(date);
+//		List<ReportResponseDTO> rlist = new ArrayList<>();
+//		for (Report result : reportList) {
+//			ReportResponseDTO response = new ReportResponseDTO(result.getReportId(), result.getDescriptionOfReport(),
+//					result.getVisualAcuity(), result.getVisualAcuityNear(), result.getVisualAcuityDistance(),
+//					result.getTypeOfTest().getTestId(), result.getPatient().getUserId());
+//			rlist.add(response);
+//		}
+//		return new ResponseEntity<>(rlist, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "Get the list of Spectacles", response = Spectacles.class)
+//	@GetMapping("/spectacles")
+//	public ResponseEntity<List<SpectaclesResponseDTO>> viewSpetacles() {
+//		List<Spectacles> spectaclesList = this.reportService.viewSpetacles();
+//		List<SpectaclesResponseDTO> sResponseList = new ArrayList<>();
+//		for (Spectacles s : spectaclesList) {
+//			SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
+//					s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
+//			sResponseList.add(response);
+//		}
+//		return new ResponseEntity<>(sResponseList, HttpStatus.OK);
+//	}
 
 }

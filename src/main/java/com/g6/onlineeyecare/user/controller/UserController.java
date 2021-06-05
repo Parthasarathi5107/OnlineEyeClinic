@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.g6.onlineeyecare.admin.dto.Admin;
 import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
 import com.g6.onlineeyecare.user.dto.User;
-import com.g6.onlineeyecare.user.dto.UserDTO;
+import com.g6.onlineeyecare.user.dto.UserResponseDTO;
 import com.g6.onlineeyecare.user.service.IUserService;
 
 import io.swagger.annotations.Api;
@@ -40,10 +40,10 @@ public class UserController {
 
 	@ApiOperation(value = "add a new User", response = User.class)
 	@PostMapping("/add")
-	public ResponseEntity<UserDTO> addUser(@RequestBody @Valid UserDTO user) {
+	public ResponseEntity<UserResponseDTO> addUser(@RequestBody @Valid UserResponseDTO user) {
 		User u = modelMapper.map(user, User.class);
 		User req = userService.addUser(u);
-		UserDTO response = modelMapper.map(req, UserDTO.class); 
+		UserResponseDTO response = modelMapper.map(req, UserResponseDTO.class); 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

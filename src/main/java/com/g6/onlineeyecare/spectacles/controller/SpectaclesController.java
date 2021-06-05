@@ -32,63 +32,63 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/spectacles")
 public class SpectaclesController {
 
-	@Autowired
-	ISpectaclesService spectaclesService;
-
-	@ApiOperation(value = "add a new Spectacles", response = Spectacles.class)
-	@PostMapping("/add")
-	public ResponseEntity<SpectaclesResponseDTO> addSpectacles(@RequestBody @Valid Spectacles spectacles)
-			throws PatientIdFoundNotException {
-		Spectacles s = this.spectaclesService.addSpectacles(spectacles);
-		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
-				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "update Spectacles", response = Spectacles.class)
-	@PutMapping("/update")
-	public ResponseEntity<SpectaclesResponseDTO> updateSpectacles(@RequestBody Spectacles spectacles) throws SpectaclesIdNotFoundException {
-		Spectacles s = this.spectaclesService.updateSpectacles(spectacles);
-		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
-				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "delete Spectacles", response = Spectacles.class)
-	@DeleteMapping("/delete/{spectaclesId}")
-	public ResponseEntity<SpectaclesResponseDTO> deleteSpectacles(@PathVariable("spectaclesId") int spectaclesId)
-			throws SpectaclesIdNotFoundException {
-		Spectacles s = this.spectaclesService.removeSpectacles(spectaclesId);
-		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
-				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-
-	}
-
-	@ApiOperation(value = "view Spectacles by Id", response = Spectacles.class)
-	@GetMapping("/view/{spectaclesId}")
-	public ResponseEntity<SpectaclesResponseDTO> viewSpectacles(@PathVariable("spectaclesId") int spectaclesId)
-			throws SpectaclesIdNotFoundException {
-		Spectacles s = this.spectaclesService.viewSpectacles(spectaclesId);
-		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
-				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@ApiOperation(value = "view all Spectacles", response = Spectacles.class)
-	@GetMapping("/viewAll")
-	public ResponseEntity<List<SpectaclesResponseDTO>> viewSpectacles() {
-		List<Spectacles> spectaclesList = this.spectaclesService.viewSpectacles();
-		List<SpectaclesResponseDTO> sResponseList = new ArrayList<>();
-		for (Spectacles s : spectaclesList) {
-			SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
-					s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
-			sResponseList.add(response);
-		}
-		return new ResponseEntity<>(sResponseList, HttpStatus.OK);
-	}
+//	@Autowired
+//	ISpectaclesService spectaclesService;
+//
+//	@ApiOperation(value = "add a new Spectacles", response = Spectacles.class)
+//	@PostMapping("/add")
+//	public ResponseEntity<SpectaclesResponseDTO> addSpectacles(@RequestBody @Valid Spectacles spectacles)
+//			throws PatientIdFoundNotException {
+//		Spectacles s = this.spectaclesService.addSpectacles(spectacles);
+//		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
+//				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "update Spectacles", response = Spectacles.class)
+//	@PutMapping("/update")
+//	public ResponseEntity<SpectaclesResponseDTO> updateSpectacles(@RequestBody Spectacles spectacles) throws SpectaclesIdNotFoundException {
+//		Spectacles s = this.spectaclesService.updateSpectacles(spectacles);
+//		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
+//				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "delete Spectacles", response = Spectacles.class)
+//	@DeleteMapping("/delete/{spectaclesId}")
+//	public ResponseEntity<SpectaclesResponseDTO> deleteSpectacles(@PathVariable("spectaclesId") int spectaclesId)
+//			throws SpectaclesIdNotFoundException {
+//		Spectacles s = this.spectaclesService.removeSpectacles(spectaclesId);
+//		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
+//				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//
+//	}
+//
+//	@ApiOperation(value = "view Spectacles by Id", response = Spectacles.class)
+//	@GetMapping("/view/{spectaclesId}")
+//	public ResponseEntity<SpectaclesResponseDTO> viewSpectacles(@PathVariable("spectaclesId") int spectaclesId)
+//			throws SpectaclesIdNotFoundException {
+//		Spectacles s = this.spectaclesService.viewSpectacles(spectaclesId);
+//		SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
+//				s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+//
+//	@ApiOperation(value = "view all Spectacles", response = Spectacles.class)
+//	@GetMapping("/viewAll")
+//	public ResponseEntity<List<SpectaclesResponseDTO>> viewSpectacles() {
+//		List<Spectacles> spectaclesList = this.spectaclesService.viewSpectacles();
+//		List<SpectaclesResponseDTO> sResponseList = new ArrayList<>();
+//		for (Spectacles s : spectaclesList) {
+//			SpectaclesResponseDTO response = new SpectaclesResponseDTO(s.getSpectaclesId(), s.getSpectaclesModel(),
+//					s.getSpectaclesDescription(), s.getSpectaclesCost(), s.getPatient().getUserId());
+//			sResponseList.add(response);
+//		}
+//		return new ResponseEntity<>(sResponseList, HttpStatus.OK);
+//	}
 }

@@ -1,15 +1,16 @@
 package com.g6.onlineeyecare.spectacles.dto;
 
+import com.g6.onlineeyecare.patient.dto.Patient;
 import lombok.Data;
 
 @Data
-public class SpectaclesResponseDTO {
+public class SpectaclesDTO {
 
 	private int spectaclesId;
 	private String spectaclesModel;
 	private String spectaclesDescription;
 	private double spectaclesCost;
-	private int patientId;
+	private Patient patient;
 	public int getSpectaclesId() {
 		return spectaclesId;
 	}
@@ -34,17 +35,17 @@ public class SpectaclesResponseDTO {
 	public void setSpectaclesCost(double spectaclesCost) {
 		this.spectaclesCost = spectaclesCost;
 	}
-	public int getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 	@Override
 	public String toString() {
-		return "SpectaclesResponseDTO [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
+		return "SpectaclesDTO [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
 				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesCost=" + spectaclesCost
-				+ ", patientId=" + patientId + "]";
+				+ ", patient=" + patient + "]";
 	}
 	
 	

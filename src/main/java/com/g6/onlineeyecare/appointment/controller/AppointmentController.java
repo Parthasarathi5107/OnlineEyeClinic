@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.g6.onlineeyecare.appointment.dto.Appointment;
-import com.g6.onlineeyecare.appointment.dto.AppointmentDTO;
+import com.g6.onlineeyecare.appointment.dto.AppointmentResponseDTO;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
@@ -35,10 +35,10 @@ public class AppointmentController {
 	
 	@ApiOperation(value = "Book appointment to consult the doctor",response = Appointment.class)
 	@PostMapping("/book")
-	public  ResponseEntity<AppointmentDTO> bookAppointment(@RequestBody @Valid AppointmentDTO appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException 
+	public  ResponseEntity<AppointmentResponseDTO> bookAppointment(@RequestBody @Valid AppointmentResponseDTO appointment) throws DoctorIdNotFoundException, PatientIdFoundNotException 
 	{
 		Appointment actual = modelMapper.map(appointment, Appointment.class);
-		AppointmentDTO response = modelMapper.map(this.appointmentService.bookAppointment(actual),AppointmentDTO.class);
+		AppointmentResponseDTO response = modelMapper.map(this.appointmentService.bookAppointment(actual),AppointmentResponseDTO.class);
 		System.out.println(actual);
 //		response.setDoctorId(actual.getDoctor().getUserId());
 //		response.setDoctorId(actual.getPatient().getUserId());

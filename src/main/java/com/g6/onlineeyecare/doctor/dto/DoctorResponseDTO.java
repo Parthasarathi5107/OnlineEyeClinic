@@ -1,20 +1,28 @@
 package com.g6.onlineeyecare.doctor.dto;
 
-
-import com.g6.onlineeyecare.user.dto.UserEntityDTO;
-
 import lombok.Data;
 
 @Data
-public class DoctorEntityDTO extends UserEntityDTO{
+public class DoctorResponseDTO {
 
-	
+	private int userId;
+	private String doctorName;
 	private String doctorConsultationTime;
 	private long doctorMobile;
 	private String doctorEmail;
 	private String address;
-	
-	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getDoctorName() {
+		return doctorName;
+	}
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
 	public String getDoctorConsultationTime() {
 		return doctorConsultationTime;
 	}
@@ -41,10 +49,10 @@ public class DoctorEntityDTO extends UserEntityDTO{
 	}
 	@Override
 	public String toString() {
-		return "DoctorEntityDTO [doctorConsultationTime=" + doctorConsultationTime + ", doctorMobile=" + doctorMobile
-				+ ", doctorEmail=" + doctorEmail + ", address=" + address + "]";
+		return "DoctorDTO [userId=" + userId + ", doctorName=" + doctorName + ", doctorConsultationTime="
+				+ doctorConsultationTime + ", doctorMobile=" + doctorMobile + ", doctorEmail=" + doctorEmail
+				+ ", address=" + address + "]";
 	}
-	
 	
 	
 }

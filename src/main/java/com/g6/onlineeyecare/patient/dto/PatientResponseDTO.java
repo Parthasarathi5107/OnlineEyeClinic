@@ -2,19 +2,23 @@ package com.g6.onlineeyecare.patient.dto;
 
 import java.time.LocalDate;
 
-import com.g6.onlineeyecare.user.dto.UserDTO;
-
 import lombok.Data;
 
-
 @Data
-public class PatientDTO extends UserDTO{
+public class PatientResponseDTO {
 
+	private int userId;
 	private int patientAge;
 	private long patientMobile;
 	private String patientEmail;
 	private LocalDate patientDOB;
 	private String address;
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public int getPatientAge() {
 		return patientAge;
 	}
@@ -47,9 +51,9 @@ public class PatientDTO extends UserDTO{
 	}
 	@Override
 	public String toString() {
-		return "PatientDTO [patientAge=" + patientAge + ", patientMobile=" + patientMobile + ", patientEmail="
-				+ patientEmail + ", patientDOB=" + patientDOB + ", address=" + address + "]";
+		return "PatientResponseDTO [userId=" + userId + ", patientAge=" + patientAge + ", patientMobile="
+				+ patientMobile + ", patientEmail=" + patientEmail + ", patientDOB=" + patientDOB + ", address="
+				+ address + "]";
 	}
-	
 	
 }

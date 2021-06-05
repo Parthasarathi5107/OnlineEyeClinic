@@ -3,19 +3,16 @@ package com.g6.onlineeyecare.appointment.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.g6.onlineeyecare.doctor.dto.Doctor;
-import com.g6.onlineeyecare.patient.dto.Patient;
-
 import lombok.Data;
 
 @Data
-public class AppointmentDTO {
+public class AppointmentResponseDTO {
 
 	private int appointmentId;
 	private LocalDate appointmentDate;
 	private LocalTime appointmentTime;
-	private Doctor doctor;
-	private Patient patient;
+	private int doctorId;
+	private int patientId;
 	public int getAppointmentId() {
 		return appointmentId;
 	}
@@ -34,24 +31,23 @@ public class AppointmentDTO {
 	public void setAppointmentTime(LocalTime appointmentTime) {
 		this.appointmentTime = appointmentTime;
 	}
-	public Doctor getDoctor() {
-		return doctor;
+	public int getDoctorId() {
+		return doctorId;
 	}
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
-	public Patient getPatient() {
-		return patient;
+	public int getPatientId() {
+		return patientId;
 	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 	@Override
 	public String toString() {
-		return "AppointmentEntityDTO [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
-				+ ", appointmentTime=" + appointmentTime + ", doctor=" + doctor + ", patient=" + patient + "]";
+		return "AppointmentDTO [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
+				+ ", appointmentTime=" + appointmentTime + ", doctorId=" + doctorId + ", patientId=" + patientId + "]";
 	}
-	
-	
 
+	
 }

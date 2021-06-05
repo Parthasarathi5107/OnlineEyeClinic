@@ -1,11 +1,9 @@
 package com.g6.onlineeyecare.user.dto;
 
-import lombok.Data;
-
-@Data
 public class UserDTO {
 
 	private int userId;
+	private String password;
 	private String userName;
 	private String role;
 	public int getUserId() {
@@ -14,7 +12,12 @@ public class UserDTO {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -27,10 +30,10 @@ public class UserDTO {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
 	@Override
 	public String toString() {
-		return "UserDTO [userId=" + userId + ", userName=" + userName + ", role=" + role + "]";
+		return "UserEntityDTO [userId=" + userId + ", password=" + password + ", userName=" + userName + ", role="
+				+ role + "]";
 	}
 	
 	
