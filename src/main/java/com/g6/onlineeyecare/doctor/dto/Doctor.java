@@ -12,7 +12,7 @@ import com.g6.onlineeyecare.user.dto.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-//Doctor entity class
+
 @ApiModel(value = "Doctor dto")
 @Entity
 @DiscriminatorValue(value = "3")

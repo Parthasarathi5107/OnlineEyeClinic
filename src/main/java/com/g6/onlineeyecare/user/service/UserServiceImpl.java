@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
 
 import com.g6.onlineeyecare.user.dao.IUserRepository;
@@ -21,7 +19,7 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	IUserRepository repository;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+	Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	public UserServiceImpl(IUserRepository repository) {
 		super();
@@ -42,9 +40,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public User updateUser(User user) throws UserIdNotFoundException {
-		Optional<User> optional = null;
-
-		optional = repository.findById(user.getUserId());
+		
+		Optional<User> optional = repository.findById(user.getUserId());
 		System.out.println(optional);
 		if (optional.isPresent()) {
 			repository.save(user);
@@ -57,9 +54,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public User removeUser(int userId) throws UserIdNotFoundException {
-		Optional<User> optional = null;
-
-		optional = repository.findById(userId);
+		
+		Optional<User> optional = repository.findById(userId);
 		if (optional.isPresent()) {
 			repository.deleteById(userId);
 		} else {
@@ -70,9 +66,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User viewUser(int userId) throws UserIdNotFoundException {
-		Optional<User> optional = null;
-
-		optional = repository.findById(userId);
+		
+		Optional<User> optional = repository.findById(userId);
 		if (!optional.isPresent()) {
 			throw new UserIdNotFoundException("User Id not found to view user");
 		}

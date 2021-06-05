@@ -42,12 +42,9 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	public Appointment bookAppointment(Appointment appointment)
 			throws DoctorIdNotFoundException, PatientIdFoundNotException
 	{
-		System.out.println("inside appointment add");
-		System.out.println(appointment);
-		System.out.println(appointment.getDoctor());
+		
 		if (doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
 			if (patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
-				System.out.println("inside save");
 				appointmentRepository.save(appointment);
 			} else {
 				throw new PatientIdFoundNotException("Patient Id not found");
@@ -62,8 +59,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	@Override
 	@Transactional
 	public Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException {
-		Optional<Appointment> optional = null;
-		optional = appointmentRepository.findById(appointment.getAppointmentId());
+		
+		 Optional<Appointment> optional = appointmentRepository.findById(appointment.getAppointmentId());
 		if (optional.isPresent()) {
 			appointmentRepository.save(appointment);
 		} else {
@@ -75,8 +72,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	@Override
 	@Transactional
 	public Appointment cancelAppointment(int appointmentId) throws AppointmentIdNotFoundException {
-		Optional<Appointment> optional = null;
-		optional = appointmentRepository.findById(appointmentId);
+		
+		 Optional<Appointment> optional = appointmentRepository.findById(appointmentId);
 		if (optional.isPresent()) {
 			appointmentRepository.deleteById(appointmentId);
 		} else {
@@ -87,9 +84,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 	@Override
 	public Appointment viewAppointment(int appointmentId) throws AppointmentIdNotFoundException {
-		Optional<Appointment> optional = null;
-
-		optional = appointmentRepository.findById(appointmentId);
+		
+		 Optional<Appointment> optional = appointmentRepository.findById(appointmentId);
 		if (!optional.isPresent()) {
 			throw new AppointmentIdNotFoundException("Appointment ID not found to view appointment");
 		}

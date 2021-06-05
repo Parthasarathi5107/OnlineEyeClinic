@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.TestIdNotFoundException;
 import com.g6.onlineeyecare.patient.dao.IPatientRepository;
@@ -24,7 +22,7 @@ public class TestServiceImpl implements ITestService {
 	@Autowired
 	IPatientRepository patientRepository;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+	Logger log = LoggerFactory.getLogger(TestServiceImpl.class);
 
 	public TestServiceImpl(ITestRepository testRepository) {
 		super();
@@ -47,8 +45,8 @@ public class TestServiceImpl implements ITestService {
 	@Override
 	@Transactional
 	public Test updateTest(Test test) throws TestIdNotFoundException {
-		Optional<Test> optional = null;
-		optional = testRepository.findById(test.getTestId());
+
+		Optional<Test> optional = testRepository.findById(test.getTestId());
 		if (optional.isPresent()) {
 			testRepository.save(test);
 		} else {
@@ -60,9 +58,8 @@ public class TestServiceImpl implements ITestService {
 	@Override
 	@Transactional
 	public Test removeTest(int testId) throws TestIdNotFoundException {
-		Optional<Test> optional = null;
 
-		optional = testRepository.findById(testId);
+		Optional<Test> optional = testRepository.findById(testId);
 		if (optional.isPresent()) {
 			testRepository.deleteById(testId);
 		} else {
@@ -73,9 +70,7 @@ public class TestServiceImpl implements ITestService {
 
 	@Override
 	public Test viewTest(int testId) throws TestIdNotFoundException {
-		Optional<Test> optional = null;
-
-		optional = testRepository.findById(testId);
+		Optional<Test> optional = testRepository.findById(testId);
 		if (!optional.isPresent()) {
 			throw new TestIdNotFoundException("Test Id not found to view test");
 		}

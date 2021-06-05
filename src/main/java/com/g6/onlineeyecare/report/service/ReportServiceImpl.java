@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.ReportIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.TestIdNotFoundException;
@@ -35,7 +33,7 @@ public class ReportServiceImpl implements IReportService {
 	@Autowired
 	ITestRepository testRepository;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+	Logger log = LoggerFactory.getLogger(ReportServiceImpl.class);
 
 	public ReportServiceImpl(IReportRepository repository) {
 		super();
@@ -61,8 +59,8 @@ public class ReportServiceImpl implements IReportService {
 	@Override
 	@Transactional
 	public Report updateReport(Report report) throws ReportIdNotFoundException {
-		Optional<Report> optional = null;
-		optional = repository.findById(report.getReportId());
+		
+		Optional<Report> optional = repository.findById(report.getReportId());
 		if (optional.isPresent()) {
 			repository.save(report);
 		} else {
@@ -74,9 +72,8 @@ public class ReportServiceImpl implements IReportService {
 	@Override
 	@Transactional
 	public Report removeReport(int reportId) throws ReportIdNotFoundException {
-		Optional<Report> optional = null;
 
-		optional = repository.findById(reportId);
+		Optional<Report> optional = repository.findById(reportId);
 		if (optional.isPresent()) {
 			repository.deleteById(reportId);
 		} else {

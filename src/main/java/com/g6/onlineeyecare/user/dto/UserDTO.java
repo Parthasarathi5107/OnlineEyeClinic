@@ -1,5 +1,8 @@
 package com.g6.onlineeyecare.user.dto;
 
+import lombok.Data;
+
+@Data
 public class UserDTO {
 
 	private int userId;

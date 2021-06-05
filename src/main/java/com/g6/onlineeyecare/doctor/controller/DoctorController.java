@@ -28,6 +28,7 @@ import com.g6.onlineeyecare.doctor.service.IDoctorService;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.test.dto.Test;
+import com.g6.onlineeyecare.test.dto.TestDTO;
 import com.g6.onlineeyecare.test.dto.TestResponseDTO;
 
 import io.swagger.annotations.Api;
@@ -56,9 +57,14 @@ public class DoctorController {
 	@ApiOperation(value = "Update your profile", response = Doctor.class)
 	@PutMapping("/update")
 	public ResponseEntity<DoctorResponseDTO> updateDoctor(@RequestBody DoctorDTO doctor) throws DoctorIdNotFoundException {
+		
 		Doctor actual = modelMapper.map(doctor, Doctor.class);
 		DoctorResponseDTO response = modelMapper.map(this.doctorService.updateDoctor(actual), DoctorResponseDTO.class);
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		if (response != null) {
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@ApiOperation(value = "delete your profile ", response = Doctor.class)
@@ -66,14 +72,22 @@ public class DoctorController {
 	public ResponseEntity<DoctorResponseDTO> deleteDoctor(@PathVariable("doctorId") int doctorId)
 			throws DoctorIdNotFoundException {
 		DoctorResponseDTO response = modelMapper.map(this.doctorService.deleteDoctor(doctorId), DoctorResponseDTO.class);
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		if (response != null) {
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@ApiOperation(value = "View Doctor profile by Id", response = Doctor.class)
 	@GetMapping("/view/{doctorId}")
 	public ResponseEntity<DoctorResponseDTO> viewDoctor(@PathVariable("doctorId") int doctorId) throws DoctorIdNotFoundException {
 		DoctorResponseDTO response = modelMapper.map(this.doctorService.viewDoctor(doctorId), DoctorResponseDTO.class);
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		if (response != null) {
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
 
 	}
 
@@ -93,25 +107,29 @@ public class DoctorController {
 		}
 	}
 
-//	@ApiOperation(value = "view all appointments", response = Doctor.class)
-//	@GetMapping("/viewAppointments")
-//	public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments() {
-//		List<Appointment> appointmentList = this.doctorService.viewAppointments();
-//		List<AppointmentResponseDTO> alist = new ArrayList<>();
-//		for (Appointment a : appointmentList) {
-//			AppointmentResponseDTO response = new AppointmentResponseDTO(a.getAppointmentId(), a.getAppointmentDate(),
-//					a.getAppointmentTime(), a.getDoctor().getUserId(), a.getPatient().getUserId());
-//			alist.add(response);
-//		}
-//		return new ResponseEntity<>(alist, HttpStatus.OK);
-//	}
+	@ApiOperation(value = "view all appointments", response = Doctor.class)
+	@GetMapping("/viewAppointments")
+	public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments() {
+		
+		List<Appointment> appointmentList = this.doctorService.viewAppointments();
+		List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
+		for (Appointment a : appointmentList) {
+			AppointmentResponseDTO appointmentDto = modelMapper.map(a, AppointmentResponseDTO.class);
+			appointmentDtoList.add(appointmentDto);
+		}
+		if (!(appointmentDtoList.isEmpty())) {
+			return new ResponseEntity<>(appointmentDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(appointmentDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
 
-//	@ApiOperation(value = "Create a new test", response = Doctor.class)
-//	@PostMapping("/test")
-//	public ResponseEntity<TestResponseDTO> createTest(@RequestBody Test test) throws PatientIdFoundNotException {
-//		Test t = this.doctorService.createTest(test);
-//		TestResponseDTO response = new TestResponseDTO(t.getTestId(), t.getTestName(), t.getTestType(),
-//				t.getTestDescription(), t.getTestCost(), t.getPatient().getUserId());
-//		return new ResponseEntity<>(response, HttpStatus.OK);
-//	}
+	@ApiOperation(value = "Create a new test", response = Doctor.class)
+	@PostMapping("/test")
+	public ResponseEntity<TestResponseDTO> createTest(@RequestBody TestDTO test) throws PatientIdFoundNotException {
+		
+		Test actucal = modelMapper.map(test, Test.class);
+		TestResponseDTO response = modelMapper.map(this.doctorService.createTest(actucal), TestResponseDTO.class);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 }

@@ -19,7 +19,6 @@ import com.g6.onlineeyecare.patient.dto.Patient;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-//Appointment entity class
 @ApiModel(value = "Appointment dto")
 @Entity
 @Table(name = "Appointment_info")

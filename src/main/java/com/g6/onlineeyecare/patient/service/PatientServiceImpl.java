@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.exceptions.AppointmentIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.DoctorIdNotFoundException;
@@ -30,7 +29,7 @@ public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	IReportRepository reportRepository;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+	Logger log = LoggerFactory.getLogger(PatientServiceImpl.class);
 	
 	public PatientServiceImpl(IPatientRepository repository) {
 		super();
@@ -51,8 +50,8 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	@Transactional
 	public Patient updatePatient(Patient patient) throws PatientIdFoundNotException {
-		Optional<Patient> optional = null;
-		optional = repository.findById(patient.getUserId());
+		
+		Optional<Patient> optional = repository.findById(patient.getUserId());
 		if (optional.isPresent()) {
 			repository.save(patient);
 		} else {
@@ -64,8 +63,8 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	@Transactional
 	public Patient deletePatient(int patientId) throws PatientIdFoundNotException {
-		Optional<Patient> optional = null;
-		optional = repository.findById(patientId);
+		
+		Optional<Patient> optional = repository.findById(patientId);
 		if (optional.isPresent()) {
 			repository.deleteById(patientId);
 		} else {
@@ -87,9 +86,8 @@ public class PatientServiceImpl implements IPatientService {
 
 	@Override
 	public Patient viewPatient(int patientId) throws PatientIdFoundNotException {
-		Optional<Patient> optional = null;
-
-		optional = repository.findById(patientId);
+		
+		Optional<Patient> optional = repository.findById(patientId);
 		if (!optional.isPresent()) {
 			throw new PatientIdFoundNotException("Patient id not found to view patient");
 		}

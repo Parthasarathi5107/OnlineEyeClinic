@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
-import com.g6.onlineeyecare.appointment.service.AppointmentServiceImpl;
 import com.g6.onlineeyecare.appointment.service.IAppointmentService;
 import com.g6.onlineeyecare.doctor.dao.IDoctorRepository;
 import com.g6.onlineeyecare.doctor.dto.Doctor;
@@ -29,7 +28,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	ITestService testService;
 
-	Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+	Logger log = LoggerFactory.getLogger(DoctorServiceImpl.class);
 	
 	public DoctorServiceImpl(IDoctorRepository repository) {
 		super();
@@ -50,9 +49,8 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Override
 	@Transactional
 	public Doctor updateDoctor(Doctor doctor) throws DoctorIdNotFoundException {
-		Optional<Doctor> optional = null;
-
-		optional = repository.findById(doctor.getUserId());
+		
+		Optional<Doctor> optional = repository.findById(doctor.getUserId());
 		if (optional.isPresent()) {
 			repository.save(doctor);
 		} else {
@@ -64,9 +62,8 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Override
 	@Transactional
 	public Doctor deleteDoctor(int doctorId) throws DoctorIdNotFoundException {
-		Optional<Doctor> optional = null;
-
-		optional = repository.findById(doctorId);
+		
+		Optional<Doctor> optional = repository.findById(doctorId);
 		if (optional.isPresent()) {
 			repository.deleteById(doctorId);
 		} else {
@@ -78,9 +75,8 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	public Doctor viewDoctor(int doctorId) throws DoctorIdNotFoundException {
-		Optional<Doctor> optional = null;
-
-		optional = repository.findById(doctorId);
+		
+		Optional<Doctor> optional = repository.findById(doctorId);
 		if (!optional.isPresent()) {
 			throw new DoctorIdNotFoundException("Doctor id not found to view doctor");
 		}
