@@ -42,7 +42,6 @@ public class UserServiceImpl implements IUserService {
 	public User updateUser(User user) throws UserIdNotFoundException {
 		
 		Optional<User> optional = repository.findById(user.getUserId());
-		System.out.println(optional);
 		if (optional.isPresent()) {
 			repository.save(user);
 		} else {
