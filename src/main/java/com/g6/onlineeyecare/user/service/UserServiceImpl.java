@@ -45,6 +45,7 @@ public class UserServiceImpl implements IUserService {
 		Optional<User> optional = null;
 
 		optional = repository.findById(user.getUserId());
+		System.out.println(optional);
 		if (optional.isPresent()) {
 			repository.save(user);
 		} else {

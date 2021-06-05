@@ -40,14 +40,19 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	@Override
 	@Transactional
 	public Appointment bookAppointment(Appointment appointment)
-			throws DoctorIdNotFoundException, PatientIdFoundNotException {
+			throws DoctorIdNotFoundException, PatientIdFoundNotException
+	{
+		System.out.println("inside appointment add");
+		System.out.println(appointment);
+		System.out.println(appointment.getDoctor());
 		if (doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
 			if (patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
+				System.out.println("inside save");
 				appointmentRepository.save(appointment);
 			} else {
 				throw new PatientIdFoundNotException("Patient Id not found");
 			}
-		} else {
+	} else {
 			throw new DoctorIdNotFoundException("Doctor Id not found");
 		}
 

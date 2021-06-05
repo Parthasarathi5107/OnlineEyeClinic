@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.g6.onlineeyecare.admin.dto.Admin;
 import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
 import com.g6.onlineeyecare.user.dto.User;
+import com.g6.onlineeyecare.user.dto.UserDTO;
 import com.g6.onlineeyecare.user.service.IUserService;
 
 import io.swagger.annotations.Api;
@@ -29,15 +31,20 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Autowired
 	IUserService userService;
 
 	@ApiOperation(value = "add a new User", response = User.class)
 	@PostMapping("/add")
-	public ResponseEntity<Admin> addUser(@RequestBody @Valid Admin user) {
-		Admin u = (Admin) this.userService.addUser(user);
-		return new ResponseEntity<>(u, HttpStatus.OK);
+	public ResponseEntity<UserDTO> addUser(@RequestBody @Valid UserDTO user) {
+		User u = modelMapper.map(user, User.class);
+		User req = userService.addUser(u);
+		UserDTO response = modelMapper.map(req, UserDTO.class); 
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "view User by Id", response = User.class)
@@ -49,8 +56,8 @@ public class UserController {
 //============================================================================================================================
 	@ApiOperation(value = "update profile", response = User.class)
 	@PutMapping("/update")
-	public ResponseEntity<User> updateUser(@RequestBody  User user) throws UserIdNotFoundException {
-		User u =  this.userService.updateUser(user);
+	public ResponseEntity<Admin> updateUser(@RequestBody  Admin user) throws UserIdNotFoundException {
+		Admin u =  (Admin) this.userService.updateUser(user);
 		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 
