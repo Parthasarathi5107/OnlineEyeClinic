@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,7 +18,7 @@ import com.g6.onlineeyecare.patient.dto.Patient;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Spectacles dto")
+@ApiModel(value = "Spectacles Entity")
 @Entity
 @Table(name = "spectacles_info")
 public class Spectacles {
@@ -30,7 +31,7 @@ public class Spectacles {
 	@NotEmpty(message = "cannot be left empty")
 	@Size(min = 3, max = 20)
 	private String spectaclesModel;
-	@ApiModelProperty(name = "Spectacles discription", required = true)
+	@ApiModelProperty(name = "Spectacles description", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String spectaclesDescription;
@@ -41,6 +42,7 @@ public class Spectacles {
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
+	@Valid
 	private Patient patient;
 
 	public Patient getPatient() {

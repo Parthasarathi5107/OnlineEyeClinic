@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(value = "Doctor dto")
+@ApiModel(value = "Doctor Entity")
 @Entity
 @DiscriminatorValue(value = "3")
 public class Doctor extends User {

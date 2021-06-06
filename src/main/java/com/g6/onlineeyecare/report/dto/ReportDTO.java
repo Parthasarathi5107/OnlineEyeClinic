@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -50,10 +51,12 @@ public class ReportDTO {
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "test_Id", referencedColumnName = "testId")
+	@Valid
 	private Test typeOfTest;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
+	@Valid
 	private Patient patient;
 	public int getReportId() {
 		return reportId;

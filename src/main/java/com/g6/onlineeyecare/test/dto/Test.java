@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,9 +18,9 @@ import com.g6.onlineeyecare.patient.dto.Patient;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Test dto")
+@ApiModel(value = "Test Entity")
 @Entity
-@Table(name = "test_info")
+@Table(name = "eye_test")
 public class Test {
 
 	@Id
@@ -46,6 +47,7 @@ public class Test {
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
+	@Valid
 	private Patient patient;
 
 	public Patient getPatient() {

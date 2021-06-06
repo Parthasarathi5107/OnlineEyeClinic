@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,7 +20,7 @@ import com.g6.onlineeyecare.patient.dto.Patient;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Appointment dto")
+@ApiModel(value = "Appointment Entity")
 @Entity
 @Table(name = "Appointment_info")
 public class Appointment {
@@ -39,10 +40,12 @@ public class Appointment {
 
 	@OneToOne
 	@JoinColumn(name = "doctor_Id", referencedColumnName = "userId")
+	@Valid
 	private Doctor doctor;
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
+	@Valid
 	private Patient patient;
 
 	public Appointment() {

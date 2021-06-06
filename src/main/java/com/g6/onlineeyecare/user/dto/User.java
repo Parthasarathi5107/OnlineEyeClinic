@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "User dto")
+@ApiModel(value = "User Entity")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_Type", discriminatorType = DiscriminatorType.INTEGER)

@@ -15,7 +15,7 @@ import com.g6.onlineeyecare.user.dto.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Patient dto")
+@ApiModel(value = "Patient Entity")
 @Entity
 @DiscriminatorValue(value = "4")
 public class Patient extends User {

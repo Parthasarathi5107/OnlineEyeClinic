@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,8 +23,9 @@ import com.g6.onlineeyecare.test.dto.Test;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Report dto")
+@ApiModel(value = "Report Entity")
 @Entity
+@Table(name = "Report_info")
 public class Report {
 
 	@Id
@@ -33,7 +36,7 @@ public class Report {
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfReport;
-	@ApiModelProperty(name = "Report discription", required = true)
+	@ApiModelProperty(name = "Report description", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String descriptionOfReport;
@@ -52,10 +55,12 @@ public class Report {
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "test_Id", referencedColumnName = "testId")
+	@Valid
 	private Test typeOfTest;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
+	@Valid
 	private Patient patient;
 
 	public int getReportId() {
