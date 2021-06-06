@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.Valid;
+
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,7 +17,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.g6.onlineeyecare.patient.dto.Patient;
 import com.g6.onlineeyecare.test.dto.Test;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
@@ -28,35 +27,33 @@ public class ReportDTO {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int reportId;
 
-	@ApiModelProperty(name = "Report date", required = true)
+	
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfReport;
-	@ApiModelProperty(name = "Report discription", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String descriptionOfReport;
-	@ApiModelProperty(name = "visual acuity", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String visualAcuity;
-	@ApiModelProperty(name = "visual acuity near", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String visualAcuityNear;
-	@ApiModelProperty(name = "visual acuity distance", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String visualAcuityDistance;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "test_Id", referencedColumnName = "testId")
-	@Valid
 	private Test typeOfTest;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	@Valid
 	private Patient patient;
 	public int getReportId() {
 		return reportId;

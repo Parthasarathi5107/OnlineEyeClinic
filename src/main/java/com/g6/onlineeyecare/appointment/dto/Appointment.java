@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,12 +39,10 @@ public class Appointment {
 
 	@OneToOne
 	@JoinColumn(name = "doctor_Id", referencedColumnName = "userId")
-	@Valid
 	private Doctor doctor;
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	@Valid
 	private Patient patient;
 
 	public Appointment() {

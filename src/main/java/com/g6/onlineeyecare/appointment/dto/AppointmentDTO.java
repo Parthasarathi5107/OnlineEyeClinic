@@ -9,14 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.Valid;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.patient.dto.Patient;
 
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Data;
 
 @Data
@@ -26,23 +26,21 @@ public class AppointmentDTO {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentId;
 
-	@ApiModelProperty(name = "Appointment date", required = true)
+	
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate appointmentDate;
 
-	@ApiModelProperty(name = "Appointment time", required = true)
+	
 	@Column
 	private LocalTime appointmentTime;
 
 	@OneToOne
 	@JoinColumn(name = "doctor_Id", referencedColumnName = "userId")
-	@Valid
 	private Doctor doctor;
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	@Valid
 	private Patient patient;
 	
 	public int getAppointmentId() {

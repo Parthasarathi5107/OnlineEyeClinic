@@ -10,31 +10,30 @@ import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.UserDTO;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 
 @Data
 public class PatientDTO extends UserDTO{
 
-	@ApiModelProperty(name = "Patient age", required = true)
+	
 	@Column
 	@Min(value = 1)
 	private int patientAge;
 	
-	@ApiModelProperty(name = "Patient mobile number", required = true)
+	
 	@Column
 	private long patientMobile;
 	
-	@ApiModelProperty(name = "Patient Email", required = true)
+	
 	@Column
 	@Email(message = "Email should be valid")
 	@NotEmpty(message = "Email cannot be empty")
 	private String patientEmail;
-	@ApiModelProperty(name = "Patient DOB", required = true)
+	
 	@Column
 	private LocalDate patientDOB;
-	@ApiModelProperty(name = "Patient address")
+	
 	@Column
 	@Size(max = 512, message = "Patient address cannot be more than 512 characters")
 	private String address;

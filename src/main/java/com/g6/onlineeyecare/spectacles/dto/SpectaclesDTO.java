@@ -6,14 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.patient.dto.Patient;
 
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Data;
 
 @Data
@@ -22,23 +21,22 @@ public class SpectaclesDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int spectaclesId;
-	@ApiModelProperty(name = "Spectacles Model", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	@Size(min = 3, max = 20)
 	private String spectaclesModel;
-	@ApiModelProperty(name = "Spectacles discription", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String spectaclesDescription;
-	@ApiModelProperty(name = "Spectacles cost", required = true)
+	
 	@Column
 	@Min(value = 1000, message = "cost cannot be less than 1000")
 	private double spectaclesCost;
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	@Valid
 	private Patient patient;
 	public int getSpectaclesId() {
 		return spectaclesId;

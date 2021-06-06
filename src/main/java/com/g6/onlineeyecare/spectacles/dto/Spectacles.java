@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -42,7 +41,6 @@ public class Spectacles {
 
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	@Valid
 	private Patient patient;
 
 	public Patient getPatient() {

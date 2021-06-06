@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
@@ -16,17 +15,17 @@ public class UserDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
-	@ApiModelProperty(name = "user password", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	@Size(min = 8, max = 25)
 	private String password;
-	@ApiModelProperty(name = "user name", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	@Size(min = 3, max = 20)
 	private String userName;
-	@ApiModelProperty(name = "user role", required = true)
+	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String role;
