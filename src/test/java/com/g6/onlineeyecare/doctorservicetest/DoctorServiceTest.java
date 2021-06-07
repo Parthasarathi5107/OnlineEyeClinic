@@ -87,7 +87,7 @@ public class DoctorServiceTest {
 		when(repository.findById(2)).thenReturn(s);
 		Doctor d = doctorService.viewDoctor(2);
 		verify(repository).findById(2);
-		assertEquals(d, d1);
+		assertEquals(d1, d);
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class DoctorServiceTest {
 		when(repository.save(d1)).thenReturn(d2);
 		Doctor d = doctorService.addDoctor(d1);
 		verify(repository).save(d1);
-		assertEquals(d, d1);
+		assertEquals(d2, d);
 	}
 
 	@Test

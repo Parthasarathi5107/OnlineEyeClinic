@@ -92,7 +92,7 @@ public class AppointmentServiceTest {
 		when(repository.findById(1)).thenReturn(Optional.of(appointment));
 		Appointment a = appointmentService.viewAppointment(1);
 		verify(repository).findById(appointment.getAppointmentId());
-		assertEquals(a, appointment);
+		assertEquals(appointment, a);
 	}
 
 	@Test

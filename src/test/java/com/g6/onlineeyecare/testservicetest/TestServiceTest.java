@@ -85,7 +85,7 @@ public class TestServiceTest {
 
 		when(repository.findById(1)).thenReturn(s);
 		Test test = testService.viewTest(1);
-		assertEquals(test, t);
+		assertEquals(t, test);
 		verify(repository).findById(1);
 	}
 

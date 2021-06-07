@@ -72,7 +72,7 @@ public class PatientServiceTest {
 
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
 		Patient p2 = patientService.viewPatient(2);
-		assertEquals(p2, p1);
+		assertEquals(p1, p2);
 		verify(repository).findById(2);
 	}
 
@@ -139,7 +139,7 @@ public class PatientServiceTest {
 		when(repository.save(p1)).thenReturn(p2);
 		Patient p = patientService.addPatient(p1);
 		verify(repository).save(p1);
-		assertEquals(p, p1);
+		assertEquals(p2, p);
 	}
 	
 	@Test

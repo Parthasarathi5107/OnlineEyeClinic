@@ -90,7 +90,7 @@ public class SpectaclesServiceTest {
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles actualSpectacles = spectaclesService.viewSpectacles(1);
 		verify(repository).findById(1);
-		assertEquals(actualSpectacles, s);
+		assertEquals(s, actualSpectacles);
 
 	}
 	
@@ -156,7 +156,7 @@ public class SpectaclesServiceTest {
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles spec = spectaclesService.removeSpectacles(1);
 		verify(repository).deleteById(1);
-		assertEquals(s, spec);
+		assertEquals(spec , s);
 	}
 	
 	@Test
@@ -182,7 +182,7 @@ public class SpectaclesServiceTest {
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles spec = spectaclesService.updateSpectacles(s);
 		verify(repository).save(s);
-		assertEquals(s, spec);
+		assertEquals(spec , s);
 	}
 
 	@Test
