@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class UserDTO {
@@ -20,7 +21,7 @@ public class UserDTO {
 	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min = 3, max = 20)
+	@Pattern(regexp = "[A-Z][a-z]+[ ]?[a-zA-Z]+")
 	private String userName;
 	
 	@Column

@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.patient.dto.Patient;
@@ -28,7 +29,7 @@ public class Test {
 	@ApiModelProperty(name = "test name", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min = 3, max = 20)
+	@Pattern(regexp = "[A-Z][a-z]+[ ]?[a-zA-Z]+")
 	private String testName;
 	@ApiModelProperty(name = "test type", required = true)
 	@Column

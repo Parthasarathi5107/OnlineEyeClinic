@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.patient.dto.Patient;
@@ -20,7 +21,7 @@ public class TestDTO {
 	
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min = 3, max = 20)
+	@Pattern(regexp = "[A-Z][a-z]+[ ]?[a-zA-Z]+")
 	private String testName;
 	
 	@Column

@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
@@ -36,7 +37,7 @@ public class User {
 	@ApiModelProperty(name = "user name", required = true)
 	@Column
 	@NotEmpty(message = "cannot be left empty")
-	@Size(min = 3, max = 20)
+	@Pattern(regexp = "[A-Z][a-z]+[ ]?[a-zA-Z]+")
 	private String userName;
 	@ApiModelProperty(name = "user role", required = true)
 	@Column
