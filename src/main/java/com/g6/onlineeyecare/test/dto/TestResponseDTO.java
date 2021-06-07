@@ -1,8 +1,5 @@
 package com.g6.onlineeyecare.test.dto;
 
-import lombok.Data;
-
-@Data
 public class TestResponseDTO {
 
 	private int testId;

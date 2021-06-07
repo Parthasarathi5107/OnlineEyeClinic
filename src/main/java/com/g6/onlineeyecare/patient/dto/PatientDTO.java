@@ -10,10 +10,7 @@ import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.UserDTO;
 
-import lombok.Data;
 
-
-@Data
 public class PatientDTO extends UserDTO{
 
 	

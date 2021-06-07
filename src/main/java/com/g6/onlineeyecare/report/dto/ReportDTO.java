@@ -17,9 +17,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.g6.onlineeyecare.patient.dto.Patient;
 import com.g6.onlineeyecare.test.dto.Test;
 
-import lombok.Data;
-
-@Data
 public class ReportDTO {
 
 	

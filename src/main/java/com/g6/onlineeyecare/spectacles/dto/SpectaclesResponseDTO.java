@@ -1,8 +1,5 @@
 package com.g6.onlineeyecare.spectacles.dto;
 
-import lombok.Data;
-
-@Data
 public class SpectaclesResponseDTO {
 
 	private int spectaclesId;

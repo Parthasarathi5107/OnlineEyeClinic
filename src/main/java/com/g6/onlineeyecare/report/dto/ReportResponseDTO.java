@@ -2,9 +2,7 @@ package com.g6.onlineeyecare.report.dto;
 
 import java.time.LocalDate;
 
-import lombok.Data;
 
-@Data
 public class ReportResponseDTO {
 
 	private int reportId;

@@ -2,9 +2,7 @@ package com.g6.onlineeyecare.patient.dto;
 
 import java.time.LocalDate;
 
-import lombok.Data;
 
-@Data
 public class PatientResponseDTO {
 
 	private int userId;

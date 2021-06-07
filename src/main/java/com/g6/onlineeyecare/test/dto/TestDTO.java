@@ -12,9 +12,6 @@ import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.patient.dto.Patient;
 
-import lombok.Data;
-
-@Data
 public class TestDTO {
 
 	@Id
