@@ -3,9 +3,9 @@ package com.g6.onlineeyecare.appointment.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import lombok.Data;
 
-@Data
+
+
 public class AppointmentResponseDTO {
 
 	private int appointmentId;

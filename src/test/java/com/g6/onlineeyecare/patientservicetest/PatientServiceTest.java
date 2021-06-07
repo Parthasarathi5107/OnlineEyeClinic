@@ -67,7 +67,6 @@ public class PatientServiceTest {
 	@DisplayName("test -> view patient by Id")
 	public void testViewPatientById() throws PatientIdFoundNotException {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		p1.setRole("patient");
 		p1.setUserId(2);
 
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
@@ -80,7 +79,6 @@ public class PatientServiceTest {
 	@DisplayName("test -> view patient by Id with invalid entries")
 	public void testViewPatientByIdInvalid() throws PatientIdFoundNotException {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		p1.setRole("patient");
 		p1.setUserId(2);
 
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
@@ -134,12 +132,11 @@ public class PatientServiceTest {
 	public void addPatient() {
 		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
 		
-		Patient p2 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
 		
-		when(repository.save(p1)).thenReturn(p2);
+		when(repository.save(p1)).thenReturn(p1);
 		Patient p = patientService.addPatient(p1);
 		verify(repository).save(p1);
-		assertEquals(p2, p);
+		assertEquals(p1, p);
 	}
 	
 	@Test

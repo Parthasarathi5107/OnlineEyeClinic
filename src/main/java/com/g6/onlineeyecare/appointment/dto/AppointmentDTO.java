@@ -17,9 +17,8 @@ import com.g6.onlineeyecare.doctor.dto.Doctor;
 import com.g6.onlineeyecare.patient.dto.Patient;
 
 
-import lombok.Data;
 
-@Data
+
 public class AppointmentDTO {
 
 	@Id

@@ -116,14 +116,11 @@ public class SpectaclesServiceTest {
 		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12),"Bangalore");
 		p.setUserId(1);
 
-		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
-		p1.setUserId(1);
-		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p1));
+		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p));
 
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
-		Spectacles expectedSpectacles = new Spectacles(1, "A-254", "rectangle glasses", 3000, p);
 
-		when(repository.save(s)).thenReturn(expectedSpectacles);
+		when(repository.save(s)).thenReturn(s);
 		Spectacles actualSpectacles = spectaclesService.addSpectacles(s);
 		verify(repository).save(s);
 		assertEquals(s, actualSpectacles);
@@ -137,9 +134,9 @@ public class SpectaclesServiceTest {
 
 		Patient p1 = mock(Patient.class);
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
-		Spectacles expectedSpectacles = new Spectacles(1, "A-254", "rectangle glasses", 3000, p1);
+		
 
-		when(repository.save(s)).thenReturn(expectedSpectacles);
+		when(repository.save(s)).thenReturn(s);
 		Executable executable = () -> spectaclesService.addSpectacles(s);
 		assertThrows(PatientIdFoundNotException.class, executable);
 

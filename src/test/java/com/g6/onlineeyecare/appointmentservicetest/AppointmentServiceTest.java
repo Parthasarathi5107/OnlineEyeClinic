@@ -73,8 +73,11 @@ public class AppointmentServiceTest {
 	public void testViewAllAppointments() {
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(1);
+		Appointment appointment2 = new Appointment();
+		appointment.setAppointmentId(2);
 		List<Appointment> list = new ArrayList<Appointment>();
 		list.add(appointment);
+		list.add(appointment2);
 
 		when(repository.findAll()).thenReturn(list);
 		List<Appointment> actualList = appointmentService.viewAllAppointments();
@@ -114,26 +117,21 @@ public class AppointmentServiceTest {
 		Patient p = new Patient();
 		p.setUserId(1);
 
-		Patient p1 = new Patient();
-		p1.setUserId(1);
-		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p1));
+		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p));
 
 		Doctor d = new Doctor();
 		d.setUserId(5);
 
-		Doctor d1 = new Doctor();
-		d1.setUserId(5);
 
-		when(doctorRepository.findById(d.getUserId())).thenReturn(Optional.of(d1));
+		when(doctorRepository.findById(d.getUserId())).thenReturn(Optional.of(d));
 
-		Appointment appointment = new Appointment(10, LocalDate.now(), LocalTime.now(), d1, p1);
-		Appointment ExcepectAppointment = new Appointment(10, LocalDate.now(), LocalTime.now(), d1, p1);
+		Appointment appointment = new Appointment(10, LocalDate.now(), LocalTime.now(), d, p);
 
-		when(repository.save(appointment)).thenReturn(ExcepectAppointment);
+		when(repository.save(appointment)).thenReturn(appointment);
 
 		Appointment actualAppointment = appointmentService.bookAppointment(appointment);
 
-		assertEquals(ExcepectAppointment, actualAppointment);
+		assertEquals(appointment, actualAppointment);
 
 		verify(repository).save(appointment);
 
@@ -145,9 +143,8 @@ public class AppointmentServiceTest {
 		Patient p = mock(Patient.class);
 		Doctor d = mock(Doctor.class);
 		Appointment appointment = new Appointment(10, LocalDate.now(), LocalTime.now(), d, p);
-		Appointment ExcepectAppointment = new Appointment(10, LocalDate.now(), LocalTime.now(), d, p);
 
-		when(repository.save(appointment)).thenReturn(ExcepectAppointment);
+		when(repository.save(appointment)).thenReturn(appointment);
 		Executable executable = () -> appointmentService.bookAppointment(appointment);
 		assertThrows(DoctorIdNotFoundException.class, executable);
 	}

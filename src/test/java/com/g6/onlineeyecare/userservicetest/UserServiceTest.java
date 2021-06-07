@@ -50,11 +50,10 @@ public class UserServiceTest {
 	public void addUser() {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
-		User expectedUser = new User(1, "abc", "Charlie", "doctor");
-		when(repository.save(u)).thenReturn(expectedUser);
+		when(repository.save(u)).thenReturn(u);
 		User actualUser = userService.addUser(u);
 		verify(repository).save(u);
-		assertEquals(expectedUser, actualUser);
+		assertEquals(u, actualUser);
 
 	}
 

@@ -80,11 +80,9 @@ public class DoctorServiceTest {
 	@DisplayName("test -> view doctor by Id")
 	public void testViewDoctorById() throws DoctorIdNotFoundException {
 		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
-		d1.setRole("doctor");
 		d1.setUserId(2);
-		Optional<Doctor> s = Optional.of(d1);
 
-		when(repository.findById(2)).thenReturn(s);
+		when(repository.findById(2)).thenReturn(Optional.of(d1));
 		Doctor d = doctorService.viewDoctor(2);
 		verify(repository).findById(2);
 		assertEquals(d1, d);
@@ -94,10 +92,8 @@ public class DoctorServiceTest {
 	@DisplayName("test -> view doctor by Id using invalid entries")
 	public void ViewDoctorByIdNotExisting() throws DoctorIdNotFoundException {
 		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
-		d1.setRole("doctor");
 		d1.setUserId(2);
-		Optional<Doctor> s = Optional.of(d1);
-		when(repository.findById(2)).thenReturn(s);
+		when(repository.findById(2)).thenReturn(Optional.of(d1));
 		Executable executable = () -> doctorService.viewDoctor(3);
 		assertThrows(DoctorIdNotFoundException.class, executable);
 
@@ -108,13 +104,11 @@ public class DoctorServiceTest {
 	public void addDoctor() {
 		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
-		Doctor d2 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
-		d2.setUserId(2);
 
-		when(repository.save(d1)).thenReturn(d2);
+		when(repository.save(d1)).thenReturn(d1);
 		Doctor d = doctorService.addDoctor(d1);
 		verify(repository).save(d1);
-		assertEquals(d2, d);
+		assertEquals(d1, d);
 	}
 
 	@Test

@@ -84,13 +84,12 @@ public class ReportServiceTest {
 
 		Report r = new Report( LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
 				"visualacuitydistance", t, p);
-		Report expectedR = new Report( LocalDate.of(2002, 02, 12), "report description", "visualacuity",
-				"visualacuitynear", "visualacuitydistance", t, p);
+		
 
-		when(repository.save(r)).thenReturn(expectedR);
+		when(repository.save(r)).thenReturn(r);
 		Report actualR = reportService.addReport(r);
 		verify(repository).save(r);
-		assertEquals(expectedR, actualR);
+		assertEquals(r, actualR);
 	}
 
 	@org.junit.Test
@@ -102,10 +101,9 @@ public class ReportServiceTest {
 
 		Report r = new Report( LocalDate.of(2002, 02, 12), "report description", "visualacuity", "visualacuitynear",
 				"visualacuitydistance", t, p);
-		Report expectedR = new Report( LocalDate.of(2002, 02, 12), "report description", "visualacuity",
-				"visualacuitynear", "visualacuitydistance", t, p);
+		
 
-		when(repository.save(r)).thenReturn(expectedR);
+		when(repository.save(r)).thenReturn(r);
 		Executable executable = () -> reportService.addReport(r);
 		assertThrows(PatientIdFoundNotException.class, executable);
 	}

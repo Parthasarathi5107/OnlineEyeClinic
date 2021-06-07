@@ -81,9 +81,8 @@ public class TestServiceTest {
 
 		Test t = new Test();
 		t.setTestId(1);
-		Optional<Test> s = Optional.of(t);
 
-		when(repository.findById(1)).thenReturn(s);
+		when(repository.findById(1)).thenReturn(Optional.of(t));
 		Test test = testService.viewTest(1);
 		assertEquals(t, test);
 		verify(repository).findById(1);
@@ -95,9 +94,8 @@ public class TestServiceTest {
 
 		Test t = new Test();
 		t.setTestId(1);
-		Optional<Test> s = Optional.of(t);
 
-		when(repository.findById(1)).thenReturn(s);
+		when(repository.findById(1)).thenReturn(Optional.of(t));
 		Executable executable = () -> testService.viewTest(2);
 		assertThrows(TestIdNotFoundException.class, executable);
 	}
@@ -109,19 +107,15 @@ public class TestServiceTest {
 		Patient p = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p.setUserId(1);
 
-		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
-		p1.setUserId(1);
-		Optional<Patient> expectedP = Optional.of(p1);
-		when(patientRepository.findById(p.getUserId())).thenReturn(expectedP);
+		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p));
 
-		Test test = new Test(2, "abc", "vision", "describe", 1800, expectedP.get());
-		Test testExpected = new Test(2, "abc", "vision", "describe", 1800, expectedP.get());
+		Test test = new Test(2, "abc", "vision", "describe", 1800, p);
 
-		when(repository.save(test)).thenReturn(testExpected);
+		when(repository.save(test)).thenReturn(test);
 
 		Test actucalTest = testService.addTest(test);
 		assertNotNull(actucalTest);
-		assertEquals(testExpected, actucalTest);
+		assertEquals(test, actucalTest);
 		verify(repository).save(test);
 	}
 
@@ -131,9 +125,8 @@ public class TestServiceTest {
 
 		Patient p = mock(Patient.class);
 		Test test = new Test(2, "abc", "vision", "describe", 1800, p);
-		Test testExpected = new Test(2, "abc", "vision", "describe", 1800, p);
 
-		when(repository.save(test)).thenReturn(testExpected);
+		when(repository.save(test)).thenReturn(test);
 		Executable executable = () -> testService.addTest(test);
 		assertThrows(PatientIdFoundNotException.class, executable);
 	}
