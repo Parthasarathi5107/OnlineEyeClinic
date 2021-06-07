@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class PatientResponseDTO {
 
 	private int userId;
+	private String patientName; 
 	private int patientAge;
 	private long patientMobile;
 	private String patientEmail;
@@ -16,6 +17,12 @@ public class PatientResponseDTO {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getPatientName() {
+		return patientName;
+	}
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
 	}
 	public int getPatientAge() {
 		return patientAge;
@@ -49,9 +56,11 @@ public class PatientResponseDTO {
 	}
 	@Override
 	public String toString() {
-		return "PatientResponseDTO [userId=" + userId + ", patientAge=" + patientAge + ", patientMobile="
-				+ patientMobile + ", patientEmail=" + patientEmail + ", patientDOB=" + patientDOB + ", address="
-				+ address + "]";
+		return "PatientResponseDTO [userId=" + userId + ", patientName=" + patientName + ", patientAge=" + patientAge
+				+ ", patientMobile=" + patientMobile + ", patientEmail=" + patientEmail + ", patientDOB=" + patientDOB
+				+ ", address=" + address + "]";
 	}
+	
+	
 	
 }
