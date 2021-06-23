@@ -18,7 +18,7 @@ import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.AdminIdNotFoundException;
 import com.g6.onlineeyecare.user.dao.IUserRepository;
 import com.g6.onlineeyecare.user.dto.User;
 import com.g6.onlineeyecare.user.service.UserServiceImpl;
@@ -59,7 +59,7 @@ public class UserServiceTest {
 
 	@Test
 	@DisplayName("test -> view user by Id")
-	public void viewUserById() throws UserIdNotFoundException {
+	public void viewUserById() throws AdminIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
@@ -71,13 +71,13 @@ public class UserServiceTest {
 	
 	@Test
 	@DisplayName("test -> view user by Id with invalid entries")
-	public void viewUserByIdInvalid() throws UserIdNotFoundException {
+	public void viewUserByIdInvalid() throws AdminIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
 		when(repository.findById(1)).thenReturn(Optional.of(u));
 		Executable executable = () -> userService.viewUser(2);
-		assertThrows(UserIdNotFoundException.class, executable);
+		assertThrows(AdminIdNotFoundException.class, executable);
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class UserServiceTest {
 
 	@Test
 	@DisplayName("test -> delete an user")
-	public void deleteUser() throws UserIdNotFoundException {
+	public void deleteUser() throws AdminIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
@@ -109,18 +109,18 @@ public class UserServiceTest {
 	
 	@Test
 	@DisplayName("test -> delete an user with invalid entries")
-	public void deleteUserInvalid() throws UserIdNotFoundException {
+	public void deleteUserInvalid() throws AdminIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
 		when(repository.findById(1)).thenReturn(Optional.of(u));
 		Executable executable = () -> userService.removeUser(2);
-		assertThrows(UserIdNotFoundException.class, executable);
+		assertThrows(AdminIdNotFoundException.class, executable);
 	}
 	
 	@Test
 	@DisplayName("test -> update an user with valid entries")
-	public void updateUser() throws UserIdNotFoundException {
+	public void updateUser() throws AdminIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
@@ -132,12 +132,12 @@ public class UserServiceTest {
 	
 	@Test
 	@DisplayName("test -> update an user with invalid entries")
-	public void updateUserInvalid() throws UserIdNotFoundException {
+	public void updateUserInvalid() throws AdminIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
 		when(repository.findById(10)).thenReturn(Optional.of(u));
 		Executable executable = () -> userService.updateUser(u);
-		assertThrows(UserIdNotFoundException.class, executable);
+		assertThrows(AdminIdNotFoundException.class, executable);
 	}
 }

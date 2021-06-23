@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g6.onlineeyecare.admin.dto.Admin;
 import com.g6.onlineeyecare.admin.dto.AdminDTO;
-import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.AdminIdNotFoundException;
 import com.g6.onlineeyecare.user.dto.User;
 import com.g6.onlineeyecare.user.dto.UserResponseDTO;
 import com.g6.onlineeyecare.user.service.IUserService;
@@ -51,7 +51,7 @@ public class UserController {
 
 	@ApiOperation(value = "view User by Id", response = User.class)
 	@GetMapping("/view/{userId}")
-	public ResponseEntity<UserResponseDTO> viewUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
+	public ResponseEntity<UserResponseDTO> viewUser(@PathVariable("userId") int userId) throws AdminIdNotFoundException {
 		
 		UserResponseDTO response = modelMapper.map(this.userService.viewUser(userId), UserResponseDTO.class);
 		if (response != null) {
@@ -63,7 +63,7 @@ public class UserController {
 
 	@ApiOperation(value = "update profile", response = User.class)
 	@PutMapping("/update")
-	public ResponseEntity<UserResponseDTO> updateUser(@RequestBody  AdminDTO user) throws UserIdNotFoundException {
+	public ResponseEntity<UserResponseDTO> updateUser(@RequestBody  AdminDTO user) throws AdminIdNotFoundException {
 		
 		Admin actual = modelMapper.map(user, Admin.class);
 		UserResponseDTO response = modelMapper.map(this.userService.updateUser(actual), UserResponseDTO.class);
@@ -76,7 +76,7 @@ public class UserController {
 
 	@ApiOperation(value = "delete user", response = User.class)
 	@DeleteMapping("/delete/{userId}")
-	public ResponseEntity<UserResponseDTO> removeUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
+	public ResponseEntity<UserResponseDTO> removeUser(@PathVariable("userId") int userId) throws AdminIdNotFoundException {
 		
 		UserResponseDTO response = modelMapper.map(this.userService.removeUser(userId), UserResponseDTO.class);
 		if (response != null) {

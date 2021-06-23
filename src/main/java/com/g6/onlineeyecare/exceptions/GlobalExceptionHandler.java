@@ -98,7 +98,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	
 	@ExceptionHandler
-	public ResponseEntity<MyExceptionResponse> invalidUserIdException(UserIdNotFoundException ex)
+	public ResponseEntity<MyExceptionResponse> invalidUserIdException(AdminIdNotFoundException ex)
 	{
 		String message=ex.getMessage();
 		MyExceptionResponse response=new MyExceptionResponse();
