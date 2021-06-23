@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -27,6 +28,10 @@ public class SpectaclesDTO {
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String spectaclesDescription;
+	
+	@Min(value = 1,message = "rating cannot be less than 1")
+	@Max(value = 5,message = " rating cannot be more than 5")
+	private int spectaclesRating;
 	
 	@Column
 	@Min(value = 1000, message = "cost cannot be less than 1000")
@@ -65,12 +70,20 @@ public class SpectaclesDTO {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+	
+	public int getSpectaclesRating() {
+		return spectaclesRating;
+	}
+	public void setSpectaclesRating(int spectaclesRating) {
+		this.spectaclesRating = spectaclesRating;
+	}
 	@Override
 	public String toString() {
 		return "SpectaclesDTO [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
-				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesCost=" + spectaclesCost
-				+ ", patient=" + patient + "]";
+				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesRating=" + spectaclesRating
+				+ ", spectaclesCost=" + spectaclesCost + ", patient=" + patient + "]";
 	}
+	
 	
 	
 }

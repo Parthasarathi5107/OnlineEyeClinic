@@ -1,5 +1,6 @@
 package com.g6.onlineeyecare.spectacles.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,4 +89,43 @@ public class SpectaclesServiceImpl implements ISpectaclesService {
 		return spectacleList;
 	}
 
+	@Override
+	public List<Spectacles> viewSpectaclesByRating(int rating) {
+		List<Spectacles> ratingList = new ArrayList<>();
+		try {
+			ratingList = repository.viewSpectaclesByRating(rating);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return ratingList;
+	}
+
+	@Override
+    public List<Spectacles> viewByModel(String spectaclesModel) {
+        List<Spectacles> modelList = new ArrayList<>();
+        try {
+            modelList = repository.viewByModel(spectaclesModel);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return modelList;
+
+    }
+
+	@Override
+	public List<Spectacles> viewByCostRange(double cost1, double cost2) {
+		
+		 List<Spectacles> modelList = new ArrayList<>();
+	        try {
+	            modelList = repository.viewByCostRange(cost1, cost2);
+	        } catch (Exception e) {
+	            log.error(e.getMessage(), e);
+	        }
+
+	        return modelList;
+
+	    }
+
+	
 }

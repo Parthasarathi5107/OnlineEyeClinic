@@ -18,5 +18,11 @@ public interface ISpectaclesService {
 	
 	List<Spectacles>viewSpectacles();
 	
+	List<Spectacles> viewSpectaclesByRating(int rating);
+	
+	List<Spectacles> viewByModel(String spectaclesModel);
+	
+	List<Spectacles> viewByCostRange(double cost1,double cost2);
+	
 	
 }

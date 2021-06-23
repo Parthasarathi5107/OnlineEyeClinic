@@ -132,4 +132,6 @@ public class DoctorController {
 		TestResponseDTO response = modelMapper.map(this.doctorService.createTest(actucal), TestResponseDTO.class);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+	
+	
 }

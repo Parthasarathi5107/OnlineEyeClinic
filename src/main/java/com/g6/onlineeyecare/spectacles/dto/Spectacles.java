@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -34,6 +35,10 @@ public class Spectacles {
 	@Column
 	@NotEmpty(message = "cannot be left empty")
 	private String spectaclesDescription;
+	@Min(value = 1,message = "rating cannot be less than 1")
+	@Max(value = 5,message = " rating cannot be more than 5")
+	private int spectaclesRating;
+	
 	@ApiModelProperty(name = "Spectacles cost", required = true)
 	@Column
 	@Min(value = 1000, message = "cost cannot be less than 1000")
@@ -83,17 +88,34 @@ public class Spectacles {
 		this.spectaclesCost = spectaclesCost;
 	}
 
+	
+	public int getSpectaclesRating() {
+		return spectaclesRating;
+	}
+
+	public void setSpectaclesRating(int spectaclesRating) {
+		this.spectaclesRating = spectaclesRating;
+	}
+
 	public Spectacles() {
 		super();
 		
 	}
 
-	public Spectacles(int spectaclesId, String spectaclesModel, String spectaclesDescription, double spectaclesCost,
-			Patient patient) {
+	
+
+
+
+	public Spectacles(int spectaclesId,
+			@NotEmpty(message = "cannot be left empty") @Size(min = 3, max = 20) String spectaclesModel,
+			@NotEmpty(message = "cannot be left empty") String spectaclesDescription,
+			@Min(value = 1, message = "rating cannot be less than 1") @Max(value = 5, message = " rating cannot be more than 5") int spectaclesRating,
+			@Min(value = 1000, message = "cost cannot be less than 1000") double spectaclesCost, Patient patient) {
 		super();
 		this.spectaclesId = spectaclesId;
 		this.spectaclesModel = spectaclesModel;
 		this.spectaclesDescription = spectaclesDescription;
+		this.spectaclesRating = spectaclesRating;
 		this.spectaclesCost = spectaclesCost;
 		this.patient = patient;
 	}
@@ -123,8 +145,9 @@ public class Spectacles {
 	@Override
 	public String toString() {
 		return "Spectacles [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
-				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesCost=" + spectaclesCost
-				+ ", patient=" + patient + "]";
+				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesRating=" + spectaclesRating
+				+ ", spectaclesCost=" + spectaclesCost + ", patient=" + patient + "]";
 	}
+
 
 }

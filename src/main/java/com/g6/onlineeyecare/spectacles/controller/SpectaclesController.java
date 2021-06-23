@@ -110,4 +110,53 @@ public class SpectaclesController {
 			return new ResponseEntity<>(spectaclesDtoList, HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@ApiOperation(value = "view all Spectacles", response = Spectacles.class)
+	@GetMapping("/rating/{rating}")
+	public ResponseEntity<List<SpectaclesResponseDTO>> viewSpectaclesByRating(@PathVariable("rating") int rating) {
+
+		List<Spectacles> spectaclesList = this.spectaclesService.viewSpectaclesByRating(rating);
+		List<SpectaclesResponseDTO> spectaclesDtoList = new ArrayList<>();
+		for (Spectacles s : spectaclesList) {
+			SpectaclesResponseDTO spectaclesDto = modelMapper.map(s, SpectaclesResponseDTO.class);
+			spectaclesDtoList.add(spectaclesDto);
+		}
+		if (!(spectaclesDtoList.isEmpty())) {
+			return new ResponseEntity<>(spectaclesDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(spectaclesDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@ApiOperation(value = "Get the required spectacle by model ", response = Spectacles.class)
+	@GetMapping("/viewByModel/{model}")
+	public ResponseEntity<List<SpectaclesResponseDTO>> viewByModel(@PathVariable("model") String model) {
+		List<Spectacles> spectacleList = this.spectaclesService.viewByModel(model);
+		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
+		for (Spectacles a : spectacleList) {
+			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(doctorDto);
+		}
+		if (!(spectacleDtoList.isEmpty())) {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@ApiOperation(value = "Get the required spectacle by model ", response = Spectacles.class)
+	@GetMapping("/viewByCost/{range1}/{range2}")
+	public ResponseEntity<List<SpectaclesResponseDTO>> viewByCostRange(@PathVariable("range1")double cost1,@PathVariable("range2")double cost2) {
+		List<Spectacles> spectacleList = this.spectaclesService.viewByCostRange(cost1, cost2);
+		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
+		for (Spectacles a : spectacleList) {
+			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(doctorDto);
+		}
+		if (!(spectacleDtoList.isEmpty())) {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

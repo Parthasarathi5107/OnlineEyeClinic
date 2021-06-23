@@ -65,7 +65,7 @@ public class SpectaclesServiceTest {
 		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
-	     Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+	     Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p);
 
 		List<Spectacles> list = new ArrayList<Spectacles>();
 		list.add(s);
@@ -85,7 +85,7 @@ public class SpectaclesServiceTest {
 		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p);
 
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles actualSpectacles = spectaclesService.viewSpectacles(1);
@@ -102,7 +102,7 @@ public class SpectaclesServiceTest {
 		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p);
 
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Executable executable = () -> spectaclesService.viewSpectacles(2);
@@ -118,7 +118,7 @@ public class SpectaclesServiceTest {
 
 		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p));
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p);
 
 		when(repository.save(s)).thenReturn(s);
 		Spectacles actualSpectacles = spectaclesService.addSpectacles(s);
@@ -133,7 +133,7 @@ public class SpectaclesServiceTest {
 		
 
 		Patient p1 = mock(Patient.class);
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p1);
 		
 
 		when(repository.save(s)).thenReturn(s);
@@ -149,7 +149,7 @@ public class SpectaclesServiceTest {
 		Patient p1 = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p1);
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles spec = spectaclesService.removeSpectacles(1);
 		verify(repository).deleteById(1);
@@ -162,7 +162,7 @@ public class SpectaclesServiceTest {
 
 		Patient p1 = mock(Patient.class);
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p1);
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Executable executable = () -> spectaclesService.removeSpectacles(2);
 		assertThrows(SpectaclesIdNotFoundException.class, executable);
@@ -175,7 +175,7 @@ public class SpectaclesServiceTest {
 		Patient p1 = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p1);
 		when(repository.findById(1)).thenReturn(Optional.of(s));
 		Spectacles spec = spectaclesService.updateSpectacles(s);
 		verify(repository).save(s);
@@ -189,7 +189,7 @@ public class SpectaclesServiceTest {
 		Patient p1 = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 
-		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
+		Spectacles s=new Spectacles(1,"A-254","rectangle glasses",4, 3000,p1);
 		when(repository.findById(10)).thenReturn(Optional.of(s));
 		Executable executable = () -> spectaclesService.updateSpectacles(s);
 		assertThrows(SpectaclesIdNotFoundException.class, executable);
