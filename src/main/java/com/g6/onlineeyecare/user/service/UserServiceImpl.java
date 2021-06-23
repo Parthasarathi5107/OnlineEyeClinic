@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.g6.onlineeyecare.exceptions.InvalidCredentialException;
-import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.AdminIdNotFoundException;
 
 import com.g6.onlineeyecare.user.dao.IUserRepository;
 import com.g6.onlineeyecare.user.dto.User;
@@ -28,11 +28,11 @@ public class UserServiceImpl implements IUserService {
 
 
 	@Override
-	public User viewUser(int userId) throws UserIdNotFoundException {
+	public User viewUser(int userId) throws AdminIdNotFoundException {
 		
 		Optional<User> optional = repository.findById(userId);
 		if (!optional.isPresent()) {
-			throw new UserIdNotFoundException("User Id not found to view user");
+			throw new AdminIdNotFoundException("User Id not found to view user");
 		}
 		return optional.get();
 	}

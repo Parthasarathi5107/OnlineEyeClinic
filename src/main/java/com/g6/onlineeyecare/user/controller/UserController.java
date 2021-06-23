@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.AdminIdNotFoundException;
 import com.g6.onlineeyecare.user.dto.User;
 import com.g6.onlineeyecare.user.dto.UserResponseDTO;
 import com.g6.onlineeyecare.user.service.IUserService;
@@ -36,7 +36,7 @@ public class UserController {
 
 	@ApiOperation(value = "view User by Id", response = User.class)
 	@GetMapping("/view/{userId}")
-	public ResponseEntity<UserResponseDTO> viewUser(@PathVariable("userId") int userId) throws UserIdNotFoundException {
+	public ResponseEntity<UserResponseDTO> viewUser(@PathVariable("userId") int userId) throws AdminIdNotFoundException {
 		
 		UserResponseDTO response = modelMapper.map(this.userService.viewUser(userId), UserResponseDTO.class);
 		if (response != null) {
