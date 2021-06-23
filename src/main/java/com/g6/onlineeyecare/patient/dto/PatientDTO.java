@@ -6,9 +6,12 @@ import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.UserDTO;
+
+import io.swagger.annotations.ApiModelProperty;
 
 
 public class PatientDTO extends UserDTO{
@@ -19,8 +22,11 @@ public class PatientDTO extends UserDTO{
 	private int patientAge;
 	
 	
+	@ApiModelProperty(name = "Mobile", value = "Mobile number cannot be null, holds max and min 10 digits")
 	@Column
-	private long patientMobile;
+	@NotEmpty(message = "Mobile number cannot be left blank or null")
+	@Pattern(regexp = "(^$|[0-9]{10})", message = "Enter 10 digit mobile number")
+	private String patientMobile;
 	
 	
 	@Column
@@ -40,10 +46,12 @@ public class PatientDTO extends UserDTO{
 	public void setPatientAge(int patientAge) {
 		this.patientAge = patientAge;
 	}
-	public long getPatientMobile() {
+	
+	
+	public String getPatientMobile() {
 		return patientMobile;
 	}
-	public void setPatientMobile(long patientMobile) {
+	public void setPatientMobile(String patientMobile) {
 		this.patientMobile = patientMobile;
 	}
 	public String getPatientEmail() {

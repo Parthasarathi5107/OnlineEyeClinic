@@ -18,7 +18,7 @@ import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.g6.onlineeyecare.exceptions.AdminIdNotFoundException;
+import com.g6.onlineeyecare.exceptions.UserIdNotFoundException;
 import com.g6.onlineeyecare.user.dao.IUserRepository;
 import com.g6.onlineeyecare.user.dto.User;
 import com.g6.onlineeyecare.user.service.UserServiceImpl;
@@ -45,21 +45,11 @@ public class UserServiceTest {
 		ac.close();
 	}
 
-	@Test
-	@DisplayName("test -> add user")
-	public void addUser() {
-
-		User u = new User(1, "abc", "Charlie", "doctor");
-		when(repository.save(u)).thenReturn(u);
-		User actualUser = userService.addUser(u);
-		verify(repository).save(u);
-		assertEquals(u, actualUser);
-
-	}
+	
 
 	@Test
 	@DisplayName("test -> view user by Id")
-	public void viewUserById() throws AdminIdNotFoundException {
+	public void viewUserById() throws UserIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
@@ -71,13 +61,13 @@ public class UserServiceTest {
 	
 	@Test
 	@DisplayName("test -> view user by Id with invalid entries")
-	public void viewUserByIdInvalid() throws AdminIdNotFoundException {
+	public void viewUserByIdInvalid() throws UserIdNotFoundException {
 
 		User u = new User(1, "abc", "Charlie", "doctor");
 
 		when(repository.findById(1)).thenReturn(Optional.of(u));
 		Executable executable = () -> userService.viewUser(2);
-		assertThrows(AdminIdNotFoundException.class, executable);
+		assertThrows(UserIdNotFoundException.class, executable);
 	}
 
 	@Test
@@ -95,49 +85,4 @@ public class UserServiceTest {
 		assertEquals(list, actualList);
 	}
 
-	@Test
-	@DisplayName("test -> delete an user")
-	public void deleteUser() throws AdminIdNotFoundException {
-
-		User u = new User(1, "abc", "Charlie", "doctor");
-
-		when(repository.findById(1)).thenReturn(Optional.of(u));
-		User actualUser = userService.removeUser(1);
-		verify(repository).deleteById(1);
-		assertEquals(u, actualUser);
-	}
-	
-	@Test
-	@DisplayName("test -> delete an user with invalid entries")
-	public void deleteUserInvalid() throws AdminIdNotFoundException {
-
-		User u = new User(1, "abc", "Charlie", "doctor");
-
-		when(repository.findById(1)).thenReturn(Optional.of(u));
-		Executable executable = () -> userService.removeUser(2);
-		assertThrows(AdminIdNotFoundException.class, executable);
-	}
-	
-	@Test
-	@DisplayName("test -> update an user with valid entries")
-	public void updateUser() throws AdminIdNotFoundException {
-
-		User u = new User(1, "abc", "Charlie", "doctor");
-
-		when(repository.findById(1)).thenReturn(Optional.of(u));
-		User actualUser = userService.updateUser(u);
-		verify(repository).save(u);
-		assertEquals(u, actualUser);
-	}
-	
-	@Test
-	@DisplayName("test -> update an user with invalid entries")
-	public void updateUserInvalid() throws AdminIdNotFoundException {
-
-		User u = new User(1, "abc", "Charlie", "doctor");
-
-		when(repository.findById(10)).thenReturn(Optional.of(u));
-		Executable executable = () -> userService.updateUser(u);
-		assertThrows(AdminIdNotFoundException.class, executable);
-	}
 }

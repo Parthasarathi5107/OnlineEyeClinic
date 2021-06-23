@@ -5,6 +5,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.User;
@@ -23,9 +24,11 @@ public class Doctor extends User {
 	@NotEmpty(message = "Consultaion time cannot be empty")
 	private String doctorConsultationTime;
 
-	@ApiModelProperty(name = "doctor mobile number", required = true)
+	@ApiModelProperty(name = "Mobile", value = "Mobile number cannot be null, holds max and min 10 digits")
 	@Column
-	private long doctorMobile;
+	@NotEmpty(message = "Mobile number cannot be left blank or null")
+	@Pattern(regexp = "(^$|[0-9]{10})", message = "Enter 10 digit mobile number")
+	private String doctorMobile;
 
 	@ApiModelProperty(name = "doctor email", required = true)
 	@Column
@@ -45,11 +48,13 @@ public class Doctor extends User {
 		this.doctorConsultationTime = doctorConsultationTime;
 	}
 
-	public long getDoctorMobile() {
+	
+
+	public String getDoctorMobile() {
 		return doctorMobile;
 	}
 
-	public void setDoctorMobile(long doctorMobile) {
+	public void setDoctorMobile(String doctorMobile) {
 		this.doctorMobile = doctorMobile;
 	}
 
@@ -74,16 +79,17 @@ public class Doctor extends User {
 
 	}
 
-	public Doctor(String doctorConsultationTime, long doctorMobile, String doctorEmail, String address) {
-		super();
 
+	public Doctor(@NotEmpty(message = "Consultaion time cannot be empty") String doctorConsultationTime,
+			@NotEmpty(message = "Mobile number cannot be left blank or null") @Pattern(regexp = "(^$|[0-9]{10})", message = "Enter 10 digit mobile number") String doctorMobile,
+			@Email(message = "Email should be valid") @NotEmpty(message = "Email cannot be empty") String doctorEmail,
+			@Size(max = 512, message = "doctor address cannot be more than 512 characters") String address) {
+		super();
 		this.doctorConsultationTime = doctorConsultationTime;
 		this.doctorMobile = doctorMobile;
 		this.doctorEmail = doctorEmail;
 		this.address = address;
 	}
-
-	
 
 	@Override
 	public int hashCode() {

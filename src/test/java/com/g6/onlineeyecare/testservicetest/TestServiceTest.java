@@ -61,7 +61,7 @@ public class TestServiceTest {
 	@DisplayName("view all test")
 	public void ViewAllTest() {
 
-		Patient p = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		Patient p = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		Test test = new Test(1, "abc", "vision", "describe", 1800, p);
 
 		List<Test> list = new ArrayList<>();
@@ -104,7 +104,7 @@ public class TestServiceTest {
 	@DisplayName("test -> adding a  test with valid entries")
 	public void addTest() throws PatientIdFoundNotException {
 
-		Patient p = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		Patient p = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p.setUserId(1);
 
 		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p));

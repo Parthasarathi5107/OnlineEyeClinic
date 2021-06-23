@@ -66,7 +66,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("test -> view patient by Id")
 	public void testViewPatientById() throws PatientIdFoundNotException {
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		p1.setUserId(2);
 
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
@@ -78,7 +78,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("test -> view patient by Id with invalid entries")
 	public void testViewPatientByIdInvalid() throws PatientIdFoundNotException {
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		p1.setUserId(2);
 
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
@@ -89,8 +89,8 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("test -> view all patients")
 	public void ViewAllPatient() {
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
-		Patient p2 = new Patient(25, 805063735, "xys@gmail.com", LocalDate.now(), "mysore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p2 = new Patient(25, "805063735", "xys@gmail.com", LocalDate.now(), "mysore");
 
 		List<Patient> dummylist = new ArrayList<>();
 		dummylist.add(p1);
@@ -106,7 +106,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("test -> delete patients")
 	public void deletePatient() throws PatientIdFoundNotException {
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		p1.setUserId(2);
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
 
@@ -119,7 +119,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("test -> delete patients with invalid entries")
 	public void deletePatientInvalid() throws PatientIdFoundNotException {
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		p1.setUserId(2);
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
 		Executable executable = () -> patientService.deletePatient(3);
@@ -130,7 +130,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("test -> add patient")
 	public void addPatient() {
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		
 		
 		when(repository.save(p1)).thenReturn(p1);
@@ -143,7 +143,7 @@ public class PatientServiceTest {
 	@DisplayName("test -> update patient with valid entries")
 	public void updatePatient() throws PatientIdFoundNotException
 	{
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		p1.setUserId(2);
 		
 		when(repository.findById(2)).thenReturn(Optional.of(p1));
@@ -157,7 +157,7 @@ public class PatientServiceTest {
 	@DisplayName("test -> update patient with invalid entries")
 	public void updatePatientInvalid() throws PatientIdFoundNotException
 	{
-		Patient p1 = new Patient(20, 805063752, "abc@gmail.com", LocalDate.now(), "bangalore");
+		Patient p1 = new Patient(20, "805063752", "abc@gmail.com", LocalDate.now(), "bangalore");
 		p1.setUserId(2);
 		
 		when(repository.findById(3)).thenReturn(Optional.of(p1));

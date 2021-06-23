@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.g6.onlineeyecare.user.dto.User;
@@ -25,9 +26,11 @@ public class Patient extends User {
 	@Min(value = 1)
 	private int patientAge;
 	
-	@ApiModelProperty(name = "Patient mobile number", required = true)
+	@ApiModelProperty(name = "Mobile", value = "Mobile number cannot be null, holds max and min 10 digits")
 	@Column
-	private long patientMobile;
+	@NotEmpty(message = "Mobile number cannot be left blank or null")
+	@Pattern(regexp = "(^$|[0-9]{10})", message = "Enter 10 digit mobile number")
+	private String patientMobile;
 	
 	@ApiModelProperty(name = "Patient Email", required = true)
 	@Column
@@ -50,11 +53,13 @@ public class Patient extends User {
 		this.patientAge = patientAge;
 	}
 
-	public long getPatientMobile() {
+
+
+	public String getPatientMobile() {
 		return patientMobile;
 	}
 
-	public void setPatientMobile(long patientMobile) {
+	public void setPatientMobile(String patientMobile) {
 		this.patientMobile = patientMobile;
 	}
 
@@ -92,7 +97,14 @@ public class Patient extends User {
 		
 	}
 
-	public Patient(int patientAge, long patientMobile, String patientEmail, LocalDate patientDOB, String address) {
+
+	
+	
+	public Patient(@Min(1) int patientAge,
+			@NotEmpty(message = "Mobile number cannot be left blank or null") @Pattern(regexp = "(^$|[0-9]{10})", message = "Enter 10 digit mobile number") String patientMobile,
+			@Email(message = "Email should be valid") @NotEmpty(message = "Email cannot be empty") String patientEmail,
+			LocalDate patientDOB,
+			@Size(max = 512, message = "Patient address cannot be more than 512 characters") String address) {
 		super();
 		this.patientAge = patientAge;
 		this.patientMobile = patientMobile;
@@ -100,8 +112,7 @@ public class Patient extends User {
 		this.patientDOB = patientDOB;
 		this.address = address;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -98,7 +98,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	
 	@ExceptionHandler
-	public ResponseEntity<MyExceptionResponse> invalidUserIdException(AdminIdNotFoundException ex)
+	public ResponseEntity<MyExceptionResponse> invalidUserIdException(UserIdNotFoundException ex)
 	{
 		String message=ex.getMessage();
 		MyExceptionResponse response=new MyExceptionResponse();
@@ -108,6 +108,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler
+	public ResponseEntity<MyExceptionResponse> handleInvalidCredentialException(InvalidCredentialException ex)
+	{
+		String message=ex.getMessage();
+		MyExceptionResponse response=new MyExceptionResponse();
+		response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		response.setExceptionMsg(message);
+		
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+	}
 	
 
 	@Override

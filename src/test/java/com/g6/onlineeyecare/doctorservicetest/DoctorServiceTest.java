@@ -62,8 +62,8 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("test -> view all doctors")
 	public void ViewAllDoctor() {
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
-		Doctor d2 = new Doctor("12:30:00", 786523496, "xyz@gmail.com", "mysore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
+		Doctor d2 = new Doctor("12:30:00", "786523496", "xyz@gmail.com", "mysore");
 
 		List<Doctor> dummylist = new ArrayList<>();
 		dummylist.add(d1);
@@ -79,7 +79,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("test -> view doctor by Id")
 	public void testViewDoctorById() throws DoctorIdNotFoundException {
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 
 		when(repository.findById(2)).thenReturn(Optional.of(d1));
@@ -91,7 +91,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("test -> view doctor by Id using invalid entries")
 	public void ViewDoctorByIdNotExisting() throws DoctorIdNotFoundException {
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 		when(repository.findById(2)).thenReturn(Optional.of(d1));
 		Executable executable = () -> doctorService.viewDoctor(3);
@@ -102,7 +102,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("test -> add doctor")
 	public void addDoctor() {
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 
 		when(repository.save(d1)).thenReturn(d1);
@@ -114,7 +114,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("test -> delete doctor by Id")
 	public void deleteDoctor() throws DoctorIdNotFoundException {
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 		when(repository.findById(2)).thenReturn(Optional.of(d1));
 
@@ -126,7 +126,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("test -> delete doctor by Id with invalid entries")
 	public void deleteDoctorInvalid() throws DoctorIdNotFoundException {
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 		when(repository.findById(2)).thenReturn(Optional.of(d1));
 
@@ -138,7 +138,7 @@ public class DoctorServiceTest {
 	@DisplayName("test -> update doctor with valid entries")
 	public void updateDoctor() throws DoctorIdNotFoundException
 	{
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 		
 		when(repository.findById(2)).thenReturn(Optional.of(d1));
@@ -151,7 +151,7 @@ public class DoctorServiceTest {
 	@DisplayName("test -> update doctor with invalid entries")
 	public void updateDoctorInvalid() throws DoctorIdNotFoundException
 	{
-		Doctor d1 = new Doctor("11:30:00", 635241589, "abc@gmail.com", "bangalore");
+		Doctor d1 = new Doctor("11:30:00", "635241589", "abc@gmail.com", "bangalore");
 		d1.setUserId(2);
 		
 		when(repository.findById(3)).thenReturn(Optional.of(d1));

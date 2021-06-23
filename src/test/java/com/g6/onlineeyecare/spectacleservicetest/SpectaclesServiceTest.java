@@ -62,7 +62,7 @@ public class SpectaclesServiceTest {
 	@Test
 	@DisplayName("test -> to view all spectacles")
 	public void testViewAllSpectacles() {
-		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
+		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
 	     Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
@@ -82,7 +82,7 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to view spectacles by Id")
 	public void testViewById() throws SpectaclesIdNotFoundException {
 
-		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
+		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
@@ -99,7 +99,7 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to view spectacles by Id with invalid entries")
 	public void testViewByIdInvalid() throws SpectaclesIdNotFoundException {
 
-		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
+		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12), "Bangalore");
 		p.setUserId(1);
 
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p);
@@ -113,7 +113,7 @@ public class SpectaclesServiceTest {
 	@Test
 	@DisplayName("test -> to add spectacles with valid entries ")
 	public void testAddSpectacles() throws PatientIdFoundNotException {
-		Patient p=new Patient(20,259751,"ram@gmail.com",LocalDate.of(2002,02,12),"Bangalore");
+		Patient p=new Patient(20,"259751","ram@gmail.com",LocalDate.of(2002,02,12),"Bangalore");
 		p.setUserId(1);
 
 		when(patientRepository.findById(p.getUserId())).thenReturn(Optional.of(p));
@@ -146,7 +146,7 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to delete spectacles by valid Id")
 	public void testDeleteSpectacles() throws SpectaclesIdNotFoundException {
 
-		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		Patient p1 = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
@@ -172,7 +172,7 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to update spectacles with valid entries")
 	public void testUpdateSpectacles() throws SpectaclesIdNotFoundException
 	{
-		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		Patient p1 = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);
@@ -186,7 +186,7 @@ public class SpectaclesServiceTest {
 	@DisplayName("test -> to update spectacles with invalid entries")
 	public void testUpdateSpectaclesInvalid() throws SpectaclesIdNotFoundException
 	{
-		Patient p1 = new Patient(20, 259751, "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
+		Patient p1 = new Patient(20, "259751", "ram@gmail.com", LocalDate.of(2002, 02, 12), "Bangalore");
 		p1.setUserId(1);
 
 		Spectacles s=new Spectacles(1,"A-254","rectangle glasses", 3000,p1);

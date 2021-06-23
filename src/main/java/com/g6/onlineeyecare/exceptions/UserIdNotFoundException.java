@@ -1,18 +1,18 @@
 package com.g6.onlineeyecare.exceptions;
 
 @SuppressWarnings("serial")
-public class AdminIdNotFoundException extends Exception {
+public class UserIdNotFoundException extends Exception {
 
     final String msg;
 
-	public AdminIdNotFoundException() {
+	public UserIdNotFoundException() {
 		super();
 		this.msg = "";
 		
 		
 	}
 
-	public AdminIdNotFoundException(String message, Throwable cause, boolean enableSuppression,
+	public UserIdNotFoundException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		this.msg = "";
@@ -20,21 +20,21 @@ public class AdminIdNotFoundException extends Exception {
 		
 	}
 
-	public AdminIdNotFoundException(String message, Throwable cause) {
+	public UserIdNotFoundException(String message, Throwable cause) {
 		super(message, cause);
 		this.msg = "";
 		
 		
 	}
 
-	public AdminIdNotFoundException(String message) {
+	public UserIdNotFoundException(String message) {
 		super(message);
 		this.msg = "";
 		
 		
 	}
 
-	public AdminIdNotFoundException(Throwable cause) {
+	public UserIdNotFoundException(Throwable cause) {
 		super(cause);
 		this.msg = "";
 		
