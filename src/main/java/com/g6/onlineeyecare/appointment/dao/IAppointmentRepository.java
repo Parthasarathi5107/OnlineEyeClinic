@@ -16,5 +16,6 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Integ
 	@Query("Select a from Appointment a where a.appointmentDate=:date")
     List<Appointment> viewAppointmentByDate(@Param("date") LocalDate date);
 	
-	
+	@Query("Select a from Appointment a where a.appointmentDate=:date and a.doctor.userName=:doctorName ORDER BY appointmentTime")
+    List<Appointment> viewAppointmentByName(@Param("date") LocalDate date,@Param("doctorName") String doctorName);
 }

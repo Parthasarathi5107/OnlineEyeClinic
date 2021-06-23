@@ -1,6 +1,7 @@
 package com.g6.onlineeyecare.doctor.service;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -95,15 +96,16 @@ public class DoctorServiceImpl implements IDoctorService {
 	}
 
 	@Override
-	public List<Appointment> viewAppointments() {
-		List<Appointment> appointmentList = null;
-		try {
-			appointmentList = appointmentService.viewAllAppointments();
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		return appointmentList;
-	}
+    public List<Appointment> viewAppointments(String doctorName,LocalDate date) {
+        List<Appointment> appointmentList = null;
+        try {
+            appointmentList = appointmentService.viewAppointmentByDateAndName(date, doctorName);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return appointmentList;
+    }
+
 
 	@Override
 	@Transactional
@@ -112,6 +114,6 @@ public class DoctorServiceImpl implements IDoctorService {
 		return testService.addTest(test);
 		
 	}
-	
+
 
 }

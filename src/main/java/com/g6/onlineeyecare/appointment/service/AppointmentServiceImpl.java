@@ -117,4 +117,18 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 	}
 	
+	
+    @Override
+    public List<Appointment> viewAppointmentByDateAndName(LocalDate date,String doctorName) {
+        List<Appointment> list = new ArrayList<>();
+        try {
+            list = appointmentRepository.viewAppointmentByName(date,doctorName);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return list;
+
+    }
+	
 }

@@ -1,5 +1,6 @@
 package com.g6.onlineeyecare.doctor.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.g6.onlineeyecare.appointment.dto.Appointment;
@@ -19,9 +20,7 @@ public interface IDoctorService {
 
 	List<Doctor> viewDoctorsList();
 
-	List<Appointment> viewAppointments();
-
 	Test createTest(Test test) throws PatientIdFoundNotException;
 
-	
+	List<Appointment> viewAppointments(String doctorName,LocalDate date);
 }

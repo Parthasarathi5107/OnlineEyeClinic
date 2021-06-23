@@ -1,6 +1,7 @@
 package com.g6.onlineeyecare.doctor.controller;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -108,21 +110,21 @@ public class DoctorController {
 	}
 
 	@ApiOperation(value = "view all appointments", response = Doctor.class)
-	@GetMapping("/viewAppointments")
-	public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments() {
-		
-		List<Appointment> appointmentList = this.doctorService.viewAppointments();
-		List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
-		for (Appointment a : appointmentList) {
-			AppointmentResponseDTO appointmentDto = modelMapper.map(a, AppointmentResponseDTO.class);
-			appointmentDtoList.add(appointmentDto);
-		}
-		if (!(appointmentDtoList.isEmpty())) {
-			return new ResponseEntity<>(appointmentDtoList, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(appointmentDtoList, HttpStatus.BAD_REQUEST);
-		}
-	}
+    @GetMapping("/viewAppointments/{date}/{doctorName}")
+    public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments(@PathVariable("date")@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,@PathVariable("doctorName") String doctorName) {
+
+        List<Appointment> appointmentList = this.doctorService.viewAppointments(doctorName,date);
+        List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
+        for (Appointment a : appointmentList) {
+            AppointmentResponseDTO appointmentDto = modelMapper.map(a, AppointmentResponseDTO.class);
+            appointmentDtoList.add(appointmentDto);
+        }
+        if (!(appointmentDtoList.isEmpty())) {
+            return new ResponseEntity<>(appointmentDtoList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(appointmentDtoList, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 	@ApiOperation(value = "Create a new test", response = Doctor.class)
 	@PostMapping("/test")

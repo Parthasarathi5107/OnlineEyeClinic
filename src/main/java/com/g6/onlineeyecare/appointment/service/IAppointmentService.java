@@ -22,4 +22,6 @@ public interface IAppointmentService {
 	List<Appointment> viewAllAppointments();
 
 	List<Appointment> viewAppointments(LocalDate date);
+	
+	List<Appointment> viewAppointmentByDateAndName(LocalDate date,String doctorName);
 }

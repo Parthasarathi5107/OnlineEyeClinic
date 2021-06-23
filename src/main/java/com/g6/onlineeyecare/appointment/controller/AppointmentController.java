@@ -126,6 +126,21 @@ public class AppointmentController {
 		}
 	}
 	
-	
+	@ApiOperation(value = "Get the required appointment by date and doctor name ",response = Appointment.class)
+    @GetMapping("/viewByName/{date}/{doctorName}")
+    public ResponseEntity<List<AppointmentResponseDTO>> viewAppointmentByDateAndName(@PathVariable("date")@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,@PathVariable("doctorName") String doctorName)
+    {
+        List<Appointment> appointmentList = this.appointmentService.viewAppointmentByDateAndName(date, doctorName);
+        List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
+        for (Appointment a : appointmentList) {
+            AppointmentResponseDTO appointmentDto = modelMapper.map(a, AppointmentResponseDTO.class);
+            appointmentDtoList.add(appointmentDto);
+        }
+        if (!(appointmentDtoList.isEmpty())) {
+            return new ResponseEntity<>(appointmentDtoList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(appointmentDtoList, HttpStatus.BAD_REQUEST);
+        }
+    }
 	
 }
