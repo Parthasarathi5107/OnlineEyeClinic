@@ -25,4 +25,6 @@ public interface IPatientService {
 	Appointment viewAppointmentDetails(int appointmentid) throws AppointmentIdNotFoundException;
 
 	List<Report> viewReport(int patientId) throws PatientIdFoundNotException;
+	
+	List<Patient> viewPatientByName(String patientName);
 }

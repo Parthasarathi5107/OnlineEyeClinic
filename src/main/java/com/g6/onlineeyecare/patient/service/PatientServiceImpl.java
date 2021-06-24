@@ -1,5 +1,6 @@
 package com.g6.onlineeyecare.patient.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -122,6 +123,17 @@ public class PatientServiceImpl implements IPatientService {
 			throw new PatientIdFoundNotException("Patient Id not found to view the report");
 		}
 		return reports;
+	}
+
+	@Override
+	public List<Patient> viewPatientByName(String patientName) {
+		List<Patient> list = new ArrayList<>();
+		try {
+			list = repository.viewByName(patientName);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return list;
 	}
 
 }

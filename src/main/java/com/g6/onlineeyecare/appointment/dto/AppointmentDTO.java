@@ -30,7 +30,7 @@ public class AppointmentDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate appointmentDate;
 
-	
+	private String status;
 	@Column
 	private LocalTime appointmentTime;
 
@@ -72,11 +72,19 @@ public class AppointmentDTO {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "AppointmentEntityDTO [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
-				+ ", appointmentTime=" + appointmentTime + ", doctor=" + doctor + ", patient=" + patient + "]";
+		return "AppointmentDTO [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate + ", status="
+				+ status + ", appointmentTime=" + appointmentTime + ", doctor=" + doctor + ", patient=" + patient + "]";
 	}
+	
 	
 	
 

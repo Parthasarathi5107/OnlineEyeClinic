@@ -26,10 +26,9 @@ public class UserServiceImpl implements IUserService {
 		this.repository = repository;
 	}
 
-
 	@Override
 	public User viewUser(int userId) throws AdminIdNotFoundException {
-		
+
 		Optional<User> optional = repository.findById(userId);
 		if (!optional.isPresent()) {
 			throw new AdminIdNotFoundException("User Id not found to view user");
@@ -47,38 +46,27 @@ public class UserServiceImpl implements IUserService {
 		}
 		return userList;
 	}
-	
-//	@Override
-//	public User signIn(User user) throws InvalidCredentialException {
-//		
-//		Optional<User> opt = repository.findById(user.getUserId());
-//		try {
-//			if (opt.isPresent()) {
-//				User u = opt.get();
-//				boolean matched = BCrypt.checkpw(user.getPassword(), u.getPassword());
-//				if (matched) {
-//					return u;
-//
-//				} else {
-//					throw new InvalidCredentialException("Invalid password");
-//				}
-//			} else {
-//				throw new InvalidCredentialException("Invalid userID");
-//			}
-//		} catch (Exception e) {
-//			throw new InvalidCredentialException("Invalid username or password");
-//		}
-//	}
-	
-	@Override
-	public User signOut(User user) {
 
-		return null;
+	@Override
+	public Boolean signIn(User user) throws InvalidCredentialException {
+		Boolean status = false;
+		Optional<User> resultUser = repository.findByuserName(user.getUserName());
+		if (resultUser.isPresent()) {
+			if ((resultUser.get().getPassword().equals(user.getPassword()))) {
+				status = true;
+
+			} else {
+				throw new InvalidCredentialException("Invalid username or password");
+			}
+		}
+		return status;
 	}
 
 	@Override
-	public User signIn(User user) throws InvalidCredentialException {
-		return null;
+	public Boolean signOut() {
+		 
+		return true;
 	}
 
+	
 }

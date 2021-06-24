@@ -46,6 +46,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		if (doctorRepository.findById(appointment.getDoctor().getUserId()).isPresent()) {
 			if (patientRepository.findById(appointment.getPatient().getUserId()).isPresent()) {
 				appointmentRepository.save(appointment);
+				appointment.setStatus("Booked");
 			} else {
 				throw new PatientIdFoundNotException("Patient Id not found");
 			}
@@ -57,17 +58,18 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	@Transactional
-	public Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException {
-		
-		 Optional<Appointment> optional = appointmentRepository.findById(appointment.getAppointmentId());
-		if (optional.isPresent()) {
-			appointmentRepository.save(appointment);
-		} else {
-			throw new InvalidAppointmentException("Invalid Appointment Exception ");
-		}
-		return optional.get();
-	}
+    @Transactional
+    public Appointment updateAppointment(Appointment appointment) throws InvalidAppointmentException {
+
+         Optional<Appointment> optional = appointmentRepository.findById(appointment.getAppointmentId());
+        if (optional.isPresent() && !(optional.get().getStatus().contentEquals("Cancelled"))) {
+            appointmentRepository.save(appointment);
+            optional.get().setStatus("Updated");
+        } else {
+            throw new InvalidAppointmentException("Invalid Appointment Exception ");
+        }
+        return optional.get();
+    }
 
 	@Override
 	@Transactional
@@ -75,7 +77,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		
 		 Optional<Appointment> optional = appointmentRepository.findById(appointmentId);
 		if (optional.isPresent()) {
-			appointmentRepository.deleteById(appointmentId);
+			optional.get().setStatus("Cancelled");
 		} else {
 			throw new AppointmentIdNotFoundException("Appointment ID not found to cancel appointment");
 		}

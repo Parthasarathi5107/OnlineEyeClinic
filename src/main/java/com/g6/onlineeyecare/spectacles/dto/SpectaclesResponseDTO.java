@@ -5,6 +5,7 @@ public class SpectaclesResponseDTO {
 	private int spectaclesId;
 	private String spectaclesModel;
 	private String spectaclesDescription;
+	private int spectaclesRating;
 	private double spectaclesCost;
 	private int patientId;
 	public int getSpectaclesId() {
@@ -37,12 +38,20 @@ public class SpectaclesResponseDTO {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
+	
+	public int getSpectaclesRating() {
+		return spectaclesRating;
+	}
+	public void setSpectaclesRating(int spectaclesRating) {
+		this.spectaclesRating = spectaclesRating;
+	}
 	@Override
 	public String toString() {
 		return "SpectaclesResponseDTO [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
-				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesCost=" + spectaclesCost
-				+ ", patientId=" + patientId + "]";
+				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesRating=" + spectaclesRating
+				+ ", spectaclesCost=" + spectaclesCost + ", patientId=" + patientId + "]";
 	}
+	
 	
 	
 }

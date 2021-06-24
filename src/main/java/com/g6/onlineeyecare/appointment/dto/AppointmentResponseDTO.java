@@ -11,6 +11,7 @@ public class AppointmentResponseDTO {
 	private int appointmentId;
 	private LocalDate appointmentDate;
 	private LocalTime appointmentTime;
+	private String status;
 	private int doctorId;
 	private int patientId;
 	public int getAppointmentId() {
@@ -43,11 +44,19 @@ public class AppointmentResponseDTO {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "AppointmentDTO [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
-				+ ", appointmentTime=" + appointmentTime + ", doctorId=" + doctorId + ", patientId=" + patientId + "]";
+		return "AppointmentResponseDTO [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
+				+ ", appointmentTime=" + appointmentTime + ", status=" + status + ", doctorId=" + doctorId
+				+ ", patientId=" + patientId + "]";
 	}
-
+	
 	
 }

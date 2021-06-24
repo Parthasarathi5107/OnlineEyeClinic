@@ -157,4 +157,20 @@ public class PatientController {
 
 	}
 
+	@ApiOperation(value = "Get the required patient by name ", response = Patient.class)
+	@GetMapping("/viewByName/{patientName}")
+	public ResponseEntity<List<PatientResponseDTO>> viewPatientByName(@PathVariable("patientName") String patientName) {
+		List<Patient> patientList = this.patientService.viewPatientByName(patientName);
+		List<PatientResponseDTO> patientDtoList = new ArrayList<>();
+		for (Patient a : patientList) {
+			PatientResponseDTO patientDto = modelMapper.map(a, PatientResponseDTO.class);
+			patientDtoList.add(patientDto);
+		}
+		if (!(patientDtoList.isEmpty())) {
+			return new ResponseEntity<>(patientDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(patientDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
+
 }

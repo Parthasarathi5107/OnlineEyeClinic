@@ -41,6 +41,8 @@ public class Appointment {
 	@JoinColumn(name = "doctor_Id", referencedColumnName = "userId")
 	private Doctor doctor;
 
+	private String status;
+	
 	@OneToOne
 	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
 	private Patient patient;
@@ -99,6 +101,15 @@ public class Appointment {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public int hashCode() {
@@ -125,7 +136,10 @@ public class Appointment {
 	@Override
 	public String toString() {
 		return "Appointment [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
-				+ ", appointmentTime=" + appointmentTime + ", doctor=" + doctor + ", patient=" + patient + "]";
+				+ ", appointmentTime=" + appointmentTime + ", doctor=" + doctor + ", status=" + status + ", patient="
+				+ patient + "]";
 	}
+
+	
 
 }

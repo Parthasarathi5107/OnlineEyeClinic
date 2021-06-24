@@ -2,6 +2,7 @@ package com.g6.onlineeyecare.doctor.service;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -115,5 +116,18 @@ public class DoctorServiceImpl implements IDoctorService {
 		
 	}
 
+	@Override
+	public List<Doctor> viewDoctorByName(String doctorName)  {
+		List<Doctor> doctorList=new ArrayList<>();
+		try
+		{
+			doctorList=repository.viewDoctorByName(doctorName);
+		}
+		catch(Exception e)
+		{
+			log.error(e.getMessage(),e);
+		}
+		return doctorList;
+		}
 
 }

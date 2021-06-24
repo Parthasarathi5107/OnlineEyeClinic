@@ -23,4 +23,6 @@ public interface IDoctorService {
 	Test createTest(Test test) throws PatientIdFoundNotException;
 
 	List<Appointment> viewAppointments(String doctorName,LocalDate date);
+	
+	List<Doctor> viewDoctorByName(String doctorName);
 }

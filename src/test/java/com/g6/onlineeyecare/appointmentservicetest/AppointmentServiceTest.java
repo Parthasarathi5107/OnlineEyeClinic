@@ -150,21 +150,21 @@ public class AppointmentServiceTest {
 	}
 
 	@Test
-	@DisplayName("test -> for deleting appointment")
-	public void testDeleteAppointment() throws AppointmentIdNotFoundException {
+	@DisplayName("test ->  Cancel appointment")
+	public void testCancelAppointment() throws AppointmentIdNotFoundException {
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(1);
 
 		when(repository.findById(1)).thenReturn(Optional.of(appointment));
 		Appointment actualAppointment = appointmentService.cancelAppointment(1);
-		verify(repository).deleteById(1);
+		verify(repository).findById(1);
 		assertEquals(appointment, actualAppointment);
 
 	}
 
 	@Test
-	@DisplayName("test -> for deleting appointment with invalid entries")
-	public void testDeleteAppointmentInvaild() throws AppointmentIdNotFoundException {
+	@DisplayName("test -> Cancel appointment with invalid entries")
+	public void testCancelAppointmentInvaild() throws AppointmentIdNotFoundException {
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(1);
 
@@ -180,7 +180,7 @@ public class AppointmentServiceTest {
 	{
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(1);
-		
+		appointment.setStatus("Booked");
 		when(repository.findById(1)).thenReturn(Optional.of(appointment));
 		Appointment actualAppointment = appointmentService.updateAppointment(appointment);
 		verify(repository).save(appointment);

@@ -68,8 +68,8 @@ public class AppointmentController {
 		}
 	}
 	
-	@ApiOperation(value = "Delete the required appointment by Id ",response = Appointment.class)
-	@DeleteMapping("/delete/{appointmentId}")
+	@ApiOperation(value = "Cancel by Id ",response = Appointment.class)
+	@DeleteMapping("/cancel/{appointmentId}")
 	public ResponseEntity<AppointmentResponseDTO> cancelAppointment(@PathVariable("appointmentId") int appointmentId) throws AppointmentIdNotFoundException 
 	{
 		AppointmentResponseDTO response = modelMapper.map(this.appointmentService.cancelAppointment(appointmentId), AppointmentResponseDTO.class);

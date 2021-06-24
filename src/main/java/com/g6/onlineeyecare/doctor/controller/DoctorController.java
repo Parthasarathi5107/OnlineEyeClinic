@@ -1,6 +1,5 @@
 package com.g6.onlineeyecare.doctor.controller;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class DoctorController {
 
 	@Autowired
 	IDoctorService doctorService;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -58,8 +57,9 @@ public class DoctorController {
 
 	@ApiOperation(value = "Update your profile", response = Doctor.class)
 	@PutMapping("/update")
-	public ResponseEntity<DoctorResponseDTO> updateDoctor(@RequestBody DoctorDTO doctor) throws DoctorIdNotFoundException {
-		
+	public ResponseEntity<DoctorResponseDTO> updateDoctor(@RequestBody DoctorDTO doctor)
+			throws DoctorIdNotFoundException {
+
 		Doctor actual = modelMapper.map(doctor, Doctor.class);
 		DoctorResponseDTO response = modelMapper.map(this.doctorService.updateDoctor(actual), DoctorResponseDTO.class);
 		if (response != null) {
@@ -73,7 +73,8 @@ public class DoctorController {
 	@DeleteMapping("/delete/{doctorId}")
 	public ResponseEntity<DoctorResponseDTO> deleteDoctor(@PathVariable("doctorId") int doctorId)
 			throws DoctorIdNotFoundException {
-		DoctorResponseDTO response = modelMapper.map(this.doctorService.deleteDoctor(doctorId), DoctorResponseDTO.class);
+		DoctorResponseDTO response = modelMapper.map(this.doctorService.deleteDoctor(doctorId),
+				DoctorResponseDTO.class);
 		if (response != null) {
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		} else {
@@ -83,7 +84,8 @@ public class DoctorController {
 
 	@ApiOperation(value = "View Doctor profile by Id", response = Doctor.class)
 	@GetMapping("/view/{doctorId}")
-	public ResponseEntity<DoctorResponseDTO> viewDoctor(@PathVariable("doctorId") int doctorId) throws DoctorIdNotFoundException {
+	public ResponseEntity<DoctorResponseDTO> viewDoctor(@PathVariable("doctorId") int doctorId)
+			throws DoctorIdNotFoundException {
 		DoctorResponseDTO response = modelMapper.map(this.doctorService.viewDoctor(doctorId), DoctorResponseDTO.class);
 		if (response != null) {
 			return new ResponseEntity<>(response, HttpStatus.OK);
@@ -110,30 +112,46 @@ public class DoctorController {
 	}
 
 	@ApiOperation(value = "view all appointments", response = Doctor.class)
-    @GetMapping("/viewAppointments/{date}/{doctorName}")
-    public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments(@PathVariable("date")@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,@PathVariable("doctorName") String doctorName) {
+	@GetMapping("/viewAppointments/{date}/{doctorName}")
+	public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments(
+			@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+			@PathVariable("doctorName") String doctorName) {
 
-        List<Appointment> appointmentList = this.doctorService.viewAppointments(doctorName,date);
-        List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
-        for (Appointment a : appointmentList) {
-            AppointmentResponseDTO appointmentDto = modelMapper.map(a, AppointmentResponseDTO.class);
-            appointmentDtoList.add(appointmentDto);
-        }
-        if (!(appointmentDtoList.isEmpty())) {
-            return new ResponseEntity<>(appointmentDtoList, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(appointmentDtoList, HttpStatus.BAD_REQUEST);
-        }
-    }
+		List<Appointment> appointmentList = this.doctorService.viewAppointments(doctorName, date);
+		List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
+		for (Appointment a : appointmentList) {
+			AppointmentResponseDTO appointmentDto = modelMapper.map(a, AppointmentResponseDTO.class);
+			appointmentDtoList.add(appointmentDto);
+		}
+		if (!(appointmentDtoList.isEmpty())) {
+			return new ResponseEntity<>(appointmentDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(appointmentDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@ApiOperation(value = "Create a new test", response = Doctor.class)
 	@PostMapping("/test")
 	public ResponseEntity<TestResponseDTO> createTest(@RequestBody TestDTO test) throws PatientIdFoundNotException {
-		
+
 		Test actucal = modelMapper.map(test, Test.class);
 		TestResponseDTO response = modelMapper.map(this.doctorService.createTest(actucal), TestResponseDTO.class);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	
-	
+
+	@ApiOperation(value = "Get the required doctor by name ", response = Doctor.class)
+	@GetMapping("/viewByName/{doctorName}")
+	public ResponseEntity<List<DoctorResponseDTO>> viewDoctorByName(@PathVariable("doctorName") String doctorName) {
+		List<Doctor> doctorList = this.doctorService.viewDoctorByName(doctorName);
+		List<DoctorResponseDTO> doctorDtoList = new ArrayList<>();
+		for (Doctor a : doctorList) {
+			DoctorResponseDTO doctorDto = modelMapper.map(a, DoctorResponseDTO.class);
+			doctorDtoList.add(doctorDto);
+		}
+		if (!(doctorDtoList.isEmpty())) {
+			return new ResponseEntity<>(doctorDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(doctorDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
 }
