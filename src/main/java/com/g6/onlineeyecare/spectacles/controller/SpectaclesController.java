@@ -159,4 +159,36 @@ public class SpectaclesController {
 			return new ResponseEntity<>(spectacleDtoList, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@ApiOperation(value = "Get the required spectacle by model ", response = Spectacles.class)
+	@GetMapping("/viewByCost/h")
+	public ResponseEntity<List<SpectaclesResponseDTO>> viewByCostHighToLow() {
+		List<Spectacles> spectacleList = this.spectaclesService.viewByCostHighToLow();
+		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
+		for (Spectacles a : spectacleList) {
+			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(doctorDto);
+		}
+		if (!(spectacleDtoList.isEmpty())) {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@ApiOperation(value = "Get the required spectacle by model ", response = Spectacles.class)
+	@GetMapping("/viewByCost/l")
+	public ResponseEntity<List<SpectaclesResponseDTO>> viewByCostLowToHigh() {
+		List<Spectacles> spectacleList = this.spectaclesService.viewByCostLowToHigh();
+		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
+		for (Spectacles a : spectacleList) {
+			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(doctorDto);
+		}
+		if (!(spectacleDtoList.isEmpty())) {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(spectacleDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

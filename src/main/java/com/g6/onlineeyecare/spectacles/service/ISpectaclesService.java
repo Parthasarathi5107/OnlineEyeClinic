@@ -24,5 +24,7 @@ public interface ISpectaclesService {
 	
 	List<Spectacles> viewByCostRange(double cost1,double cost2);
 	
+	List<Spectacles> viewByCostHighToLow();
 	
+	List<Spectacles> viewByCostLowToHigh();
 }

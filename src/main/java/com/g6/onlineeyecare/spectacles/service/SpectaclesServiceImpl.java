@@ -127,5 +127,31 @@ public class SpectaclesServiceImpl implements ISpectaclesService {
 
 	    }
 
-	
+	@Override
+	public List<Spectacles> viewByCostHighToLow() {
+		
+		List<Spectacles> costList = new ArrayList<>();
+        try {
+        	costList = repository.viewByCostHighToLow();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return costList;
+
+    }
+
+	@Override
+	public List<Spectacles> viewByCostLowToHigh() {
+		
+		List<Spectacles> costList = new ArrayList<>();
+        try {
+        	costList = repository.viewByCostLowToHigh();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return costList;
+
+    }
 }
