@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.SpectaclesIdNotFoundException;
 import com.g6.onlineeyecare.spectacles.dto.Spectacles;
 import com.g6.onlineeyecare.spectacles.dto.SpectaclesDTO;
@@ -42,7 +41,7 @@ public class SpectaclesController {
 	@ApiOperation(value = "add a new Spectacles", response = Spectacles.class)
 	@PostMapping("/add")
 	public ResponseEntity<SpectaclesResponseDTO> addSpectacles(@RequestBody @Valid SpectaclesDTO spectacles)
-			throws PatientIdFoundNotException {
+		 {
 
 		Spectacles actucal = modelMapper.map(spectacles, Spectacles.class);
 		SpectaclesResponseDTO response = modelMapper.map(this.spectaclesService.addSpectacles(actucal),

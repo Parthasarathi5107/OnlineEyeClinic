@@ -7,7 +7,7 @@ public class SpectaclesResponseDTO {
 	private String spectaclesDescription;
 	private int spectaclesRating;
 	private double spectaclesCost;
-	private int patientId;
+	
 	public int getSpectaclesId() {
 		return spectaclesId;
 	}
@@ -32,12 +32,6 @@ public class SpectaclesResponseDTO {
 	public void setSpectaclesCost(double spectaclesCost) {
 		this.spectaclesCost = spectaclesCost;
 	}
-	public int getPatientId() {
-		return patientId;
-	}
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
-	}
 	
 	public int getSpectaclesRating() {
 		return spectaclesRating;
@@ -49,9 +43,8 @@ public class SpectaclesResponseDTO {
 	public String toString() {
 		return "SpectaclesResponseDTO [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
 				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesRating=" + spectaclesRating
-				+ ", spectaclesCost=" + spectaclesCost + ", patientId=" + patientId + "]";
+				+ ", spectaclesCost=" + spectaclesCost + "]";
 	}
-	
-	
+
 	
 }

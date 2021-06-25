@@ -5,15 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.g6.onlineeyecare.patient.dto.Patient;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -44,17 +42,6 @@ public class Spectacles {
 	@Min(value = 1000, message = "cost cannot be less than 1000")
 	private double spectaclesCost;
 
-	@OneToOne
-	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	private Patient patient;
-
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
 
 	public int getSpectaclesId() {
 		return spectaclesId;
@@ -110,14 +97,14 @@ public class Spectacles {
 			@NotEmpty(message = "cannot be left empty") @Size(min = 3, max = 20) String spectaclesModel,
 			@NotEmpty(message = "cannot be left empty") String spectaclesDescription,
 			@Min(value = 1, message = "rating cannot be less than 1") @Max(value = 5, message = " rating cannot be more than 5") int spectaclesRating,
-			@Min(value = 1000, message = "cost cannot be less than 1000") double spectaclesCost, Patient patient) {
+			@Min(value = 1000, message = "cost cannot be less than 1000") double spectaclesCost) {
 		super();
 		this.spectaclesId = spectaclesId;
 		this.spectaclesModel = spectaclesModel;
 		this.spectaclesDescription = spectaclesDescription;
 		this.spectaclesRating = spectaclesRating;
 		this.spectaclesCost = spectaclesCost;
-		this.patient = patient;
+		
 	}
 
 	@Override
@@ -146,8 +133,9 @@ public class Spectacles {
 	public String toString() {
 		return "Spectacles [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
 				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesRating=" + spectaclesRating
-				+ ", spectaclesCost=" + spectaclesCost + ", patient=" + patient + "]";
+				+ ", spectaclesCost=" + spectaclesCost + "]";
 	}
 
+	
 
 }

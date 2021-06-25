@@ -4,14 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.g6.onlineeyecare.patient.dto.Patient;
+
 
 
 public class SpectaclesDTO {
@@ -37,9 +36,7 @@ public class SpectaclesDTO {
 	@Min(value = 1000, message = "cost cannot be less than 1000")
 	private double spectaclesCost;
 
-	@OneToOne
-	@JoinColumn(name = "patient_Id", referencedColumnName = "userId")
-	private Patient patient;
+
 	public int getSpectaclesId() {
 		return spectaclesId;
 	}
@@ -64,12 +61,7 @@ public class SpectaclesDTO {
 	public void setSpectaclesCost(double spectaclesCost) {
 		this.spectaclesCost = spectaclesCost;
 	}
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+
 	
 	public int getSpectaclesRating() {
 		return spectaclesRating;
@@ -81,9 +73,7 @@ public class SpectaclesDTO {
 	public String toString() {
 		return "SpectaclesDTO [spectaclesId=" + spectaclesId + ", spectaclesModel=" + spectaclesModel
 				+ ", spectaclesDescription=" + spectaclesDescription + ", spectaclesRating=" + spectaclesRating
-				+ ", spectaclesCost=" + spectaclesCost + ", patient=" + patient + "]";
+				+ ", spectaclesCost=" + spectaclesCost + "]";
 	}
-	
-	
 	
 }
