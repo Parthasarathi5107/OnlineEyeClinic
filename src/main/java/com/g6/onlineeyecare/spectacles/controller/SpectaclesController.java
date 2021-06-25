@@ -134,8 +134,8 @@ public class SpectaclesController {
 		List<Spectacles> spectacleList = this.spectaclesService.viewByModel(model);
 		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
 		for (Spectacles a : spectacleList) {
-			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
-			spectacleDtoList.add(doctorDto);
+			SpectaclesResponseDTO specDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(specDto);
 		}
 		if (!(spectacleDtoList.isEmpty())) {
 			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
@@ -150,8 +150,8 @@ public class SpectaclesController {
 		List<Spectacles> spectacleList = this.spectaclesService.viewByCostRange(cost1, cost2);
 		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
 		for (Spectacles a : spectacleList) {
-			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
-			spectacleDtoList.add(doctorDto);
+			SpectaclesResponseDTO specDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(specDto);
 		}
 		if (!(spectacleDtoList.isEmpty())) {
 			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
@@ -166,8 +166,8 @@ public class SpectaclesController {
 		List<Spectacles> spectacleList = this.spectaclesService.viewByCostHighToLow();
 		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
 		for (Spectacles a : spectacleList) {
-			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
-			spectacleDtoList.add(doctorDto);
+			SpectaclesResponseDTO specDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(specDto);
 		}
 		if (!(spectacleDtoList.isEmpty())) {
 			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);
@@ -182,8 +182,8 @@ public class SpectaclesController {
 		List<Spectacles> spectacleList = this.spectaclesService.viewByCostLowToHigh();
 		List<SpectaclesResponseDTO> spectacleDtoList = new ArrayList<>();
 		for (Spectacles a : spectacleList) {
-			SpectaclesResponseDTO doctorDto = modelMapper.map(a, SpectaclesResponseDTO.class);
-			spectacleDtoList.add(doctorDto);
+			SpectaclesResponseDTO specDto = modelMapper.map(a, SpectaclesResponseDTO.class);
+			spectacleDtoList.add(specDto);
 		}
 		if (!(spectacleDtoList.isEmpty())) {
 			return new ResponseEntity<>(spectacleDtoList, HttpStatus.OK);

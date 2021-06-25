@@ -13,8 +13,8 @@ public interface IUserService {
 
 	List<User> viewUsers();
 	
-	Boolean signIn(User user) throws InvalidCredentialException;
+	User signIn(User user) throws InvalidCredentialException;
 	
-	Boolean signOut();
+	User signOut();
 
 }

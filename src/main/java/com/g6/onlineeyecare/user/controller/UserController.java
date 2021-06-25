@@ -82,10 +82,11 @@ public class UserController {
 	
 	@ApiOperation(value = "User Post mapping for user signing out", response = User.class)
 	@PostMapping("/signout")
-	public ResponseEntity<UserResponseDTO> signoutuser() 
+	public ResponseEntity<User> signoutuser() 
 	{
-		UserResponseDTO response = modelMapper.map(this.userService.signOut(), UserResponseDTO.class);
+		User response = this.userService.signOut();
 	    return new ResponseEntity<>(response, HttpStatus.RESET_CONTENT);
 
 	}
+	
 }
