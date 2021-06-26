@@ -13,7 +13,7 @@ public interface IUserService {
 
 	List<User> viewUsers();
 	
-	User signIn(User user) throws InvalidCredentialException;
+	String signIn(User user) throws InvalidCredentialException;
 	
 	User signOut();
 

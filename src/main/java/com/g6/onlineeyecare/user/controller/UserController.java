@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.g6.onlineeyecare.exceptions.AdminIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.InvalidCredentialException;
+import com.g6.onlineeyecare.security.JwtResponse;
 import com.g6.onlineeyecare.user.dto.User;
 import com.g6.onlineeyecare.user.dto.UserDTO;
 import com.g6.onlineeyecare.user.dto.UserResponseDTO;
@@ -74,11 +75,10 @@ public class UserController {
 	
 	@ApiOperation(value = "User Post mapping for user signing in", response = User.class)
 	@PostMapping("/signin")
-	public ResponseEntity<UserResponseDTO> signuser(@RequestBody UserDTO user) throws InvalidCredentialException
+	public ResponseEntity<JwtResponse> signuser(@RequestBody UserDTO user) throws InvalidCredentialException
 	{
 		User actual = modelMapper.map(user, User.class);
-		UserResponseDTO response = modelMapper.map(this.userService.signIn(actual), UserResponseDTO.class);
-	    return new ResponseEntity<>(response, HttpStatus.RESET_CONTENT);
+		return new ResponseEntity<>(new JwtResponse(this.userService.signIn(actual)),HttpStatus.OK);
 
 	}
 	

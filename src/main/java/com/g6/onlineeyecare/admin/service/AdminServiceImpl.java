@@ -30,9 +30,17 @@ public class AdminServiceImpl implements IAdminService{
 
     @Override
     @Transactional
-    public Admin addAdmin(Admin admin) {
+    public Admin addAdmin(Admin admin){
         try {
-            repository.save(admin);
+        	Optional<Admin> adminCheck = repository.findByuserName(admin.getUserName());
+        	if(adminCheck.isPresent())
+        	{
+        		throw new Exception("Enter Unique UserName");
+        	}
+        	else
+        	{
+        		repository.save(admin);
+        	}  
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
