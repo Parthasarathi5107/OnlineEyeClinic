@@ -32,7 +32,7 @@ public class OnlineEyeClinicApplication {
 	private ApiInfo apiInfo()
 	{
 		return new ApiInfoBuilder().title("OnlineEyeClinic website").description("contains api to manipulate OnlineEyeClinic")
-				.version("myproductappV1.1").build();
+				.version("myappV1.1").build();
 	}
 	
 	public static void main(String[] args) {
