@@ -26,7 +26,7 @@ public class ReportDTO {
 
 	
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dateOfReport;
 	
 	@Column

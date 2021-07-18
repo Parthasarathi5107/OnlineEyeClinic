@@ -78,7 +78,7 @@ public class UserController {
 	{
 		User actual = modelMapper.map(user, User.class);
 		UserResponseDTO response = modelMapper.map(this.userService.signIn(actual), UserResponseDTO.class);
-	    return new ResponseEntity<>(response, HttpStatus.RESET_CONTENT);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 	

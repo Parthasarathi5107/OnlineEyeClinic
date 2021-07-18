@@ -135,12 +135,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 	}
 
-	@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-		return new ResponseEntity<>("Date format Exception ->" + " Expected Date format: yyyy-MM-dd",
-				HttpStatus.BAD_REQUEST);
-	}
+//	@Override
+//	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+//			HttpHeaders headers, HttpStatus status, WebRequest request) {
+//
+//		return new ResponseEntity<>("Date format Exception ->" + " Expected Date format: dd-MM-yyyy",
+//				HttpStatus.BAD_REQUEST);
+//	}
 
 }

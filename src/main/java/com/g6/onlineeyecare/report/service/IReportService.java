@@ -3,6 +3,8 @@ package com.g6.onlineeyecare.report.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.g6.onlineeyecare.exceptions.PatientIdFoundNotException;
 import com.g6.onlineeyecare.exceptions.ReportIdNotFoundException;
 import com.g6.onlineeyecare.exceptions.TestIdNotFoundException;
@@ -21,4 +23,6 @@ public interface IReportService {
 	List<Report> viewAllReport(LocalDate date);
 
 	List<Spectacles> viewSpetacles();
+	
+	List<Report> viewReportByPatientId(Integer patientId);
 }

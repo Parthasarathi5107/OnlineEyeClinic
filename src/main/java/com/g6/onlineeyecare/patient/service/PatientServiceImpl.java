@@ -1,6 +1,5 @@
 package com.g6.onlineeyecare.patient.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,14 +125,16 @@ public class PatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	public List<Patient> viewPatientByName(String patientName) {
-		List<Patient> list = new ArrayList<>();
-		try {
-			list = repository.viewByName(patientName);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		return list;
-	}
+    public Patient viewPatientByNameAndEmail(String patientName,String patientEmail) {
+        Patient p=new Patient();
+        try {
+            p= repository.viewByNameAndEmail(patientName,patientEmail);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return p;
+    }
+
+
 
 }

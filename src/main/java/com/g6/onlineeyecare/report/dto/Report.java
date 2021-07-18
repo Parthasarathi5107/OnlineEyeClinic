@@ -33,7 +33,7 @@ public class Report {
 
 	@ApiModelProperty(name = "Report date", required = true)
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dateOfReport;
 	@ApiModelProperty(name = "Report description", required = true)
 	@Column

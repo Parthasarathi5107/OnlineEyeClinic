@@ -48,20 +48,21 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User signIn(User user) throws InvalidCredentialException {
-		Optional<User> optional = repository.findById(user.getUserId());
-		User loggedInUser = null;
-		if (optional.isPresent()) {
-			if (optional.get().getPassword().equals(user.getPassword()) ) {
-				loggedInUser = optional.get();
-			} else {
-				throw new InvalidCredentialException("Invalid userId or password");
-			}
-		} else {
-			throw new InvalidCredentialException("Invalid userId");
-		}
-		return loggedInUser;
-	}
+    public User signIn(User user) throws InvalidCredentialException {
+        Optional<User> optional = repository.findById(user.getUserId());
+        User loggedInUser = null;
+        if (optional.isPresent()) {
+            if (optional.get().getPassword().equals(user.getPassword())&&(optional.get().getRole().equals(user.getRole()) )
+                    &&(optional.get().getUserName().equals(user.getUserName()) )) {
+                loggedInUser = optional.get();
+            } else {
+                throw new InvalidCredentialException("Invalid userId or password");
+            }
+        } else {
+            throw new InvalidCredentialException("Invalid userId");
+        }
+        return loggedInUser;
+    }
 	@Override
 	public User signOut() {
 		

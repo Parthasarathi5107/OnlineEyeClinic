@@ -102,8 +102,24 @@ public class ReportController {
 	@ApiOperation(value = "View the specific report by date", response = Report.class)
 	@GetMapping("/viewByDate/{date}")
 	public ResponseEntity<List<ReportResponseDTO>> viewAllReport(
-			@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+			@PathVariable("date") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
 		List<Report> reportList = this.reportService.viewAllReport(date);
+		List<ReportResponseDTO> reportDtoList = new ArrayList<>();
+		for (Report r : reportList) {
+			ReportResponseDTO reportDto = modelMapper.map(r, ReportResponseDTO.class);
+			reportDtoList.add(reportDto);
+		}
+		if (!(reportDtoList.isEmpty())) {
+			return new ResponseEntity<>(reportDtoList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(reportDtoList, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@ApiOperation(value = "View the specific report by date", response = Report.class)
+	@GetMapping("/viewById/{patientId}")
+	public ResponseEntity<List<ReportResponseDTO>> viewReportByPatientId(@PathVariable("patientId")int patientId ) {
+		List<Report> reportList = this.reportService.viewReportByPatientId(patientId);
 		List<ReportResponseDTO> reportDtoList = new ArrayList<>();
 		for (Report r : reportList) {
 			ReportResponseDTO reportDto = modelMapper.map(r, ReportResponseDTO.class);

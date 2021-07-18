@@ -12,6 +12,6 @@ import com.g6.onlineeyecare.patient.dto.Patient;
 @Repository
 public interface IPatientRepository extends JpaRepository<Patient, Integer>{
 	
-	@Query("Select a from Patient a where a.userName=:patientName")
-	List<Patient> viewByName(@Param("patientName") String patientName);
+	@Query("Select a from Patient a where a.userName=:patientName and a.patientEmail=:patientEmail")
+    Patient viewByNameAndEmail(@Param("patientName") String patientName,@Param("patientEmail") String patientEmail);
 }

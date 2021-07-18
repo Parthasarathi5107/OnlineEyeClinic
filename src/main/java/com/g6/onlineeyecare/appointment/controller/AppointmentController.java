@@ -113,7 +113,7 @@ public class AppointmentController {
 	
 	@ApiOperation(value = "Get the required appointment by date ",response = Appointment.class)
 	@GetMapping("/viewByDate/{date}")
-	public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments(@PathVariable("date")@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date)
+	public ResponseEntity<List<AppointmentResponseDTO>> viewAppointments(@PathVariable("date")@DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date)
 	{
 		List<Appointment> appointmentList = this.appointmentService.viewAppointments(date);
 		List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();
@@ -130,7 +130,7 @@ public class AppointmentController {
 	
 	@ApiOperation(value = "Get the required appointment by date and doctor name ",response = Appointment.class)
     @GetMapping("/viewByName/{date}/{doctorName}")
-    public ResponseEntity<List<AppointmentResponseDTO>> viewAppointmentByDateAndName(@PathVariable("date")@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,@PathVariable("doctorName") String doctorName)
+    public ResponseEntity<List<AppointmentResponseDTO>> viewAppointmentByDateAndName(@PathVariable("date")@DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date,@PathVariable("doctorName") String doctorName)
     {
         List<Appointment> appointmentList = this.appointmentService.viewAppointmentByDateAndName(date, doctorName);
         List<AppointmentResponseDTO> appointmentDtoList = new ArrayList<>();

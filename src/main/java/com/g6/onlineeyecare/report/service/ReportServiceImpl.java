@@ -125,4 +125,17 @@ public class ReportServiceImpl implements IReportService {
 		return spectacleList;
 	}
 
+	@Override
+	public List<Report> viewReportByPatientId(Integer patientId) {
+		List<Report> myReport = new ArrayList<>();
+
+		try {
+			myReport = repository.findReportByPatientId(patientId);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return myReport;
+	}
+	
+
 }

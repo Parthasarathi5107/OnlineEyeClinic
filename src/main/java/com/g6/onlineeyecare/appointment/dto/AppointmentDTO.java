@@ -27,7 +27,7 @@ public class AppointmentDTO {
 
 	
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate appointmentDate;
 
 	private String status;

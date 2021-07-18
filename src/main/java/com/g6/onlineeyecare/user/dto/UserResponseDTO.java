@@ -5,6 +5,7 @@ public class UserResponseDTO {
 	private int userId;
 	private String userName;
 	private String role;
+	private String password;
 	public int getUserId() {
 		return userId;
 	}
@@ -25,9 +26,17 @@ public class UserResponseDTO {
 		this.role = role;
 	}
 	
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
-		return "UserDTO [userId=" + userId + ", userName=" + userName + ", role=" + role + "]";
+		return "UserResponseDTO [userId=" + userId + ", userName=" + userName + ", role=" + role + ", password="
+				+ password + "]";
 	}
 	
 	

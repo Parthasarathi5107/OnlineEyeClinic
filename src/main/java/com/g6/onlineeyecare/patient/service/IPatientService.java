@@ -26,5 +26,5 @@ public interface IPatientService {
 
 	List<Report> viewReport(int patientId) throws PatientIdFoundNotException;
 	
-	List<Patient> viewPatientByName(String patientName);
+	Patient viewPatientByNameAndEmail(String patientName,String patientEmail);
 }
