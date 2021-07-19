@@ -6,7 +6,7 @@ public class DoctorResponseDTO {
 	private int userId;
 	private String doctorName;
 	private String doctorConsultationTime;
-	private long doctorMobile;
+	private String doctorMobile;
 	private String doctorEmail;
 	private String address;
 	public int getUserId() {
@@ -27,10 +27,11 @@ public class DoctorResponseDTO {
 	public void setDoctorConsultationTime(String doctorConsultationTime) {
 		this.doctorConsultationTime = doctorConsultationTime;
 	}
-	public long getDoctorMobile() {
+	
+	public String getDoctorMobile() {
 		return doctorMobile;
 	}
-	public void setDoctorMobile(long doctorMobile) {
+	public void setDoctorMobile(String doctorMobile) {
 		this.doctorMobile = doctorMobile;
 	}
 	public String getDoctorEmail() {

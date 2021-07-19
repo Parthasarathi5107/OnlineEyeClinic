@@ -8,7 +8,7 @@ public class PatientResponseDTO {
 	private int userId;
 	private String patientName; 
 	private int patientAge;
-	private long patientMobile;
+	private String patientMobile;
 	private String patientEmail;
 	private LocalDate patientDOB;
 	private String address;
@@ -30,10 +30,11 @@ public class PatientResponseDTO {
 	public void setPatientAge(int patientAge) {
 		this.patientAge = patientAge;
 	}
-	public long getPatientMobile() {
+	
+	public String getPatientMobile() {
 		return patientMobile;
 	}
-	public void setPatientMobile(long patientMobile) {
+	public void setPatientMobile(String patientMobile) {
 		this.patientMobile = patientMobile;
 	}
 	public String getPatientEmail() {
